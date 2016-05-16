@@ -189,11 +189,9 @@ class MODULOS{
 	function ingresar(){
 
 		if ($_POST["btn-accion"]=="activar"){
-			//ECHO "publicar"; exit();
 			$activar=1;
 		}
 		if ($_POST["btn-accion"]=="guardar"){
-			//ECHO "guardar"; exit();
 			$activar=0;
 		}
 
