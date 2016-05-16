@@ -1,0 +1,8 @@
+#bloque-body{
+  width:100% !important;
+  margin:0px auto !important;
+  height:100%;
+  position:relative;
+  font-size: 12px; display:block;
+  text-align:center;
+}

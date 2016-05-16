@@ -1,0 +1,12 @@
+RewriteEngine on
+
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteCond %{SCRIPT_FILENAME} !-f
+
+Rewriterule ^quienes-somos$  index.php?cat=2&pla=1
+Rewriterule ^inicio$  index.php?cat=1&pla=1
+Rewriterule ^raiz$  index.php?cat=1&pla=1
+Rewriterule ^dashboard$  nucleo/dashboard.php
+Rewriterule ^landicorp$  index.php?cat=2&pla=1
+Rewriterule ^utilar$  index.php?cat=4&pla=1
+Rewriterule ^dashboard$  nucleo/dashboard.php

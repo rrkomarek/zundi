@@ -1,0 +1,39 @@
+@import "../css/sf-ui-font.css";
+/*  navbar */
+html, body {
+height: 100%;
+margin:0;
+border:0;
+display:block;
+}
+
+body {
+text-align:center;
+background-color:#F4F6F7 !important;
+}
+
+
+body{
+  font-family: "sf_ui_light",helvetica, arial !important;
+}
+
+.btn-user {
+  color:#3292C5 !important;
+}
+
+.btn-perfil:hover{
+border:1px solid #40A9E2;
+background-color: #40A9E2;
+}
+
+.btn-menu{
+  color:#066CBB !important;
+}
+
+.btn-alarma i{
+  color:#E80329 !important;
+}
+
+.btn-mensajes i{
+  color:#0AC5AB !important;
+}

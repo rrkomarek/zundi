@@ -1,0 +1,441 @@
+/*navbar*/
+
+* {
+	margin  : 0px;
+	padding : 0px;
+}
+
+html {}
+
+body {}
+
+/*menu*/
+
+.navbar,
+.navbar-collapse,
+.navbar-default,
+.navbar-fixed-top,
+.navbar-inner,
+.navbar .collapse {
+	height        : 43px !important;
+	min-height    : 43px !important;
+	margin-bottom : 0px;
+}
+
+.navbar-brand {
+	height     : 43px !important;
+	min-height : 43px !important;
+	padding    : 0;
+}
+
+.navbar-brand .navbar-logo {
+	max-height  : 30px;
+	margin-top  : 6px;
+	margin-left : 10px;
+}
+
+.navbar-nav>li>.dropdown-menu {
+	margin-top : -1px;
+	border     : 1px solid #e7e7e7;
+}
+
+.btn-navbar {
+	height        : 43px !important;
+	min-height    : 43px !important;
+	padding-top   : 12px !important;
+	padding-right : 5px !important;
+	padding-left  : 5px !important;
+}
+
+.img-user {
+	float       : left;
+	margin-top  : 10px;
+	margin-left : 15px;
+}
+
+.menu-user {
+	min-width      : 180px;
+	padding-bottom : 0px;
+}
+
+.btn-perfil {
+	margin-top : 8px;
+}
+
+.name-user {
+	width        : 78px;
+	float        : right;
+	margin-right : 15px;
+}
+
+.btn-submenu {
+	padding-top    : 10px !important;
+	padding-bottom : 10px !important;
+}
+
+.btn-salir {
+	border-bottom-right-radius : 4px;
+	border-bottom-left-radius  : 4px;
+}
+
+.btn-volver{
+padding-left: 0px;
+}
+.btn-menu {
+	width      : 70px;
+	height     : 43px;
+	min-height : 43px !important;
+	margin     : 0px 0px 0px 0px !important;
+	cursor     : pointer;
+}
+
+.btn-menu i {
+	margin-right : 15px;
+}
+
+.btn-menu .icn-close {
+	display    : none;
+	margin-top : 0px;
+}
+
+.btn-menu.on .icn-close {
+	display : block;
+}
+
+.btn-menu .icn-reorder {
+	float      : left;
+	margin-top : -2px;
+}
+
+.btn-menu.on .icn-reorder {
+	display : none;
+}
+
+@media (min-width: 768px) {
+	.navbar-nav>li>a {
+		padding-top    : 10px;
+		padding-bottom : 0px;
+		line-height    : 0px !important;
+	}
+}
+
+#btn-navicon.on {}
+
+/*sidebar*/
+
+.sidebar {
+	z-index    : 99;
+	position   : fixed;
+	top        : 0px;
+	right      : -250px;
+	width      : 250px;
+	height     : 100vh;
+	margin-top : 43px;
+}
+
+.sidebar.on {
+	display : block;
+}
+
+.sidebar-inner {
+	margin     : 0px;
+	padding    : 15px;
+	text-align : left;
+	list-style : none;
+}
+
+.sidebar-inner .title-menu {
+	display     : block;
+	margin-top  : 30px;
+	padding     : 10px;
+	padding-top : 0;
+}
+
+.sidebar-inner .title-menu-general {
+	margin-top : 5px;
+}
+
+.btn-menu-sidebar {
+	display : block;
+	padding : 8px 13px;
+}
+
+/*iconos*/
+
+.icn-credential,
+.icn-off {}
+
+/*popup-div*/
+
+.popup-div {
+	display : none;
+}
+
+.popup-div.on {
+	z-index     : 98;
+	display     : block !important;
+	position    : fixed;
+	top         : 43px;
+	width       : 100%;
+	height      : 100vh;
+}
+
+.btn-cerrar-pag {
+	position : fixed;
+	top      : 58px;
+	right    : 20px;
+	width    : 35px;
+	height   : 25px;
+	cursor   : pointer;
+}
+
+
+
+/*footer*/
+
+.footer-pag {
+	width      : 100%;
+	clear      : both;
+	margin-top : 15px;
+	display: block;
+	float:left;
+}
+
+
+/*header*/
+
+/*pag*/
+.body-page{
+	padding-right : 40px;
+	padding-left: 40px;
+	padding-top: 20px;
+}
+
+.bloque-modulo {
+	display       : block;
+	/*padding-right : 60px;
+	padding-left: 40px;*/
+	padding-left: 0px;
+}
+
+.head-modulo {
+	display    : inline-block;
+	width: 100%;
+	padding-top: 10px;
+}
+
+.title-page {
+	margin-top  : 0px;
+	padding : 0px;
+}
+
+.title-form {
+	margin-top  : 8px;
+	padding : 0px;
+}
+
+.head-botones {
+	display    : inline-block;
+	margin-top : 0px;
+	margin-right: 10px;
+}
+
+.body-modulo{
+	margin-top: 0px;
+	min-height: 78vh;
+}
+
+.frame-mod{
+	border:0px;
+	width: 100%;
+	height: 94vh;
+}
+
+/* form */
+
+.form-modulo{
+	/* padding:20px 0px; */
+}
+
+.form-modulo .input-group-addon{
+
+}
+
+.form-textarea{
+	width: 100% !important;
+	display: inline-block;
+}
+
+.form-select{
+	width: 40%;
+}
+
+.form-botones{
+	margin-top:20px !important;
+	margin-bottom: 20px !important;
+	display: block;
+	text-align: right;
+}
+
+.form-botones .btn-eliminar{
+	float:left;
+	margin-top: 10px;
+}
+
+/* publicacion */
+.publicacion{
+	padding:15px;
+}
+
+/* tablas */
+
+
+.table td { padding-left: 15px !important; }
+.btn-accion {
+	font-size: 17px !important;
+	padding: 2px 3px 2px 3px;
+}
+
+/*Key-index*/
+
+.key-index {
+	z-index  : 3000;
+	display  : inline-block;
+	position : fixed;
+	right    : 7px;
+	bottom   : 5px;
+	width    : 24px;
+	height   : 24px;
+	cursor   : pointer;
+}
+
+.key-index i {
+	display : none;
+}
+
+/*Bloques login*/
+
+.block-login {
+	position   : fixed;
+	width      : 100%;
+	height     : 100vh;
+	padding    : 0 !important;
+	text-align : center;
+	z-index  : 30100;
+}
+
+.login {
+	z-index         : 30055;
+	display         : inline-block;
+	-moz-box-sizing : border-box;
+	box-sizing      : border-box;
+	position        : absolute;
+	top             : 10%;
+	width           : 300px;
+	height          : auto !important;
+	margin          : 0px auto;
+	margin-left     : -165px;
+	padding         : 15px;
+}
+
+.login .btn-cerrar {
+	position  : absolute;
+	top       : 0;
+	right     : -5px;
+	font-size : 18px;
+}
+
+.login .brand-login {
+	display  : inline-block;
+	position : relative;
+	width    : 200px;
+	margin   : 15px auto 25px auto;
+}
+
+.login .brand-login img {
+	display   : block;
+	max-width : 200px;
+}
+
+.login .brand-login i {
+	display     : inline-block;
+	position    : absolute;
+	top         : -7px;
+	margin-left : -16px;
+}
+
+.login .brand-login span {
+	display     : inline-block;
+	margin-left : 40px;
+	font-size   : 27px;
+}
+
+.login .input-lg {
+	height       : 50px;
+	padding-left : 0px;
+}
+
+.login .input-group-addon {
+	padding-right : 10px;
+}
+
+.login .password .input-lg,
+.login  .password  .input-group-addon {}
+
+.login .email .input-lg,
+.login  .email  .input-group-addon {}
+
+.login .help-block {
+	margin-top : 15px;
+}
+
+.login .help-block a {}
+
+.login .help-block a:hover {}
+
+.login .btn-ingresar {
+	width : 100%;
+}
+
+#login_ok {
+	margin-top    : -15px;
+	margin-bottom : 7px;
+}
+
+.login-footer {
+	z-index  : 30051;
+	position : fixed;
+	bottom   : 5px;
+	width    : 100%;
+}
+
+.bg-shadow {
+	z-index  : 30050;
+	position : fixed;
+	width    : 100%;
+	height   : 100vh;
+}
+
+/*Alertas y errores*/
+
+.alert {}
+
+/*Base de datos*/
+
+.container-conexion {
+	display : block;
+	width   : 99.5%;
+	height  : 96vh;
+}
+
+.container-conexion .mensaje {
+	display    : inline-block;
+	margin-top : 20%;
+	padding    : 12px 16px;
+}
+
+.container-conexion .mensaje label {
+	display    : inline-block;
+	margin-top : 10px;
+	padding    : 8px 12px;
+}
