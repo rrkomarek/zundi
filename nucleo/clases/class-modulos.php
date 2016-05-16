@@ -44,7 +44,11 @@ class CLASSMODULOS{
 			<script language="JavaScript">
 			$(document).ready(function()
 			{
-
+				$("#btn-eliminar").click(function() {
+				  url = "<?php echo $ruta; ?>&tarea=eliminar&id=<?php echo $id_mod; ?>";
+				  if (confirm('¿Está seguro que desea eliminar "'+ mod_nombre +'" \n el Registro de la Base de Datos?'))
+				  document.location=(url);
+				});
 			});
 			</script>
 		<?php

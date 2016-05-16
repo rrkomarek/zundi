@@ -177,7 +177,7 @@ class MODULOS{
 					</label>
 				</div>
 				<div class="form-group form-botones">
-					 <button type="submit" class="btn btn-danger btn-eliminar color-bg-rojo-a " name="btn-accion" id="btn-guardar" value="eliminar"><i class="icn-trash" ></i> Eliminar Modulo</button>
+					 <button class="btn btn-danger btn-eliminar color-bg-rojo-a " name="btn-accion" id="btn-eliminar"><i class="icn-trash" ></i> Eliminar Modulo</button>
 					 <button type="submit" class="btn btn-info  btn-actualizar hvr-fade btn-lg color-bg-celecte-c btn-lg" name="btn-accion" id="btn-activar" value="actualizar"><i class="icn-sync" ></i> Actualizar</button>
 				</div>
 			</form>
@@ -212,9 +212,6 @@ class MODULOS{
 
 	function modificar(){
 
-		if ($_POST["btn-accion"]=="eliminar"){
-			$this->eliminar($_POST["inputId"]);
-		}
 		if ($_POST["btn-accion"]=="actualizar"){
 
 			$sql="UPDATE modulos SET
@@ -237,9 +234,7 @@ class MODULOS{
 			$id= $_GET['id'];
 		}
 		$sql="DELETE FROM modulos WHERE mod_id='".$id."'";
-
 		$this->query->consulta($sql);
-
 		$up_sqr6 = "ALTER TABLE modulos AUTO_INCREMENT=1";
 		$this->query->consulta($up_sqr6);
 		$this->busqueda();
@@ -247,11 +242,16 @@ class MODULOS{
 
 	function tipo_modulo($mod_tipo){
 
-		if ($mod_tipo=="0"){
-			$mod_tipo="nativo";
-		}else{
-			$mod_tipo="";
-		}
+		switch ($mod_tipo) {
+			case '0':
+				$mod_tipo="configuración";
+				break;
+			case '1':
+				$mod_tipo="formulario";
+				break;			
+			default:
+				$mod_tipo="no definido";
+				break;
 		return $mod_tipo;
 
 	}
