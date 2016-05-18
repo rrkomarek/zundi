@@ -68,7 +68,7 @@
 		function dibujar_cabecera($cat,$pla){
 			  $sesion= new SESION();
 				$sesion->iniciar_sesion();
-
+				//echo 'ingresar dibujar cabecera';
 				$query = new MYSQL();
 			/* HTML  */
 				echo '<!DOCTYPE HTML>'."\n";
@@ -183,6 +183,7 @@
 		}
 
 		function dibujar_cuerpo($cat,$pla){
+			//echo "dibujar cuerpo";
 			echo "<!--  Inicio Cuerpo  -->"."\n\n";
 				$rs = $this->obtener_padre($cat,$pla);
 				$num = $this->query->num_registros($rs);

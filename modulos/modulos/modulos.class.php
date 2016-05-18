@@ -248,12 +248,12 @@ class MODULOS{
 				break;
 			case '1':
 				$mod_tipo="formulario";
-				break;			
+				break;
 			default:
 				$mod_tipo="no definido";
 				break;
+		}
 		return $mod_tipo;
-
 	}
 
 }
