@@ -26,6 +26,7 @@ class CLASSMODULOS{
 	<?php
 	}  // fin script_busqueda()
 
+
 /************** Scripts ***************/
 		function script_page($FileModulo){
 		?>
@@ -42,17 +43,18 @@ class CLASSMODULOS{
 		function script_form($query,$ruta,$id_mod){
 		?>
 			<script language="JavaScript">
-			$(document).ready(function()
-			{
 				$("#btn-eliminar").click(function() {
-				  url = "<?php echo $ruta; ?>&tarea=eliminar&id=<?php echo $id_mod; ?>";
-				  if (confirm('¿Está seguro que desea eliminar "'+ mod_nombre +'" \n el Registro de la Base de Datos?'))
-				  documentlocation=(url);
+					id = $( this ).attr("id_eliminar");
+					nombre = $( this ).attr("nombre_eliminar");
+				  url = "<? echo _RUTA_WEB.$ruta; ?>?tarea=eliminar&id_mod=<? echo $id_mod; ?>&id="+id;
+					if(confirm('¿Estas seguro de ELIMINAR '+ nombre +' ?')){
+						alert(url);
+					 	document.location.href=url;
+					}
 				});
-			});
 			</script>
 		<?php
-		}  // fin script_busqueda()
+		}
 
 
 /************** Scripts arbol ***************/

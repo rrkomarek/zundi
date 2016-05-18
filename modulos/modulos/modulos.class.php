@@ -55,7 +55,7 @@ class MODULOS{
 						    <td class="col-xl-offset-2 acciones">
 									<?php  if($fila_id=="1"){ $aux ="disabled"; } ?>
 						      <a  id="btn-editar-modulo" class="btn btn-accion btn-editar <?php echo $aux; ?>" href="modulos.adm.php?tarea=form_editar&id=<? echo $fila_id; ?>&id_mod=<? echo $this->id_mod; ?>" title="Editar <? echo $fila_id."-".$fila_url; ?>" ><i class="icn-pencil"></i></a>
-									<a href="javascript:confirma_eliminacion('<?php echo $fila_id; ?>', '<? echo $fila_nombre; ?>','eliminar');" title="eliminar" class="btn btn-accion <?php echo $aux; ?>"><i class="icn-trash"></i></a>
+									<a  title="eliminar" type="button" id_eliminar="<? echo $fila_id; ?>" nombre_eliminar="<? echo $fila_nombre; ?>" id="btn-eliminar" class="btn btn-eliminar btn-accion <?php echo $aux; ?>"><i class="icn-trash"></i></a>
 						    </td>
 						  </tr>
 						  <?php
@@ -67,7 +67,7 @@ class MODULOS{
 			</div>
 		</div>
 		<?php
-		$this->class_modulo->script_page("modulos.adm.php");
+				$this->class_modulo->script_form($this->query,"modulos/modulos/modulos.adm.php",$this->id_mod);
   }  // fin busqueda
 
 	function form_nuevo(){
@@ -104,8 +104,8 @@ class MODULOS{
 				<div class="form-group">
 					<label>Tipo modulo:  </label>
 					<select class="form-control form-select" name="inputTipo" id="inputTipo">
-						<option value="0" checked>Simple</option>
-						<option value="1" >Compuesto</option>
+						<option value="0" checked>Datos</option>
+						<option value="1" >Configuración</option>
 					</select>
 				</div>
 				<div class="form-group form-botones">
@@ -115,7 +115,6 @@ class MODULOS{
 			</form>
 		</div>
 		<?php
-		$this->class_modulo->script_form($this->query,"modulos.adm.php",$this->id_mod);
 	}
 
 	function form_editar(){
@@ -164,8 +163,8 @@ class MODULOS{
 				<div class="form-group">
 					<label>Tipo modulo:  </label>
 					<select class="form-control form-select" name="inputTipo" id="inputTipo">
-						<option value="0" <?php if ($fila_tipo==0){ echo "selected"; } ?> >Simple</option>
-						<option value="1" <?php if ($fila_tipo==1){ echo "selected"; } ?> >Compuesto</option>
+						<option value="0" <?php if ($fila_tipo==0){ echo "selected"; } ?> >Datos</option>
+						<option value="1" <?php if ($fila_tipo==1){ echo "selected"; } ?> >Configuración</option>
 					</select>
 				</div>
 				<div class="form-group">
@@ -177,13 +176,14 @@ class MODULOS{
 					</label>
 				</div>
 				<div class="form-group form-botones">
-					 <button class="btn btn-danger btn-eliminar color-bg-rojo-a " name="btn-accion" id="btn-eliminar"><i class="icn-trash" ></i> Eliminar Modulo</button>
+					 <button  type="button" class="btn btn-danger btn-eliminar color-bg-rojo-a" id_eliminar="<? echo $fila_id; ?>" nombre_eliminar="<? echo $fila_nombre; ?>" name="btn-accion" id="btn-eliminar" value="eliminar"><i class="icn-trash" ></i> Eliminar Modulo</button>
+
 					 <button type="submit" class="btn btn-info  btn-actualizar hvr-fade btn-lg color-bg-celecte-c btn-lg" name="btn-accion" id="btn-activar" value="actualizar"><i class="icn-sync" ></i> Actualizar</button>
 				</div>
 			</form>
 		</div>
 		<?php
-		$this->class_modulo->script_form($this->query,"modulos.adm.php",$this->id_mod);
+		 $this->class_modulo->script_form($this->query,"modulos/modulos/modulos.adm.php",$this->id_mod);
 	}
 
 	function ingresar(){
@@ -211,7 +211,7 @@ class MODULOS{
 	} // fin funcion ingresar
 
 	function modificar(){
-
+		if ($_POST["btn-accion"]=="eliminar"){}
 		if ($_POST["btn-accion"]=="actualizar"){
 
 			$sql="UPDATE modulos SET
@@ -228,11 +228,9 @@ class MODULOS{
 		$this->busqueda();
 	}
 
-	function eliminar($id){
-		if ($id==""){
-			$this->class_pagina->validar_get ( $_GET['id'] );
-			$id= $_GET['id'];
-		}
+	function eliminar(){
+		$this->class_pagina->validar_get ( $_GET['id'] );
+		$id= $_GET['id'];
 		$sql="DELETE FROM modulos WHERE mod_id='".$id."'";
 		$this->query->consulta($sql);
 		$up_sqr6 = "ALTER TABLE modulos AUTO_INCREMENT=1";
@@ -244,10 +242,10 @@ class MODULOS{
 
 		switch ($mod_tipo) {
 			case '0':
-				$mod_tipo="configuración";
+				$mod_tipo="Datos";
 				break;
 			case '1':
-				$mod_tipo="formulario";
+				$mod_tipo="Configuración";
 				break;
 			default:
 				$mod_tipo="no definido";
