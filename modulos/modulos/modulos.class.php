@@ -45,7 +45,7 @@ class MODULOS{
 						  <tr>
 						    <td><i class="icn <?php echo $fila_icono; ?>"></i> <?php echo $fila_nombre; ?></td>
 
-						    <td ><?php echo $this->tipo_modulo($fila_tipo); ?></td>
+						    <td class="col-tipo-modulo"><?php echo $this->tipo_modulo($fila_tipo); ?></td>
 						    <td class="estado">
 						      <?php
 
@@ -170,10 +170,10 @@ class MODULOS{
 				</div>
 				<div class="form-group">
 					<label class="radio-inline">
-						<input type="radio" name="inputActivar" id="inputActivar" value="0" <?php if ($fila_activar==0){ echo "checked"; } ?> > No activo
+						<input type="radio" name="inputActivar" id="inputActivar" value="0" <?php if ($fila_activar==0){ echo "checked"; } ?> > Desactivar
 					</label>
 					<label class="radio-inline">
-						<input type="radio" name="inputActivar" id="inputActivar" value="1" <?php if ($fila_activar==1){ echo "checked"; } ?> > Activar
+						<input type="radio" name="inputActivar" id="inputActivar" value="1" <?php if ($fila_activar==1){ echo "checked"; $aux="Activo"; } else { $aux="Activar"; } ?> > <? echo $aux; ?>
 					</label>
 				</div>
 				<div class="form-group form-botones">

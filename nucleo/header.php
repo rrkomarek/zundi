@@ -23,8 +23,7 @@ $query ->conectar(_BASE_DE_DATOS,_HOST,_USUARIO,_PASSWORD);
   <link rel="stylesheet" href="<?php echo _RUTA_WEB; ?>css/font-awesome.css" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="<?php echo _RUTA_WEB; ?>css/bootstrap-toggle.min.css" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="<?php echo _RUTA_WEB; ?>css/animate.css" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" href="<?php echo _RUTA_WEB; ?>css/hover.css" rel="stylesheet" type="text/css">
-
+  
   <!--  Codigo css estandar Zundi  -->
   <link rel="stylesheet" href="<?php echo _RUTA_WEB; ?>css/estilos.adm.css" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="<?php echo _RUTA_WEB; ?>css/theme.adm.css" rel="stylesheet" type="text/css">
