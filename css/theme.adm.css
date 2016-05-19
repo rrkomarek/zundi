@@ -7,7 +7,7 @@
 }
 
 /* pag */
-a { color: #007AFF; }
+a { color: #007AFF; cursor: pointer !important; }
 .btn  {
   font-size: 15px !important;
   -webkit-border-radius: 4px;
@@ -16,12 +16,14 @@ a { color: #007AFF; }
   font-family : "Lato-Light",
                 sans-serif !important;
   border:0px !important;
+  cursor: pointer !important;
 }
 
 .btn:active, .btn:hover {
   text-decoration: none;
   -webkit-transition-duration : 0.5s;
   transition-duration         : 0.5s;
+  cursor: pointer !important;
 }
 .btn-primary {
   background-color: #007AFF; /* color-azul */
@@ -332,6 +334,15 @@ textarea{
 
 .btn-activar {
   background-color: #45B175;  /* verde */
+}
+.btn-fila-activar { cursor: pointer !important; }
+.btn-fila-activar i{
+   font-size: 16px ;
+
+}
+
+.btn-fila-activar:hover {
+    color     : #007AFF; /* color-azul */
 }
 
 .btn-config i{

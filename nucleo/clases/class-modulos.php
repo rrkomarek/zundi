@@ -2,15 +2,14 @@
 
 class CLASSMODULOS{
 
-/************** Estado de Publicacion ***************/
-
-	function EstadoPublicar($Estado,$Link,$Tarea,$id){
-		if( $Estado==1){
-      		echo "<a title='Publicado' href='$Link&tarea=$Tarea&publicar=0&id=$id'><span class='fa fa-eye'></span></a>";
+	function estado_publicacion($query,$estado,$link,$id_mod,$disabled,$id){
+		$link = _RUTA_WEB.$link;
+		if( $estado==1){
+      		echo "<a title='activo' class='btn btn-fila-activar $disabled' href='$link?tarea=activar&estado=0&id=$id&id_mod=$id_mod' ><i class='icn-eye-open color-text-negro-b'></i></a>";
   		}else{
-      		echo "<a title='No Publicado' href='$Link&tarea=$Tarea&publicar=1&id=$id'><span class='fa fa-eye-slash np'></span></a>";
+      		echo "<a title='desactivado' class='btn btn-fila-activar $disabled' href='$link?tarea=activar&estado=1&id=$id&id_mod=$id_mod' ><i class='icn-eye-close color-text-gris-a'></i></a>";
   		};
-	} //Fin function EstadoPublicacion
+	}
 
 /************** Scripts ***************/
 	function script_busqueda($FileModulo){

@@ -31,9 +31,9 @@
 
     $menu_config .= construir_menu_sidebar("icn-shortcut","Atajos","btn-menu-sidebar btn-atajos-config btn-menu-ajax","atajos","#");
 
-    $menu_config .= construir_menu_sidebar("icn-box","Modulos","btn-menu-sidebar btn-modulos btn-menu-ajax","1");
+    $menu_config .= construir_menu_sidebar("icn-box","Modulos","btn-menu-sidebar btn-modulos btn-menu-ajax","2");
 
-    $menu_config .= construir_menu_sidebar("icn-system","Sistemas","btn-menu-sidebar btn-sistemas btn-menu-ajax","0");
+    $menu_config .= construir_menu_sidebar("icn-system","Sistemas","btn-menu-sidebar btn-sistemas btn-menu-ajax","1");
 
     $menu_atajos .= construir_menu_atajo("icon-copy","Editar Página","btn-submenu btn-editar-pagina btn-menu-ajax","btn-editar-pagina","#");
   }

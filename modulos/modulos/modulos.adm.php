@@ -28,7 +28,7 @@ switch( $tarea ){
   case 'form_editar': $form->form_editar();break;
   case 'ingresar': $form->ingresar();break;
   case 'modificar': $form->modificar();break;
-  case 'publicar': $form->publicar();break;
+  case 'activar': $form->activar();break;
   case 'eliminar': $form->eliminar();break;
   default: $form->busqueda();break;
 }

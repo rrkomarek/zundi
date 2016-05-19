@@ -44,16 +44,15 @@ class MODULOS{
 						  ?>
 						  <tr>
 						    <td><i class="icn <?php echo $fila_icono; ?>"></i> <?php echo $fila_nombre; ?></td>
-
+								<?php  if($fila_tipo=="2"){ $aux ="disabled"; } ?>
 						    <td class="col-tipo-modulo"><?php echo $this->tipo_modulo($fila_tipo); ?></td>
 						    <td class="estado">
 						      <?php
-
-						        //$ClassModulo->EstadoPublicar($mod_activar,"modulos.adm.php?s="._RUTA_DEFAULT,"publicar",$mod_id); // $mod_tipo,$link,$tarea,$id
-						      ?>
+						        $this->class_modulo->estado_publicacion($query,$fila_activar,"modulos/modulos/modulos.adm.php", $this->id_mod,$aux, $fila_id ); // query, id item, ruta, id modulo, aux disabled
+									?>
 						    </td>
 						    <td class="col-xl-offset-2 acciones">
-									<?php  if($fila_id=="1"){ $aux ="disabled"; } ?>
+
 						      <a  id="btn-editar-modulo" class="btn btn-accion btn-editar <?php echo $aux; ?>" href="modulos.adm.php?tarea=form_editar&id=<? echo $fila_id; ?>&id_mod=<? echo $this->id_mod; ?>" title="Editar <? echo $fila_id."-".$fila_url; ?>" ><i class="icn-pencil"></i></a>
 									<a  title="eliminar" type="button" id_eliminar="<? echo $fila_id; ?>" nombre_eliminar="<? echo $fila_nombre; ?>" id="btn-eliminar" class="btn btn-eliminar btn-accion <?php echo $aux; ?>"><i class="icn-trash"></i></a>
 						    </td>
@@ -207,7 +206,7 @@ class MODULOS{
 
 		$this->query->consulta($sql);
 
-		$this->busqueda();
+		header("location: modulos.adm.php?id_mod=".$this->id_mod);
 	} // fin funcion ingresar
 
 	function modificar(){
@@ -225,7 +224,7 @@ class MODULOS{
 
 			$this->query->consulta($sql);
 		}
-		$this->busqueda();
+			header("location: modulos.adm.php?id_mod=".$this->id_mod);
 	}
 
 	function eliminar(){
@@ -235,7 +234,16 @@ class MODULOS{
 		$this->query->consulta($sql);
 		$up_sqr6 = "ALTER TABLE modulos AUTO_INCREMENT=1";
 		$this->query->consulta($up_sqr6);
-		$this->busqueda();
+		header("location: modulos.adm.php?id_mod=".$this->id_mod);
+	}
+
+	function activar(){
+		$this->class_pagina->validar_get ( $_GET['estado'] );
+		$this->class_pagina->validar_get ( $_GET['id'] );
+		$sql="update modulos set
+				mod_activar='".$_GET['estado']."' where mod_id='".$_GET['id']."'";
+		$this->query->consulta($sql);
+		header("location: modulos.adm.php?id_mod=".$this->id_mod);
 	}
 
 	function tipo_modulo($mod_tipo){
@@ -246,6 +254,9 @@ class MODULOS{
 				break;
 			case '1':
 				$mod_tipo="Configuración";
+				break;
+			case '2':
+				$mod_tipo="Esencial";
 				break;
 			default:
 				$mod_tipo="no definido";
