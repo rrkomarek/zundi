@@ -106,6 +106,7 @@ table.table{
 }
 
 /*Bloque login*/
+.logo-zundi{ font-size: 22px; }
 
 .login {
   -moz-border-radius    : 5px;
@@ -346,7 +347,7 @@ textarea{
 }
 
 .btn-config i{
-  color:#DC4C3E;  /* color-rojo */
+  /* color:#DC4C3E;   color-rojo */
 }
 
 .btn-volver{
@@ -363,8 +364,8 @@ textarea{
 
 }
 
-.btn-atajos, .btn-atajos-config i{
-  color: #FAB543 !important; /* color-naranja */
+.btn-atajos{
+   color: #FAB543 !important; /* color-naranja */
 }
 
 #btn-navicon.on {
@@ -410,10 +411,10 @@ font-weight: bold;
   color:#007AFF; /* color-azul */
 }
 .icn-box{
-  color:#45B175;/* color-verde */
+  /* color:#45B175; color-verde */
 }
 .icn-shortcut{
-  color: #FAB543 !important; /* color-naranja */
+  /* color: #FAB543 !important;  color-naranja */
 }
 
 .btn-menu-sidebar-active, .btn-menu-sidebar-active:hover{

@@ -1,4 +1,5 @@
 <?php
+//echo "errores";
 header('Content-Type: text/html; charset=utf-8');
 class ERROR {
   function error_login(){

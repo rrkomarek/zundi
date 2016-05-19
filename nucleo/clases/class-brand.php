@@ -11,6 +11,7 @@ class BRAND{
     $rs = $query -> consulta($sql);
     $fila = $query -> obt_fila($rs);
     $img_cat = $fila["cat_imagen"];
+
     if ($img_cat){
       return "<img class=' $tipo' src='"._RUTA_WEB.$img."' />";
     }else{
@@ -19,9 +20,9 @@ class BRAND{
       $fila = $query -> obt_fila($rs);
       $img_conf = $fila["conf_imagen"];
       if ($img_conf){
-        return "<img class='$tipo' src='"._RUTA_WEB.$img_conf."' />";
+        return "<img class='".$tipo."' src='"._RUTA_WEB.$img_conf."' />";
       }else{
-        echo '<i class="icn-zundi color-text-rojo-a"></i><span class="color-text-gris">zundi</span>';
+        return '<div class="logo-zundi"><i class="icn-zundi color-text-rojo-a"></i><span class="color-text-gris">zundi</span></div>';
       }
     }
   } // fin function brand_login

@@ -2,7 +2,7 @@
   header('Content-Type: text/html; charset=utf-8');
   define(_EDITANDO,"true");
 
-  echo "Aqui";
+  //echo "Aqui";
 
   require_once(_RUTA_HOST."nucleo/clases/class-brand.php");
   $brand = new BRAND();
@@ -24,17 +24,15 @@
 
 
   if ($id_rol==2){
+
     $ref_inicio="index.php";
+
+    $menu_config .= cargar_sistemas($this->query, $id_rol, $id_mod);
     $menu_config .= construir_title_menu("Administración");
-
     $menu_config .= construir_menu_sidebar("icn-conf","Configuración Sitio","btn-menu-sidebar btn-config btn-menu-ajax","config","#");
-
     $menu_config .= construir_menu_sidebar("icn-shortcut","Atajos","btn-menu-sidebar btn-atajos-config btn-menu-ajax","atajos","#");
-
     $menu_config .= construir_menu_sidebar("icn-box","Modulos","btn-menu-sidebar btn-modulos btn-menu-ajax","2");
-
     $menu_config .= construir_menu_sidebar("icn-system","Sistemas","btn-menu-sidebar btn-sistemas btn-menu-ajax","1");
-
     $menu_atajos .= construir_menu_atajo("icon-copy","Editar Página","btn-submenu btn-editar-pagina btn-menu-ajax","btn-editar-pagina","#");
   }
 
@@ -54,6 +52,40 @@
   }
   function construir_title_menu( $nombre){
     $aux ="<div class='title-menu'>$nombre</div>";
+    return $aux;
+  }
+
+  function cargar_sistemas($query,$id_rol,$id_mod){
+    echo $sql ="SELECT sis_id, sis_nombre, sis_icono FROM sistemas";
+    $rs = $query->consulta($sql);
+    $fila = $query->obt_fila($rs);
+    $num=$query->num_registros($rs);
+      if($num>0){
+        for($i=0;$i<$num;$i++){
+          list($fila_id,$fila_nombre,$fila_icono)=$query->obt_fila($rs);
+          $aux .= acordion("<i class='".$fila_icono."'></i>",".$fila_nombre.",".$fila_id.",".$id_mod.");
+        }
+      }
+    return $aux;
+  };
+
+  function acordion($nombre, $menu, $id_sistema, $id_modulo){
+   $aux ='<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+      <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="heading-'.$id_sistema.'">
+          <h4 class="panel-title">
+            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-'.$id_sistema.'" aria-expanded="true" aria-controls="collapse-'.$id_sistema.'">
+             '.$nombre.'
+            </a>
+          </h4>
+        </div>
+        <div id="collapse-'.$id_sistema.'" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-'.$id_sistema.'">
+          <div class="panel-body">
+            '.$menu.'
+          </div>
+        </div>
+      </div>
+    </div>';
     return $aux;
   }
 ?>
@@ -135,7 +167,7 @@
 	<ul class="sidebar-inner">
     <div class="title-menu title-menu-general"> Menu General</div>
     <li>
-      <a class="btn-menu-sidebar btn-menu-sidebar-active" href="<? echo $ref; ?>"><i class="icn-home"></i> Inicio </a>
+      <a class="btn-menu-sidebar btn-menu-sidebar-active" href="<? echo $ref_inicio; ?>"><i class="icn-home"></i> Inicio </a>
     </li>
     <?php echo $menu_config; ?>
 	</ul>

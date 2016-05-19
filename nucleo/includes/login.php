@@ -13,6 +13,7 @@ if( $_GET["tarea"]=="salir" ){
 	}
 	header("Location:".$link);
 }
+//echo "login";
 ?>
 <!-- --------------  Index login  --------------- -->
 <div class="key-index" onclick="toggleId('block-login');">

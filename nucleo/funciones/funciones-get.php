@@ -18,6 +18,7 @@
       }else{
         $id_plantilla = obtener_plantilla($query,$id_categoria);
       }
+      //echo "id_pla:".$id_plantilla;
       return $id_plantilla;
     }
 
@@ -29,7 +30,7 @@
   					 WHERE cat_id='$cat'";
   		$res  = $query->consulta($sql);
   		$fila = $query->obt_fila($res);
-  		//echo "fila:".	$fila["0"]."</br>";
+  		//echo "fila:".	$fila["cat_id_plantilla"]."</br>";
   		return 	$fila["0"];
   	}
   /* funcion traer rol */

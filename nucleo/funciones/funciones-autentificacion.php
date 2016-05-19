@@ -13,7 +13,7 @@
     if(isset($_POST['autentificar'])){
 	    autentificar($plantilla,$cat,$pla,$query,$sesion);
     } else {
-	    //echo "no autentificado</br>";
+	     //echo "no autentificado</br>";
 		  if( verificar_categoria($query,$cat) or autentifico($cat,$sesion)){
         //echo "Ingreso normal de usuario</br>";
 			  ingresar($plantilla,$cat,$pla);
