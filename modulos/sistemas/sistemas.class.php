@@ -155,7 +155,6 @@ class SISTEMAS{
 					<label>Tipo modulo:  </label>
 					<select class="form-control form-select" name="inputTipo" id="inputTipo">
 						<?  echo $this->opciones_tipo($fila_tipo);  ?>
-
 					</select>
 				</div>
 				<div class="form-group">

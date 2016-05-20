@@ -103,8 +103,7 @@ class MODULOS{
 				<div class="form-group">
 					<label>Tipo modulo:  </label>
 					<select class="form-control form-select" name="inputTipo" id="inputTipo">
-						<option value="0" checked>Datos</option>
-						<option value="1" >Configuración</option>
+						<?php echo $this->opciones_tipo("");  ?>
 					</select>
 				</div>
 				<div class="form-group form-botones">
@@ -117,7 +116,6 @@ class MODULOS{
 	}
 
 	function form_editar(){
-
 		$botones = $this->class_pagina->crear_btn("modulos.adm.php?tarea=busqueda&id_mod=$this->id_mod","btn btn-link  btn-volver","icn-chevron-left","volver"); // link, clase, icono, nombre
 		$this->class_pagina->crear_head_form("Editar Modulo", $botones,"");// nombre, botones-left, botones-right
 		echo "<a href='javascript:location.reload()'><i class='icn-sync'></i></a>";
@@ -145,7 +143,6 @@ class MODULOS{
 						<input type="hidden" id="inputId" name="inputId" value="<?php echo $fila_id; ?>" />
 					</div>
 				</div>
-
 				<div class="form-group form-descripcion">
 					<label>Descripción</label>
 					<textarea class="form-control" rows="5" id="inputDescripcion" name="inputDescripcion" placeholder=""><? echo $fila_descripcion; ?></textarea>
@@ -158,12 +155,10 @@ class MODULOS{
 					<label>Icono modulo</label>
 					<input class="form-control" id="inputIcono" name="inputIcono"  placeholder="" value="<? echo $fila_icono; ?>"/>
 				</div>
-
 				<div class="form-group">
 					<label>Tipo modulo:  </label>
 					<select class="form-control form-select" name="inputTipo" id="inputTipo">
-						<option value="0" <?php if ($fila_tipo==0){ echo "selected"; } ?> >Datos</option>
-						<option value="1" <?php if ($fila_tipo==1){ echo "selected"; } ?> >Configuración</option>
+						<?  echo $this->opciones_tipo($fila_tipo);  ?>
 					</select>
 				</div>
 				<div class="form-group">
@@ -263,6 +258,23 @@ class MODULOS{
 				break;
 		}
 		return $mod_tipo;
+	}
+
+	function opciones_tipo($fila_tipo){
+		$tipos = Array();
+		for ($i = 0; $i <= 3; $i++) {
+			$tipos [$i]= $this->tipo_modulo($i);
+		}
+
+		for ($i = 0; $i <= 3; $i++) {
+			if (isset($fila_tipo)){
+				if ($fila_tipo==$i){ $sel="selected"; } else {$sel="";}
+			}else {
+			$sel="";
+			}
+			$aux .='<option value="'.$i.'" '.$sel.'?>'.$tipos[$i].'</option>';
+		}
+		return $aux;
 	}
 
 }

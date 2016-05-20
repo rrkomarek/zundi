@@ -209,7 +209,7 @@ class CLASSMODULOS{
 
 /************** Nombre Usuario ***************/
 
-	function Nombre_Usuario($Usuario){
+	function nombre_usuario($Usuario){
 
  		$query=NEW QUERY;
 		$sql="select nombre from usuario where id=$Usuario";
@@ -220,7 +220,7 @@ class CLASSMODULOS{
 
 /************** Icono  Modulo ***************/
 
-	function Icono_Modulo($id){
+	function icono_modulo($id){
 
  		$query=NEW QUERY;
 		$sql="select mod_icono from modulos where mod_id=$id";
@@ -231,7 +231,7 @@ class CLASSMODULOS{
 
 /************** Nombre Modulo ***************/
 
-	function Nombre_Modulo($id){
+	function mombre_modulo($id){
 
  		$query=NEW QUERY;
 		$sql="select mod_nombre from modulos where mod_id=$id";

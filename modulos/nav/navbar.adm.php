@@ -6,8 +6,12 @@
 
   require_once(_RUTA_HOST."nucleo/clases/class-brand.php");
   $brand = new BRAND();
+
   $id_usu = $sesion->get_variable("usu_id");
   $id_rol = $sesion->get_variable("usu_rol");
+
+  $this->class_modulo->nombre_usuario($id_usu);
+
   $sql ="SELECT usu_nombre,usu_apellidos,usu_imagen FROM usuarios WHERE usu_id='$id_usu'";
   $rs = $this->query->consulta($sql);
   $fila = $this->query->obt_fila($rs);
