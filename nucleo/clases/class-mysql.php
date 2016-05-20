@@ -135,5 +135,9 @@ class MYSQL {
 			}
 
 		}
+
+		function ejecutar_query(){
+			
+		}
 }
 ?>

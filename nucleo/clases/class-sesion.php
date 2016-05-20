@@ -2,6 +2,12 @@
 	header('Content-Type: text/html; charset=utf-8_spanish_ci');
 	class SESION{
 
+		var $constructor;
+
+	  function sesion($constructor){
+	    $this->constructor = $constuctor;
+	  }
+
 		function iniciar_sesion(){
 			session_start();
 		}

@@ -1,8 +1,8 @@
 <?php
   //Trabajo de variables GET
-    require_once(_RUTA_HOST."nucleo/funciones/funciones-get.php");
-    require_once(_RUTA_HOST."nucleo/clases/class-errores.php");
-    $error = new ERROR();
+    // require_once(_RUTA_HOST."nucleo/funciones/funciones-get.php");
+    // require_once(_RUTA_HOST."nucleo/clases/class-errores.php");
+    // $error = new ERROR();
   /* Autentificacion */
     //Trabajo de variables GET
     $cat = get_categoria_index();

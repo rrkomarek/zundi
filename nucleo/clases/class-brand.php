@@ -1,23 +1,30 @@
 <?PHP
-require_once(_RUTA_HOST."/nucleo/config.php");
-require_once(_RUTA_HOST."/nucleo/clases/class-mysql.php");
-//echo "Class BRAND";
+// require_once(_RUTA_HOST."/nucleo/config.php");
+// require_once(_RUTA_HOST."/nucleo/clases/class-mysql.php");
+// //echo "Class BRAND";
+header('Content-Type: text/html; charset=utf-8');
+
 class BRAND{
 
-  function brand($cat,$tipo){
-    $query = new MYSQL();
-    $query ->conectar(_BASE_DE_DATOS,_HOST,_USUARIO,_PASSWORD);
+  var $constructor;
+
+  function __construct($constructor) {
+    $this->constructor = $constructor;
+  }
+
+  function brand_login($cat,$tipo){
+
     $sql ="SELECT cat_imagen FROM categoria WHERE cat_id='$cat' and cat_tipo='2'";
-    $rs = $query -> consulta($sql);
-    $fila = $query -> obt_fila($rs);
+    $rs = $this->constructor->query -> consulta($sql);
+    $fila =  $this->constructor->query -> obt_fila($rs);
     $img_cat = $fila["cat_imagen"];
 
     if ($img_cat){
       return "<img class=' $tipo' src='"._RUTA_WEB.$img."' />";
     }else{
       $sql ="SELECT conf_imagen FROM configuracion";
-      $rs = $query -> consulta($sql);
-      $fila = $query -> obt_fila($rs);
+      $rs = $this->constructor->query -> consulta($sql);
+      $fila = $this->constructor->query -> obt_fila($rs);
       $img_conf = $fila["conf_imagen"];
       if ($img_conf){
         return "<img class='".$tipo."' src='"._RUTA_WEB.$img_conf."' />";

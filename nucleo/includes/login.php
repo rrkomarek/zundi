@@ -1,9 +1,9 @@
 <?
 if( $_GET["tarea"]=="salir" ){
 	require_once("../clases/class-sesion.php");
-	$sesion = new SESION();
-	$sesion->iniciar_sesion();
-	$sesion->cerrar_sesion();
+	$this->construccion->sesion = new SESION();
+	$this->construccion->sesion->iniciar_sesion();
+	$this->construccion->sesion->cerrar_sesion();
 	if(isset($_GET["cat"])){
 		if(is_numeric($_GET["cat"])){
 			$link="../../index.php?&cat=".$_GET["cat"]."&pla=".$_GET["pla"];

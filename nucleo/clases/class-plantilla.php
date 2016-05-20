@@ -1,5 +1,7 @@
 <?php
-	class PLANTILLA{
+header('Content-Type: text/html; charset=utf-8');
+
+class PLANTILLA{
 
 	  //var $capa;
 		var $cat_nombre;
@@ -14,16 +16,14 @@
 		var $pla_css;
 		var $css_cont;
 		var $pla_codigos;
-	  var $query;
+		var $constructor;
 		//var $url;
 
-		function plantilla($conexion){
-	   $this->query = $conexion;
-	   //$this->capa = new VENTANA();  //revisar para que sirve
-		}
+	  function __construct($constructor) {
+	    $this->constructor = $constructor;
+	  }
 
 		function cargar_plantilla($cat,$pla){
-			//echo "Entre a cargar plantilla";
 			$consulta = "SELECT
 			pla_id,
 			cat_nombre,
@@ -41,11 +41,11 @@
 			categoria
 			WHERE cat_id = '".$cat."' and pla_id='".$pla."'";
 			//echo $consulta;
-			$rs = $this->query->consulta($consulta);
+			$rs = $this->constructor->query->consulta($consulta);
 	    if ($rs){
-				$cant = $this->query->num_registros($rs);
+				$cant = $this->constructor->query->num_registros($rs);
 				if ($cant > 0){
-					$fila = $this->query->obt_fila($rs);
+					$fila = $this->constructor->query->obt_fila($rs);
 					$this->cat_nombre     = $fila["cat_nombre"];
 					$this->cat_analitica  = $fila["cat_analitica"];
 					$this->cat_favicon 		= $fila["cat_favicon"];
@@ -57,6 +57,7 @@
 					$this->pla_icono   		= $fila["pla_icono"];
 					$this->pla_css     		= $fila["pla_css"];
 					$this->pla_codigos 		= $fila["pla_codigos"];
+
 				}else{
 					return false;
 				}
@@ -66,10 +67,10 @@
 		}
 
 		function dibujar_cabecera($cat,$pla){
-			  $sesion= new SESION();
-				$sesion->iniciar_sesion();
+			//$sesion= new SESION();
+			//$this->constructor->sesion->iniciar_sesion();
 				//echo 'ingresar dibujar cabecera';
-				$query = new MYSQL();
+			//$query = new MYSQL();
 			/* HTML  */
 				echo '<!DOCTYPE HTML>'."\n";
 			  echo '<html id="pagIndex" lang="ES">'."\n";
@@ -79,7 +80,7 @@
 			/* Meta Site  */
 				echo '	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">'."\n";
 				//echo '<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />';
-//echo '<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15"/>';
+				//echo '<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15"/>';
 				?>
 				<meta name="tipo_contenido"  content="text/html;" http-equiv="content-type" charset="utf-8">
 				<?php
@@ -162,16 +163,17 @@
 					echo ' <link href="css/estilos-popup.adm.css" rel="stylesheet" type="text/css" />'.'\n';
 				}*/
 
-				echo '<body onload="PaginaCargada();" class="PagBody loading" role="document" data-spy="scroll" data-target="#navigation" data-offset="80" >'."\n";
+				//echo '<body onload="PaginaCargada();" class="PagBody loading" role="document" data-spy="scroll" data-target="#navigation" data-offset="80" >'."\n";
+				echo '<body class="PagBody loading" role="document" data-spy="scroll" data-target="#navigation" data-offset="80" >'."\n";
 				echo '	<div id="wrapper">'."\n";
 				echo '		<div id="preloader_logo"></div>'."\n";
 				echo '		<div id="preloader_body"></div>'."\n";
 
 			/*----------------  Inicio Session administrador --------------- */
 
-				//$sesion->imprimir();
+				//$this->constructor->sesion->imprimir();
 
-				if($sesion->existe_variable("usu_rol")){
+				if($this->constructor->sesion->existe_variable("usu_rol")){
 					require_once(_RUTA_HOST.'modulos/nav/navbar.adm.php');
 				} else {
 					require_once(_RUTA_HOST.'/nucleo/includes/login.php');
@@ -186,16 +188,16 @@
 			//echo "dibujar cuerpo";
 			echo "<!--  Inicio Cuerpo  -->"."\n\n";
 				$rs = $this->obtener_padre($cat,$pla);
-				$num = $this->query->num_registros($rs);
+				$num = $this->constructor->query->num_registros($rs);
 				if ($num > 0){
-					list($cont_id, $cont_nombre, $cont_css,$cont_clase, $con_id_contenedor, $cont_codigos) = $this->query->obt_fila($rs);
+					list($cont_id, $cont_nombre, $cont_css,$cont_clase, $con_id_contenedor, $cont_codigos) = $this->constructor->query->obt_fila($rs);
 					//echo "id_cont:".$cont_id;
 					echo '	<div class="'.$cont_class.'" id="'.$cont_nombre.'">'."\n\n";  //inicio publicacion
 						$rs_pub = $this->obtener_publicaciones($cont_id,$cat,$pla);
-						$cant = $this->query->num_registros($rs_pub);
+						$cant = $this->constructor->query->num_registros($rs_pub);
 						if ($cant > 0){
 							//echo "aqui pub";
-							while ($fila_aux = $this->query->obt_fila($rs_pub)){
+							while ($fila_aux = $this->constructor->query->obt_fila($rs_pub)){
 								$this->cargar_pub($fila_aux["pub_archivo"],$fila_aux["pub_id"],$cat);
 							}
 						}
@@ -215,12 +217,12 @@
 		function dibujar_hijos($id_hijo,$cat,$pla){
 			$rs=$this->tiene_hijos($id_hijo);
 			$res= $this->obtener_publicaciones($id_hijo,$idcategoria,$id_plantilla);
-			while ($fila = $this->query->obt_fila($rs)){
+			while ($fila = $this->constructor->query->obt_fila($rs)){
 				echo '	<div class="'.$fila["pub_clase"].'" id="'.$fila["pub_nombre"].'">'."\n\n";//inicio publicacion
   				$res = $this->obtener_publicaciones($fila["id"],$cat,$pla);
 					$cant = $this->cnx->num_registros($res);
 					if ($cant > 0){
-						while ($fila_aux = $this->query->obt_fila($res)){
+						while ($fila_aux = $this->constructor->query->obt_fila($res)){
 							$this->cargar_pub($fila_aux["pub_archivo"],$fila_aux["pub_id"],$cat);
 						}
 					}
@@ -233,7 +235,7 @@
 		function tiene_cont($id,$cat,$pla){
 			$ress = $this->obtener_publicaciones($id,$cat,$pla);
 			$res  = $this->tiene_hijos($id);
-			if (($this->query->num_registros($res) > 0)  || ($this->query->num_registros($ress)>0)){
+			if (($this->constructor->query->num_registros($res) > 0)  || ($this->constructor->query->num_registros($ress)>0)){
 				return true;
 			} else {
 					if(isset($_SESSION['usu_admin'])){
@@ -257,7 +259,7 @@
 										(cont_id = '".$id_hijo."')
 									ORDER BY cont_orden asc";
 					//echo $consulta;
-					return $this->query->consulta($consulta);
+					return $this->constructor->query->consulta($consulta);
 		}
 
 		function dibujar_pie(){
@@ -280,10 +282,10 @@
 				echo '</html>'."\n";
 		}
 
-    function nombre_sitio($query){
+    function nombre_sitio(){
     		$consulta = "SELECT conf_nombre_sitio FROM configuracion";
-    		$rs = $this->query->consulta($consulta);
-    		$fila = $this->query->obt_fila($rs);
+    		$rs = $this->constructor->query->consulta($consulta);
+    		$fila = $this->constructor->query->obt_fila($rs);
     		$nombre=$fila["conf_nombre_sitio"];
     		return $nombre;
     }
@@ -291,8 +293,8 @@
     function ruta_analitica($query){
 			//echo "ruta analitica";
     		$consulta = "SELECT conf_ruta_analitica FROM configuracion";
-    		$rs = $this->query->consulta($consulta);
-    		$fila = $this->query->obt_fila($rs);
+    		$rs = $this->constructor->query->consulta($consulta);
+    		$fila = $this->constructor->query->obt_fila($rs);
     		$ruta=$fila["conf_ruta_analitica"];
     		echo "<meta ".$ruta." ej:analitica />";
 
@@ -300,22 +302,22 @@
 
 	  function scripts_head($query){
 	    		$consulta = "SELECT conf_script_head FROM configuracion";
-	    		$rs = $this->query->consulta($consulta);
-	    		$fila = $this->query->obt_fila($rs);
+	    		$rs = $this->constructor->query->consulta($consulta);
+	    		$fila = $this->constructor->query->obt_fila($rs);
 	    		return $ruta=$fila["conf_script_head"];
 	  }
 
 		function scripts_footer($query){
 	    		$consulta = "SELECT conf_script_footer FROM configuracion";
-	    		$rs = $this->query->consulta($consulta);
-	    		$fila = $this->query->obt_fila($rs);
+	    		$rs = $this->constructor->query->consulta($consulta);
+	    		$fila = $this->constructor->query->obt_fila($rs);
 	    		return $ruta=$fila["conf_script_footer"];
 	  }
 
 		function traer_padre($id){
 			//echo "traer padre";
 			$sql="select * from categoria where cat_id=".$id;
-			$resultado= $this->query->consulta($sql);
+			$resultado= $this->constructor->query->consulta($sql);
 			if ($rs){
 				if($id_padre==0){
 					return $id;
@@ -349,7 +351,7 @@
 						  and cat_id = '".$cat."' and cont_id_contenedor ='0'
 						  and pla_id='".$pla."'
 					 ORDER BY cont_orden asc";
-	   return $this->query->consulta($consulta);
+	   return $this->constructor->query->consulta($consulta);
 		}
 
 		function obtener_publicaciones($id,$cat,$pla){
@@ -364,14 +366,14 @@
 								(cont_rel_id_cat= '".$cat."' ) and cont_rel_id_pla='".$pla."' and cont_rel_activar='1'
 						ORDER BY cont_rel_orden asc";
 			//echo $consulta;
-			return $this->query->consulta($consulta);
+			return $this->constructor->query->consulta($consulta);
 
 		}
 
 		function obtener_css($cat,$pla){
 			$rs = $this->obtener_padre($cat,$pla);
-			if ($this->query->num_registros($rs) > 0){
-				while ($fila = $this->query->obt_fila($rs)){
+			if ($this->constructor->query->num_registros($rs) > 0){
+				while ($fila = $this->constructor->query->obt_fila($rs)){
 						echo '<link rel="stylesheet" href="'._RUTA_WEB.$fila["cont_css"].'" rel="stylesheet" type="text/css">'."\n";
 						$this->obtener_css_hijos($fila["cont_id"],$cat);
 				}
@@ -380,8 +382,8 @@
 
 		function obtener_css_hijos($id_hijo,$cat){
       $rse=$this->tiene_hijos($id_hijo);
-			if ($this->query->num_registros($rse) > 0){
-			    while ($fila1 = $this->query->obt_fila($rs)){
+			if ($this->constructor->query->num_registros($rse) > 0){
+			    while ($fila1 = $this->constructor->query->obt_fila($rs)){
 						echo '<link rel="stylesheet" href="'._RUTA_WEB.$fila["cont_css"].'" rel="stylesheet" type="text/css">'."\n";
             $this->obtener_css_hijos($fila1["cont_id"],$cat);
 				}

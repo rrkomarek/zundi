@@ -1,7 +1,14 @@
 <?php
-//echo "errores";
 header('Content-Type: text/html; charset=utf-8');
+
 class ERROR {
+
+  var $constructor;
+
+  function __construct($constructor) {
+    $this->constructor = $constructor;
+  }
+
   function error_login(){
     return "<div role='alert' class='alert alert-danger animated fadeIn' id='error_login'><i class='icn-danger'></i> El email o password que ingresaste es incorrecto. Por favor intenta denuevo.</div>";
   }

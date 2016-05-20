@@ -1,14 +1,17 @@
 <?php
-require_once(_RUTA_HOST."/nucleo/config.php");
-require_once(_RUTA_HOST."/nucleo/clases/class-mysql.php");
-require_once(_RUTA_HOST."/nucleo/funciones/funciones-get.php");
-require_once(_RUTA_HOST."/nucleo/clases/class-sesion.php");
+header('Content-Type: text/html; charset=utf-8');
 
 class REDIRECCION{
 
+  var $constructor;
+
+  function __construct($constructor) {
+    $this->constructor = $constructor;
+  }
+
   function login($cat,$pla,$usu_id){
     //return "cat:".$cat."pla:".$pla."usu_id:".$usu_id;
-    switch ( traer_rol($usu_id) ) {
+    switch ( $this->traer_rol($usu_id) ) {
      case "0":
        // "Sin rol";
      break;
@@ -41,12 +44,12 @@ class REDIRECCION{
   } // fin login
 
   function ruta_amigable($cat,$pla){
-    $query = new MYSQL();
-    $query ->conectar(_BASE_DE_DATOS,_HOST,_USUARIO,_PASSWORD);
+    //$query = new MYSQL();
+    //$query ->conectar(_BASE_DE_DATOS,_HOST,_USUARIO,_PASSWORD);
 
     $sql ="SELECT cat_ruta_amigable FROM categoria WHERE cat_id='$cat'";
-    $rs = $query -> consulta($sql);
-    $fila = $query -> obt_fila($rs);
+    $rs = $this->constructor->query-> consulta($sql);
+    $fila = $this->constructor->query-> obt_fila($rs);
     $ruta_cat = $fila["cat_ruta_amigable"];
     if ($pla!=1) {
       return _RUTA_WEB.$ruta_cat."?p=".$pla;
@@ -54,5 +57,6 @@ class REDIRECCION{
       return _RUTA_WEB.$ruta_cat;
     }
   } // fin ruta amigable
+
 } // fin clase
 ?>
