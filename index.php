@@ -7,7 +7,7 @@
    * Devs.: Ariel Velazques, Ariel Ortuño, Cidar Veizaga, Cristian Grageda, Carolina Sanchez, Marcelo Garcia
    */
   require_once("nucleo/clases/class-constructor.php");
-  $constructor = new CONSTRUCTOR();
-  $constructor->autentificacion->index();
+  $fmt = new CONSTRUCTOR();
+  $fmt->autentificacion->index();
 
 ?>

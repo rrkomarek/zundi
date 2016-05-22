@@ -1,8 +1,15 @@
 <?PHP
+header('Content-Type: text/html; charset=utf-8');
 
 class CLASSMODULOS{
 
-	function estado_publicacion($query,$estado,$link,$id_mod,$disabled,$id){
+  var $fmt;
+
+  function __construct($fmt) {
+    $this->fmt = $fmt;
+  }
+
+	function estado_publicacion( $estado,$link,$id_mod,$disabled,$id){
 		$link = _RUTA_WEB.$link;
 		if( $estado==1){
       		echo "<a title='activo' class='btn btn-fila-activar $disabled' href='$link?tarea=activar&estado=0&id=$id&id_mod=$id_mod' ><i class='icn-eye-open color-text-negro-b'></i></a>";
@@ -11,23 +18,20 @@ class CLASSMODULOS{
   		};
 	}
 
-/************** Scripts ***************/
 	function script_busqueda($FileModulo){
-	?>
-		<script language="JavaScript">
-			function confirma_eliminacion(mod_id, mod_nombre, mod_tarea){
-			  url = "<?php echo $FileModulo; ?>&tarea="+ mod_tarea + "&id="+ mod_id;
-			  if (confirm('¿Está seguro que desea eliminar "'+ mod_nombre +'" \n el Registro de la Base de Datos?'))
-			  location=(url)
-			}
+  	?>
+  		<script language="JavaScript">
+  			function confirma_eliminacion(mod_id, mod_nombre, mod_tarea){
+  			  url = "<?php echo $FileModulo; ?>&tarea="+ mod_tarea + "&id="+ mod_id;
+  			  if (confirm('¿Está seguro que desea eliminar "'+ mod_nombre +'" \n el Registro de la Base de Datos?'))
+  			  location=(url)
+  			}
 
-		</script>
-	<?php
-	}  // fin script_busqueda()
+  		</script>
+  	<?php
+	}
 
-
-/************** Scripts ***************/
-		function script_page($FileModulo){
+	function script_page($FileModulo){
 		?>
 			<script language="JavaScript">
 			$(document).ready(function()
@@ -36,94 +40,23 @@ class CLASSMODULOS{
 			});
 			</script>
 		<?php
-		}  // fin script_busqueda()
+	}  // fin script_busqueda()
 
-/************** Scripts ***************/
-		function script_form($query,$ruta,$id_mod){
+	function script_form($ruta,$id_mod){
 		?>
 			<script language="JavaScript">
 				$("#btn-eliminar").click(function() {
 					id = $( this ).attr("id_eliminar");
 					nombre = $( this ).attr("nombre_eliminar");
 				  url = "<? echo _RUTA_WEB.$ruta; ?>?tarea=eliminar&id_mod=<? echo $id_mod; ?>&id="+id;
-					if(confirm('¿Estas seguro de ELIMINAR '+ nombre +' ?')){
-						alert(url);
-					 	document.location.href=url;
+					if(confirm('¿Estas seguro de ELIMINAR: "'+ nombre +'" ?')){
+					  //alert(url);
+					  document.location.href=url;
 					}
 				});
 			</script>
 		<?php
-		}
-
-
-/************** Scripts arbol ***************/
-
-	function script_arbol($FileModulo){
-		include_once("../../nucleo/clases/class-generar-arbol.php");
-  		include_once("../../nucleo/clases/class-arbol-nodo.php");
-  		include_once("../../nucleo/clases/class-arbol.php");
-		include_once("../../nucleo/clases/class-conexion.php");
-	?>
-	<script type="text/javascript" src="<?php echo _RUTA_WEB; ?>nucleo/arbol/core/lang/Bs_Misc.lib.js"></script>
-	<script type="text/javascript" src="<?php echo _RUTA_WEB; ?>nucleo/arbol/core/lang/Bs_Array.class.js"></script>
-	<script type="text/javascript" src="<?php echo _RUTA_WEB; ?>nucleo/arbol/components/tree/Bs_Tree.class.js"></script>
-	<script type="text/javascript" src="<?php echo _RUTA_WEB; ?>nucleo/arbol/components/tree/Bs_TreeElement.class.js"></script>
-	<script type="text/javascript" src="<?php echo _RUTA_WEB; ?>nucleo/arbol/core/lang/Bs_Cookie.lib.js"></script>
-	<script type="text/javascript" src="<?php echo _RUTA_WEB; ?>nucleo/arbol/core/util/Bs_Wddx.class.js"></script>
-	<script type="text/javascript" src="<?php echo _RUTA_WEB; ?>nucleo/arbol/core/util/Bs_XmlParser.class.js"></script>
-	<script type="text/javascript" src="<?php echo _RUTA_WEB; ?>nucleo/arbol/components/checkbox/Bs_Checkbox.class.js"></script>
-
-		<script language="JavaScript">
-			function init(val){
-				if(val=='1')
-				{
-				<?
-					$cnx = new Tconexion();
-					$cnx->conectar(_BASE_DE_DATOS,_HOST,_USUARIO,_PASSWORD);
-
-					$arbol = new TArbol();
-					$arbol->nombreVariable="a";
-					$vector = obtener_tabla($_GET['id'],$cnx,categoria_contenidos, id_contenido);
-					llenarPrincipal($arbol,$cnx,$vector);
-					echo $arbol->toJavascript();
-				?>
-				}
-				else
-				{
-					<?
-					$cnx = new Tconexion();
-					$cnx->conectar(_BASE_DE_DATOS, _HOST, _USUARIO, _PASSWORD);
-			        $arbol = new TArbol();
-					$arbol->nombreVariable="a";
-					llenarPrincipal($arbol,$cnx,'');
-					echo $arbol->toJavascript();
-				?>
-				}
-
-
-			  t = new Bs_Tree();
-		  	  t.imageDir="<?php echo _RUTA_WEB; ?>nucleo/arbol/components/tree/img/";
-			  t.imgHeight = '20';
-			  t.imgWidth ='20' ;
-			 // t.e.setTamCheck();
-			 t.useCheckboxSystem  = true;
-			  //t.imgWidth='100';
-			  //      t.setTamChecks();
-			 t.checkboxSystemImgDir = '<?php echo _RUTA_WEB; ?>nucleo/arbol/components/checkbox/img/';
-			  t.useAutoSequence=false;
-			  //t.rememberState = true;
-			  t.initByArray(a);
-			   //     t.setTamCheck('1','1');
-			   // t.autoCollapse = true;
-			  //t.expandAll();
-			  t.drawInto('treeDiv1');
-			//  t.applyState();
-		   }
-		</script>
-	<?php
-	}  // fin script_busqueda()
-
-/************** Estructurar Fecha ***************/
+	}
 
 	function Estructurar_Fecha($Fecha){
 	    $Fechas = explode("-", $Fecha);
@@ -159,8 +92,6 @@ class CLASSMODULOS{
 	    return $ano."-".$mes."-".$dia;
 	}
 
-/************** Estructurar compacta Fecha y hora compacta ***************/
-
 	function Fecha_Hora_Compacta($Fecha){
 	    $FechaHora = explode(" ", $Fecha);
 	    $Fechas = explode("-", $FechaHora[0]);
@@ -187,8 +118,6 @@ class CLASSMODULOS{
 		return $F;
 	}
 
-/************** Estructurar Fecha  compacta ***************/
-
 	function Fecha_Compacta($Fecha){
 	    $Fechas = explode("-", $Fecha);
 	    $ano=$Fechas[0];
@@ -207,63 +136,19 @@ class CLASSMODULOS{
 		return $F;
 	}
 
-/************** Nombre Usuario ***************/
-
-	function nombre_usuario($Usuario){
-
- 		$query=NEW QUERY;
-		$sql="select nombre from usuario where id=$Usuario";
-		$query->consulta($sql);
-		list($mod_nombre)=$query->valores_fila();
-		return $mod_nombre;
-	} //Fion nombre usuario
-
-/************** Icono  Modulo ***************/
-
 	function icono_modulo($id){
-
- 		$query=NEW QUERY;
 		$sql="select mod_icono from modulos where mod_id=$id";
-		$query->consulta($sql);
-		list($mod_icono)=$query->valores_fila();
-		return $mod_icono;
+		$rs=$this->fmt->query->consulta($sql);
+		$fila=$this->fmt->query->obt_fila($rs);
+		return $fila["mod_icono"];
 	} //Fion nombre usuario
-
-/************** Nombre Modulo ***************/
 
 	function mombre_modulo($id){
-
- 		$query=NEW QUERY;
 		$sql="select mod_nombre from modulos where mod_id=$id";
-		$query->consulta($sql);
-		list($mod_nombre)=$query->valores_fila();
-		return $mod_nombre;
+    $rs=$this->fmt->query->consulta($sql);
+		$fila=$this->fmt->query->obt_fila($rs);
+		return $fila["mod_nombre"];
 	} //Fion nombre usuario
-
-/************** Conocer Modulo ***************/
-
-	function get_modulo_nombre($id){
-
-		$query0=NEW QUERY;
-		$sql0="select mod_nombre from modulos where mod_id=$id";
-
-		$query0->consulta($sql0);
-		$row= $query0->valores_columnas();
-
-		return $row['mod_nombre'];
-
-	}
-
-	function get_modulo_icono($id){
-		$query0=NEW QUERY;
-		$sql0="select mod_icono from modulos where mod_id=$id";
-
-		$query0->consulta($sql0);
-		$row= $query0->valores_columnas();
-
-		return $row['mod_icono'];
-
-	}
 
 	function get_modulo_id (){
 

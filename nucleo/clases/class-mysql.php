@@ -1,4 +1,5 @@
 <?php
+header('Content-Type: text/html; charset=utf-8');
 
 class MYSQL {
 
@@ -137,7 +138,7 @@ class MYSQL {
 		}
 
 		function ejecutar_query(){
-			
+
 		}
 }
 ?>

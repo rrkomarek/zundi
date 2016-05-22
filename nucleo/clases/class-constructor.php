@@ -12,6 +12,11 @@ class CONSTRUCTOR{
   var $mensaje;
   var $error;
   var $usuario;
+  var $redireccion;
+  var $header;
+  var $footer;
+  var $nav;
+  var $categoria;
 
   function __construct() {
 
@@ -51,6 +56,13 @@ class CONSTRUCTOR{
 
     require_once(_RUTA_HOST."nucleo/clases/class-sesion.php");
     require_once(_RUTA_HOST."nucleo/clases/class-mysql.php");
+
+    $sesion = new SESION($this);
+    $sesion->iniciar_sesion();
+
+    $query = new MYSQL();
+    $query->conectar(_BASE_DE_DATOS,_HOST,_USUARIO,_PASSWORD);
+
     require_once(_RUTA_HOST."nucleo/clases/class-get.php");
     require_once(_RUTA_HOST."nucleo/clases/class-plantilla.php");
     require_once(_RUTA_HOST."nucleo/clases/class-errores.php");
@@ -59,29 +71,45 @@ class CONSTRUCTOR{
     require_once(_RUTA_HOST."nucleo/clases/class-autentificacion.php");
     require_once(_RUTA_HOST."nucleo/clases/class-brand.php");
     require_once(_RUTA_HOST."nucleo/clases/class-usuarios.php");
+    require_once(_RUTA_HOST."nucleo/clases/class-header.php");
+    require_once(_RUTA_HOST."nucleo/clases/class-footer.php");
+    require_once(_RUTA_HOST."nucleo/clases/class-sistemas.php");
+    require_once(_RUTA_HOST."nucleo/clases/class-modulos.php");
+    require_once(_RUTA_HOST."nucleo/clases/class-paginas.php");
+    require_once(_RUTA_HOST."nucleo/clases/class-nav.php");
+    require_once(_RUTA_HOST."nucleo/clases/class-cateogorias.php");
 
-    $sesion = new SESION($this);
-    $query = new MYSQL();
-    $query->conectar(_BASE_DE_DATOS,_HOST,_USUARIO,_PASSWORD);
 
-    $get = new GET($this);
-    $autentificacion = new AUTENTIFICACION($this);
-    $plantilla = new PLANTILLA($this);
-    $brand = new BRAND($this);
-    $error = new ERROR($this);
-    $redireccion = new REDIRECCION($this);
-    $mensaje = new MENSAJE($this);
-    $usuario = new USUARIO($this);
+    // $get = new GET($this);
+    // $autentificacion = new AUTENTIFICACION($this);
+    // $plantilla = new PLANTILLA($this);
+    // $brand = new BRAND($this);
+    // $error = new ERROR($this);
+    // $redireccion = new REDIRECCION($this);
+    // $mensaje = new MENSAJE($this);
+    // $usuario = new USUARIO($this);
+    // $header = new HEADER($this);
+    // $class_pagina = new CLASSPAGINA($this);
+    // $class_modulo = new CLASSMODULO($this);
 
-    $this->sesion = $sesion;
     $this->query = $query;
-    $this->get = $get;
-    $this->autentificacion = $autentificacion;
-    $this->plantilla = $plantilla;
-    $this->brand = $brand;
-    $this->mensaje = $mensaje;
-    $this->error = $error;
-    $this->usuario = $usuario;
+    $this->sesion = $sesion;
+    $this->get = new GET($this);
+    $this->autentificacion = new AUTENTIFICACION($this);
+    $this->plantilla = new PLANTILLA($this);
+    $this->brand = new BRAND($this);
+    $this->mensaje = new MENSAJE($this);
+    $this->error = new ERROR($this);
+    $this->usuario = new USUARIO($this);
+    $this->redireccion =  new REDIRECCION($this);
+    $this->header = new HEADER($this);
+    $this->footer = new FOOTER($this);
+    $this->class_pagina = new CLASSPAGINAS($this);
+    $this->class_modulo = new CLASSMODULOS($this);
+    $this->class_sistema = new CLASSSISTEMAS($this);
+    $this->nav = new NAV($this);
+    $this->cagegoria = new CATEGORIA($this);
+
 
   }
 

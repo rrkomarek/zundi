@@ -3,10 +3,10 @@ header('Content-Type: text/html; charset=utf-8');
 
 class ERROR {
 
-  var $constructor;
+  var $fmt;
 
-  function __construct($constructor) {
-    $this->constructor = $constructor;
+  function __construct($fmt) {
+    $this->fmt = $fmt;
   }
 
   function error_login(){

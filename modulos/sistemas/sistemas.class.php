@@ -4,24 +4,18 @@ header("Content-Type: text/html;charset=utf-8");
 
 class SISTEMAS{
 
-	var $class_pagina;
-	var $class_modulo;
-	var $error;
-	var $query;
+	var $fmt;
 	var $id_mod;
 
-	function SISTEMAS($query,$class_pagina,$class_modulo, $error){
-		$this->class_pagina = $class_pagina;
-		$this->class_modulo = $class_modulo;
-		$this->error = $error;
-		$this->query= $query;
-		$this->class_pagina->validar_get($_GET['id_mod']);
+	function SISTEMAS($fmt){
+		$this->fmt = $fmt;
+		$this->fmt->get->validar_get($_GET['id_mod']);
 		$this->id_mod=$_GET['id_mod'];
 	}
 
   function busqueda(){
-      $botones = $this->class_pagina->crear_btn("sistemas.adm.php?tarea=form_nuevo&id_mod=$this->id_mod","btn btn-primary","icn-plus","Nuevo Sistema");  // link, tarea, clase, icono, nombre
-      $this->class_pagina->crear_head($this->query,$this->id_mod, $botones); // bd, id modulo, botones
+      $botones = $this->fmt->class_pagina->crear_btn("sistemas.adm.php?tarea=form_nuevo&id_mod=$this->id_mod","btn btn-primary","icn-plus","Nuevo Sistema");  // link, tarea, clase, icono, nombre
+      $this->fmt->class_pagina->crear_head( $this->id_mod, $botones); // bd, id modulo, botones
       ?>
       <div class="body-modulo">
       <div class="table-responsive">
@@ -37,19 +31,19 @@ class SISTEMAS{
           <tbody>
             <?php
               $sql="select sis_id, sis_nombre, sis_descripcion, sis_icono, sis_tipo, sis_activar, sis_orden from sistemas	ORDER BY sis_id desc";
-              $rs =$this->query -> consulta($sql);
-              $num=$this->query->num_registros($rs);
+              $rs =$this->fmt->query-> consulta($sql);
+              $num=$this->fmt->query->num_registros($rs);
               if($num>0){
               for($i=0;$i<$num;$i++){
-                list($fila_id,$fila_nombre,$fila_descripcion,$fila_icono,$fila_tipo,$fila_activar,$fila_orden)=$this->query->obt_fila($rs);
+                list($fila_id,$fila_nombre,$fila_descripcion,$fila_icono,$fila_tipo,$fila_activar,$fila_orden)=$this->fmt->query->obt_fila($rs);
               ?>
               <tr>
                 <td><i class="icn <?php echo $fila_icono; ?>"></i> <?php echo $fila_nombre; ?></td>
-                <?php  if($fila_tipo=="2"){ $aux ="disabled"; } ?>
+                <?php // if($fila_tipo=="2"){ $aux ="disabled"; } ?>
                 <td class="col-tipo-modulo"><?php echo $this->tipo_modulo($fila_tipo); ?></td>
                 <td class="estado">
                   <?php
-                    $this->class_modulo->estado_publicacion($query,$fila_activar,"modulos/sistemas/sistemas.adm.php", $this->id_mod,$aux, $fila_id ); // query, id item, ruta, id modulo, aux disabled
+                    $this->fmt->class_modulo->estado_publicacion($fila_activar,"modulos/sistemas/sistemas.adm.php", $this->id_mod,$aux, $fila_id ); // query, id item, ruta, id modulo, aux disabled
                   ?>
                 </td>
                 <td class="col-xl-offset-2 acciones">
@@ -67,12 +61,12 @@ class SISTEMAS{
       </div>
     </div>
     <?php
-        $this->class_modulo->script_form($this->query,"modulos/sistemas/sistemas.adm.php",$this->id_mod);
+        $this->fmt->class_modulo->script_form("modulos/sistemas/sistemas.adm.php",$this->id_mod);
   }  // fin busqueda
 
   function form_nuevo(){
-		$botones = $this->class_pagina->crear_btn("sistemas.adm.php?tarea=busqueda&id_mod=$this->id_mod","btn btn-link  btn-volver","icn-chevron-left","volver"); // link, clase, icono, nombre
-		$this->class_pagina->crear_head_form("Nuevo Sistema", $botones,"");// nombre, botones-left, botones-right
+		$botones = $this->fmt->class_pagina->crear_btn("sistemas.adm.php?tarea=busqueda&id_mod=$this->id_mod","btn btn-link  btn-volver","icn-chevron-left","volver"); // link, clase, icono, nombre
+		$this->fmt->class_pagina->crear_head_form("Nuevo Sistema", $botones,"");// nombre, botones-left, botones-right
 		echo "<a href='javascript:location.reload()'><i class='icn-sync'></i></a>";
 		?>
 		<div class="body-modulo col-xs-6 col-xs-offset-3">
@@ -82,7 +76,7 @@ class SISTEMAS{
 				<div class="form-group control-group">
 					<label>Nombre Sistema</label>
 					<div class="input-group controls">
-						<span class=" color-border-gris-a  color-text-gris input-group-addon form-input-icon"><i class="<? echo $this->class_pagina->traer_mod_icono($this->query,$this->id_mod); ?>"></i></span>
+						<span class=" color-border-gris-a  color-text-gris input-group-addon form-input-icon"><i class="<? echo $this->fmt->class_modulo->icono_modulo($this->id_mod); ?>"></i></span>
 						<input class="form-control input-lg color-border-gris-a color-text-gris form-nombre"  id="inputNombre" name="inputNombre" placeholder=" " type="text" autofocus />
 					</div>
 				</div>
@@ -114,18 +108,18 @@ class SISTEMAS{
 
 	function form_editar(){
 
-		$botones = $this->class_pagina->crear_btn("sistemas.adm.php?tarea=busqueda&id_mod=$this->id_mod","btn btn-link  btn-volver","icn-chevron-left","volver"); // link, clase, icono, nombre
-		$this->class_pagina->crear_head_form("Editar Sistema", $botones,"");// nombre, botones-left, botones-right
+		$botones = $this->fmt->class_pagina->crear_btn("sistemas.adm.php?tarea=busqueda&id_mod=$this->id_mod","btn btn-link  btn-volver","icn-chevron-left","volver"); // link, clase, icono, nombre
+		$this->fmt->class_pagina->crear_head_form("Editar Sistema", $botones,"");// nombre, botones-left, botones-right
 		echo "<a href='javascript:location.reload()'><i class='icn-sync'></i></a>";
-		$this->class_pagina->validar_get ( $_GET['id'] );
+		$this->fmt->get->validar_get ( $_GET['id'] );
 		$id = $_GET['id'];
 
 		$sql="select sis_id, sis_nombre, sis_descripcion, sis_tipo, sis_icono, sis_activar from sistemas	where sis_id='".$id."'";
-		$rs=$this->query->consulta($sql);
-		$num=$this->query->num_registros($rs);
+		$rs=$this->fmt->query->consulta($sql);
+		$num=$this->fmt->query->num_registros($rs);
 			if($num>0){
 				for($i=0;$i<$num;$i++){
-					list($fila_id,$fila_nombre,$fila_descripcion,$fila_tipo,$fila_icono,$fila_activar)=$this->query->obt_fila($rs);
+					list($fila_id,$fila_nombre,$fila_descripcion,$fila_tipo,$fila_icono,$fila_activar)=$this->fmt->query->obt_fila($rs);
 				}
 			}
 		?>
@@ -173,7 +167,7 @@ class SISTEMAS{
 			</form>
 		</div>
 		<?php
-		 $this->class_modulo->script_form($this->query,"modulos/sistemas/sistemas.adm.php",$this->id_mod);
+		 $this->fmt->class_modulo->script_form("modulos/sistemas/sistemas.adm.php",$this->id_mod);
 	}
 
 	function ingresar(){
@@ -194,7 +188,7 @@ class SISTEMAS{
 
 		$sql="insert into sistemas (".$ingresar.") values (".$valores.")";
 
-		$this->query->consulta($sql);
+		$this->fmt->query->consulta($sql);
 
 		header("location: sistemas.adm.php?id_mod=".$this->id_mod);
 	} // fin funcion ingresar
@@ -211,27 +205,27 @@ class SISTEMAS{
 						sis_activar='".$_POST['inputActivar']."'
 	          WHERE sis_id='".$_POST['inputId']."'";
 
-			$this->query->consulta($sql);
+			$this->fmt->query->consulta($sql);
 		}
 			header("location: sistemas.adm.php?id_mod=".$this->id_mod);
 	}
 
 	function eliminar(){
-		$this->class_pagina->validar_get ( $_GET['id'] );
+		$this->fmt->get->validar_get ( $_GET['id'] );
 		$id= $_GET['id'];
 		$sql="DELETE FROM sistemas WHERE sis_id='".$id."'";
-		$this->query->consulta($sql);
+		$this->fmt->query->consulta($sql);
 		$up_sqr6 = "ALTER TABLE sistemas AUTO_INCREMENT=1";
-		$this->query->consulta($up_sqr6);
+		$this->fmt->query->consulta($up_sqr6);
 		header("location: sistemas.adm.php?id_mod=".$this->id_mod);
 	}
 
 	function activar(){
-		$this->class_pagina->validar_get ( $_GET['estado'] );
-		$this->class_pagina->validar_get ( $_GET['id'] );
+		$this->fmt->get->validar_get ( $_GET['estado'] );
+		$this->fmt->get->validar_get ( $_GET['id'] );
 		$sql="update sistemas set
 				sis_activar='".$_GET['estado']."' where sis_id='".$_GET['id']."'";
-		$this->query->consulta($sql);
+		$this->fmt->query->consulta($sql);
 		header("location: sistemas.adm.php?id_mod=".$this->id_mod);
 	}
 

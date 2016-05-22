@@ -6,25 +6,25 @@ header('Content-Type: text/html; charset=utf-8');
 
 class BRAND{
 
-  var $constructor;
+  var $fmt;
 
-  function __construct($constructor) {
-    $this->constructor = $constructor;
+  function __construct($fmt) {
+    $this->fmt = $fmt;
   }
 
   function brand_login($cat,$tipo){
 
     $sql ="SELECT cat_imagen FROM categoria WHERE cat_id='$cat' and cat_tipo='2'";
-    $rs = $this->constructor->query -> consulta($sql);
-    $fila =  $this->constructor->query -> obt_fila($rs);
+    $rs = $this->fmt->query -> consulta($sql);
+    $fila =  $this->fmt->query -> obt_fila($rs);
     $img_cat = $fila["cat_imagen"];
 
     if ($img_cat){
       return "<img class=' $tipo' src='"._RUTA_WEB.$img."' />";
     }else{
       $sql ="SELECT conf_imagen FROM configuracion";
-      $rs = $this->constructor->query -> consulta($sql);
-      $fila = $this->constructor->query -> obt_fila($rs);
+      $rs = $this->fmt->query -> consulta($sql);
+      $fila = $this->fmt->query -> obt_fila($rs);
       $img_conf = $fila["conf_imagen"];
       if ($img_conf){
         return "<img class='".$tipo."' src='"._RUTA_WEB.$img_conf."' />";

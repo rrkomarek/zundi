@@ -1,19 +1,5 @@
 <?php
-// require_once(_RUTA_HOST."nucleo/clases/class-errores.php");
-// require_once(_RUTA_HOST."nucleo/clases/class-redireccion.php");
-// require_once(_RUTA_HOST."nucleo/funciones/funciones-get.php");
-// require_once(_RUTA_HOST."nucleo/clases/class-brand.php");
-// require_once(_RUTA_HOST."nucleo/clases/class-mensajes.php");
-//
-// //echo _RUTA_HOST;
-// $brand = new BRAND();
-// $error= new ERROR();
-// $mensaje= new MENSAJE();
-// $redireccion= new REDIRECCION();
-// //$sesion = new SESION();
-
-//require_once(_RUTA_HOST."nucleo/clases/class-constructor.php");
-$constructor = new CONSTRUCTOR();
+$fmt = new CONSTRUCTOR();
 ?>
 <div class="login color-gradient-blanco color-shadow-negro" >
   <div class="btn btn-cerrar color-text-gris-b"  onclick="toggleId('block-login');"  >
@@ -21,11 +7,8 @@ $constructor = new CONSTRUCTOR();
   </div>
   <form class="form" onsubmit="return action_form(this)" method="POST" id="form-ingreso">
     <div class="brand-login">
-    <?php
-      echo $constructor->brand->brand_login();
-    //echo $construccion->brand->brand_login($cat,"logo-login");
-
-    ?></div>
+    <?php  echo $fmt->brand->brand_login();?>
+    </div>
     <div class="control-group" id="mensaje-login"></div> <!--    Mensaje login ajax  -->
     <div class="control-group">
       <div class="input-group email controls">
@@ -54,23 +37,23 @@ $constructor = new CONSTRUCTOR();
 		var ie = $("#inputEmail").val( );
 		var ip = $("#inputPassword").val( );
 		$.ajax({
-			url:"<?php echo _RUTA_WEB; ?>nucleo/includes/ajax-login.php",
+			url:"<?php echo _RUTA_WEB; ?>nucleo/ajax/ajax-login.php",
 			type:"post",
 			data:{ inputEmail:ie , inputPassword:ip },
 			success: function(msg){
-        alert(msg);
-        /*if ((msg!="false")&&(msg!="sin-rol")) {
-          $("#mensaje-login").html("<?php echo $this->constructor->mensaje->login_ok(); ?>");
-          redireccionar_tiempo(msg,800);
+        //alert(msg);
+        if ((msg!="false")&&(msg!="sin-rol")) {
+          $("#mensaje-login").html("<?php echo $this->fmt->mensaje->login_ok(); ?>");
+          redireccionar_tiempo(msg,800); // core.js
         }
         if(msg=="sin-rol"){
-          $("#mensaje-login").html("<?php echo $this->constructor->error->error_rol(); ?>");
-          toggleIdCerrar("error_login", 6000);
+          $("#mensaje-login").html("<?php echo $this->fmt->error->error_rol(); ?>");
+          toggleIdCerrar("error_login", 6000);  // core.js
         }
         if (msg=="false") {
-            $("#mensaje-login").html("<?php echo $this->constructor->error->error_login(); ?>");
-            toggleIdCerrar("error_login", 3000);
-        }*/
+            $("#mensaje-login").html("<?php echo $this->fmt->error->error_login(); ?>");
+            toggleIdCerrar("error_login", 3000); // core.js
+        }
 			}
 		});
 		elemento = document.getElementById("btn-ingresar");

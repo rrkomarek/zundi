@@ -1,13 +1,17 @@
 <?PHP
 header("Content-Type: text/html;charset=utf-8");
-error_reporting(E_ALL & ~E_NOTICE);
 
 class CLASSPAGINAS{
 
+	var $fmt;
+
+  function __construct($fmt) {
+    $this->fmt = $fmt;
+  }
 
 /* ---------------- Funcion Verificar ---------------------- */
 
-	function verificar(){
+	function verificar_session(){
 		include_once("sesion.php");
 		$sesion= new SESION();
 		$sesion->iniciar_sesion();
@@ -22,11 +26,11 @@ class CLASSPAGINAS{
 
 /* ---------------- Funcion crear head ---------------------- */
 
-	function crear_head($query,$id_mod,$botones){
+	function crear_head( $id_mod,$botones){
 
 		$sql ="SELECT mod_nombre,mod_icono FROM modulos WHERE mod_id=$id_mod";
-		$rs = $query -> consulta($sql);
-		$row = $query -> obt_fila ($rs);
+		$rs = $this->fmt->query -> consulta($sql);
+		$row = $this->fmt->query -> obt_fila ($rs);
 		$nom = $row["mod_nombre"];
 		$icon = $row["mod_icono"];
 		?>
@@ -57,15 +61,6 @@ class CLASSPAGINAS{
 			<?php
 		}  // fin crear head
 
-/* ---------------- Traer icono ---------------------- */
-	function traer_mod_icono($query, $id_mod){
-		$sql ="SELECT  mod_icono FROM modulos WHERE mod_id=$id_mod";
-		$rs = $query -> consulta($sql);
-		$row = $query -> obt_fila ($rs);
-		$icon = $row["mod_icono"];
-		return $icon;
-	}
-
 /* ---------------- Funcion btn nuevo ---------------------- */
 
 	function crear_btn($Link,$Clase,$Icon,$Nom){
@@ -74,16 +69,6 @@ class CLASSPAGINAS{
 			 </a>';
 		return $Botones;
 	} // fin btn nuevo
-
-/************** Scripts ***************/
-	function validar_get($get){
-		require_once("class-errores.php");
-		$error = new ERROR();
-		if (!is_numeric($get)){
-		  $error->error_modulo_no_encontrado();
-		}
-	}
-
 
 }
 ?>

@@ -2,10 +2,10 @@
 	header('Content-Type: text/html; charset=utf-8_spanish_ci');
 	class SESION{
 
-		var $constructor;
+		var $fmt;
 
-	  function sesion($constructor){
-	    $this->constructor = $constuctor;
+	  function sesion($fmt){
+	    $this->fmt = $fmt;
 	  }
 
 		function iniciar_sesion(){

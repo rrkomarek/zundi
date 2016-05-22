@@ -3,10 +3,10 @@ header('Content-Type: text/html; charset=utf-8');
 
 class GET{
 
-  var $constructor;
+  var $fmt;
 
-  function __construct($constructor){
-    $this->constructor = $constuctor;
+  function __construct($fmt){
+    $this->fmt = $fmt;
   }
 
   function get_categoria_index(){
@@ -35,11 +35,21 @@ class GET{
     $sql = "SELECT cat_id_plantilla
            FROM categoria
            WHERE cat_id='$cat'";
-    $res  = $query->consulta($sql);
-    $fila = $query->obt_fila($res);
+    $res  = $this->fmt->query->consulta($sql);
+    $fila = $this->fmt->query->obt_fila($res);
     //echo "fila:".	$fila["cat_id_plantilla"]."</br>";
     return 	$fila["0"];
   }
+
+  function validar_get($get){
+    if ($get!=""){
+      if (!is_numeric($get)){
+        $this->fmt->error->error_modulo_no_encontrado();
+      }
+    }
+  }
+
+
 }
 
 ?>

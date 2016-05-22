@@ -1,26 +1,15 @@
 <?php
-header("Content-Type: text/html;charset=utf-8");
-require_once("../../nucleo/config.php");
-require_once("../../nucleo/clases/class-mysql.php");
-require_once("../../nucleo/clases/class-paginas.php");
-require_once("../../nucleo/clases/class-modulos.php");
-require_once("../../nucleo/clases/class-errores.php");
+require_once("../../nucleo/clases/class-constructor.php");
+$fmt = new CONSTRUCTOR();
+//$fmt->autentificacion->autentificar();
 require_once('sistemas.class.php');
 
-$query = new MYSQL();
-$query->conectar(_BASE_DE_DATOS,_HOST,_USUARIO,_PASSWORD);
-
-$class_pagina = new CLASSPAGINAS();
-$class_modulo = new CLASSMODULOS();
-$error = new ERROR();
-
-$class_pagina->validar_get ( $_GET['tarea'] );
+$fmt->get->validar_get( $_GET['tarea'] );
 $tarea = $_GET['tarea'];
 
-$form =new SISTEMAS($query,$class_pagina,$class_modulo, $error );
+$form =new SISTEMAS($fmt);
 
-
-require_once('../../nucleo/header.php');
+echo $fmt->header->header_modulo();
 
 switch( $tarea ){
   case 'busqueda': $form->busqueda();break;
@@ -32,6 +21,6 @@ switch( $tarea ){
   case 'eliminar': $form->eliminar();break;
   default: $form->busqueda();break;
 }
-require_once('../../nucleo/footer.php');
+echo $fmt->footer->footer_modulo();
 
 ?>

@@ -3,16 +3,16 @@ header('Content-Type: text/html; charset=utf-8');
 
 class AUTENTIFICACION{
 
-  var $constructor;
+  var $fmt;
 
-  function __construct($constructor) {
-    $this->constructor = $constructor;
+  function __construct($fmt) {
+    $this->fmt = $fmt;
   }
 
   function index(){
     //echo "index autentificación";
-    $cat = $this->constructor->get->get_categoria_index();
-    $pla = $this->constructor->get->get_plantilla_index($this->constructor->query, $cat);
+    $cat = $this->fmt->get->get_categoria_index();
+    $pla = $this->fmt->get->get_plantilla_index($this->fmt->query, $cat);
 
     //echo "cat:".$cat." pla:".$pla."</br>";
 
@@ -20,11 +20,11 @@ class AUTENTIFICACION{
 	    autentificar($plantilla,$cat,$pla,$query,$sesion);
     } else {
 	    //echo "no autentificado</br>";
-		  if( $this->verificar_categoria($this->constructor->query,$cat) or autentifico($cat,$this->constructor->sesion)){
+		  if( $this->verificar_categoria($this->fmt->query,$cat) or autentifar($cat,$this->fmt->sesion)){
         //echo "Ingreso normal de usuario</br>";
-			  $this->ingresar($this->constructor->plantilla,$cat,$pla);
+			  $this->ingresar($this->fmt->plantilla,$cat,$pla);
 		  }else{
-        $this->constructor->error->error_pag_no_encontrada();
+        $this->fmt->error->error_pag_no_encontrada();
 	    }
     }
 
@@ -45,7 +45,7 @@ class AUTENTIFICACION{
     }
   }
 
-  function autentifico($cat,$sesion){
+  function autentifar($cat,$sesion){
 	    $array_f = explode(":",$sesion->get_variable("usu_id"));
 	    if(in_array($cat,$array_f))
 		    return true;

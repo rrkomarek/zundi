@@ -3,15 +3,15 @@ header('Content-Type: text/html; charset=utf-8');
 
 class REDIRECCION{
 
-  var $constructor;
+  var $fmt;
 
-  function __construct($constructor) {
-    $this->constructor = $constructor;
+  function __construct($fmt) {
+    $this->fmt = $fmt;
   }
 
   function login($cat,$pla,$usu_id){
     //return "cat:".$cat."pla:".$pla."usu_id:".$usu_id;
-    switch ( $this->traer_rol($usu_id) ) {
+    switch ( $this->fmt->usuario->id_rol_usuario($usu_id) ) {
      case "0":
        // "Sin rol";
      break;
@@ -48,8 +48,8 @@ class REDIRECCION{
     //$query ->conectar(_BASE_DE_DATOS,_HOST,_USUARIO,_PASSWORD);
 
     $sql ="SELECT cat_ruta_amigable FROM categoria WHERE cat_id='$cat'";
-    $rs = $this->constructor->query-> consulta($sql);
-    $fila = $this->constructor->query-> obt_fila($rs);
+    $rs = $this->fmt->query-> consulta($sql);
+    $fila = $this->fmt->query-> obt_fila($rs);
     $ruta_cat = $fila["cat_ruta_amigable"];
     if ($pla!=1) {
       return _RUTA_WEB.$ruta_cat."?p=".$pla;

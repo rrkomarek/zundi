@@ -4,25 +4,24 @@ function PaginaCargada() {
 }
 
 function AbrirPopup(Url,tipo){
-document.title=Url;
-var ancho1= $( window ).width();
-ancho=Math.round(ancho1*0.98);
-$("#PopupDiv").css("width",ancho1+"px");
-   var popupdiv = document.getElementById("PopupDiv");
-   var popupdivbg = document.getElementById("PopupDivBg");
-    var closeb = "<a  href='javascript:CerrarPopup(\""+tipo+"\");'><i class='fa fa-times'></i></a>";
-    popupdiv.style.display='block';
-    popupdivbg.style.display='block';
-    popupdiv.innerHTML='<div class="CerrarPopup">'
-                        + closeb
-                        + '</div><div class="BloquePopup">'
-                        + '<iframe id="IdFrame" src="' + Url
-                        + '" name="frame_content" scrolling=auto ></div>';
-   ancho = ancho -1;
-   $("#IdFrame").css("width",ancho+"px");
-  $("#wrapper").toggleClass("toggled");
+	document.title=Url;
+	var ancho1= $( window ).width();
+	ancho=Math.round(ancho1*0.98);
+	$("#PopupDiv").css("width",ancho1+"px");
+	   var popupdiv = document.getElementById("PopupDiv");
+	   var popupdivbg = document.getElementById("PopupDivBg");
+	    var closeb = "<a  href='javascript:CerrarPopup(\""+tipo+"\");'><i class='fa fa-times'></i></a>";
+	    popupdiv.style.display='block';
+	    popupdivbg.style.display='block';
+	    popupdiv.innerHTML='<div class="CerrarPopup">'
+	                        + closeb
+	                        + '</div><div class="BloquePopup">'
+	                        + '<iframe id="IdFrame" src="' + Url
+	                        + '" name="frame_content" scrolling=auto ></div>';
+	   ancho = ancho -1;
+	   $("#IdFrame").css("width",ancho+"px");
+	  $("#wrapper").toggleClass("toggled");
 }
-
 
 function CerrarPopup(Accion){
       var popupdiv = document.getElementById("PopupDiv");
@@ -37,7 +36,7 @@ function CerrarPopup(Accion){
 }
 
 function AbrirPopupPagina(Url,tipo){
-document.title=Url;
+	document.title=Url;
    var popupdivpag = document.getElementById("PopupDivPagina");
    var bgdivpag = document.getElementById("BgDivPagina");
    var D1 = document.getElementById("ContCuerpo");
@@ -51,7 +50,6 @@ document.title=Url;
                         + '<iframe src="' + Url
                         + '" name="frame_content" scrolling="no">'
                         + '</div>';
-
 }
 
 function CerrarPopupPagina(Accion){
@@ -65,8 +63,7 @@ function CerrarPopupPagina(Accion){
       }
 }
 
-function MostrarOcultarElemento(Id)
-						{
+function MostrarOcultarElemento(Id){
 							var Obj=document.getElementById(Id);
 
 							if(Obj.style.display=='none')
@@ -127,27 +124,26 @@ function MostrarOcultarElemento(Id)
 								alert('Ingrese el Nombre de Usuario');
 								return false;
 							}
-						}
+}
 
 $(document).ready(function() {
 
     $('#B1').click(function(){
 
-        var dataString = $('#form_account').serialize();
+      var dataString = $('#form_account').serialize();
 
+      $.ajax({
+          type: "POST",
+          url: "modulos/formularios/registro.php",
+          data: dataString,
+          success: function(data) {
+			$( "#MsgForm" ).html(data);
+			$( "#B2" ).click();
+			var url = "#paso1";
+			$(location).attr('href',url);
 
-        $.ajax({
-            type: "POST",
-            url: "modulos/formularios/registro.php",
-            data: dataString,
-            success: function(data) {
-				$( "#MsgForm" ).html(data);
-				$( "#B2" ).click();
-				var url = "#paso1";
-				$(location).attr('href',url);
-
-            }
-        });
+          }
+      });
 
     });
 });
@@ -157,6 +153,7 @@ function seleccionar(campo){
 	 campo.LabelUsuario.display=none;
 	 }
 }
+
 function deseleccionarBuscar(campo){
 	if(campo.length < 1){
 		campo.LabelUsuario.display=block;
@@ -167,22 +164,23 @@ function toggleId(id){
 	$( "#" + id ).fadeToggle( 800 );void(0);
 	//$( "#page-content-wrapper" ).toggleClass( "on" );
 }
+
 function toggleIdCerrar(id,tiempo){
-setTimeout(function() {
+	setTimeout(function() {
       $("#" + id ).fadeOut(800);void(0);
     }, tiempo );
 }
 
 function redireccionar_tiempo(ruta,tiempo){
-setTimeout(function() {
+	setTimeout(function() {
       //$("#" + id ).fadeOut(800);void(0);
-document.location.href=ruta;
-    }, tiempo );
+			document.location.href=ruta;
+  }, tiempo );
 }
 
 $("#menu-toggle").click(function(e) {
-e.preventDefault();
-$("#wrapper").toggleClass("toggled");
+	e.preventDefault();
+	$("#wrapper").toggleClass("toggled");
 });
 
 
