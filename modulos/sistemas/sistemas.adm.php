@@ -1,7 +1,7 @@
 <?php
 require_once("../../nucleo/clases/class-constructor.php");
 $fmt = new CONSTRUCTOR();
-//$fmt->autentificacion->autentificar();
+
 require_once('sistemas.class.php');
 
 $fmt->get->validar_get( $_GET['tarea'] );

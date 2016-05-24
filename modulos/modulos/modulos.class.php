@@ -3,24 +3,18 @@ header("Content-Type: text/html;charset=utf-8");
 
 class MODULOS{
 
-	var $class_pagina;
-	var $class_modulo;
-	var $error;
-	var $query;
+	var $fmt;
 	var $id_mod;
 
-	function MODULOS($query,$class_pagina,$class_modulo, $error){
-		$this->class_pagina = $class_pagina;
-		$this->class_modulo = $class_modulo;
-		$this->error = $error;
-		$this->query= $query;
-		$this->class_pagina->validar_get($_GET['id_mod']);
+	function MODULOS($fmt){
+		$this->fmt = $fmt;
+		$this->fmt->get->validar_get($_GET['id_mod']);
 		$this->id_mod=$_GET['id_mod'];
 	}
 
 	function busqueda(){
-			$botones = $this->class_pagina->crear_btn("modulos.adm.php?tarea=form_nuevo&id_mod=$this->id_mod","btn btn-primary","icn-plus","Nuevo modulo");  // link, tarea, clase, icono, nombre
-			$this->class_pagina->crear_head($this->query,$this->id_mod, $botones); // bd, id modulo, botones
+			$botones = $this->fmt->class_pagina->crear_btn("modulos.adm.php?tarea=form_nuevo&id_mod=$this->id_mod","btn btn-primary","icn-plus","Nuevo modulo");  // link, tarea, clase, icono, nombre
+			$this->fmt->class_pagina->crear_head( $this->id_mod, $botones); // bd, id modulo, botones
 			?>
 			<div class="body-modulo">
 			<div class="table-responsive">
@@ -36,25 +30,25 @@ class MODULOS{
 				  <tbody>
 						<?php
 							$sql="select mod_id, mod_nombre, mod_descripcion, mod_url, mod_tipo, mod_icono, mod_activar from modulos	ORDER BY mod_id desc";
-							$rs =$this->query -> consulta($sql);
-							$num=$this->query->num_registros($rs);
+							$rs =$this->fmt->query->consulta($sql);
+							$num=$this->fmt->query->num_registros($rs);
 							if($num>0){
 						  for($i=0;$i<$num;$i++){
-						    list($fila_id,$fila_nombre,$fila_descripcion,$fila_url,$fila_tipo,$fila_icono,$fila_activar)=$this->query->obt_fila($rs);
+						    list($fila_id,$fila_nombre,$fila_descripcion,$fila_url,$fila_tipo,$fila_icono,$fila_activar)=$this->fmt->query->obt_fila($rs);
 						  ?>
 						  <tr>
-						    <td><i class="icn <?php echo $fila_icono; ?>"></i> <?php echo $fila_nombre; ?></td>
+						    <td class="col-nombre"><i class="icn <?php echo $fila_icono; ?>"></i> <?php echo $fila_nombre; ?></td>
 								<?php  if($fila_tipo=="2"){ $aux ="disabled"; } ?>
-						    <td class="col-tipo-modulo"><?php echo $this->tipo_modulo($fila_tipo); ?></td>
+						    <td class="tabla-col col-tipo-modulo"><?php echo $this->tipo_modulo($fila_tipo); ?></td>
 						    <td class="estado">
 						      <?php
-						        $this->class_modulo->estado_publicacion($query,$fila_activar,"modulos/modulos/modulos.adm.php", $this->id_mod,$aux, $fila_id ); // query, id item, ruta, id modulo, aux disabled
+						        $this->fmt->class_modulo->estado_publicacion($fila_activar,"modulos/modulos/modulos.adm.php", $this->id_mod,$aux, $fila_id ); // query, id item, ruta, id modulo, aux disabled
 									?>
 						    </td>
 						    <td class="col-xl-offset-2 acciones">
 
 						      <a  id="btn-editar-modulo" class="btn btn-accion btn-editar <?php echo $aux; ?>" href="modulos.adm.php?tarea=form_editar&id=<? echo $fila_id; ?>&id_mod=<? echo $this->id_mod; ?>" title="Editar <? echo $fila_id."-".$fila_url; ?>" ><i class="icn-pencil"></i></a>
-									<a  title="eliminar" type="button" id_eliminar="<? echo $fila_id; ?>" nombre_eliminar="<? echo $fila_nombre; ?>" id="btn-eliminar" class="btn btn-eliminar btn-accion <?php echo $aux; ?>"><i class="icn-trash"></i></a>
+									<a  title="eliminar <? echo $fila_id; ?>" type="button" idEliminar="<? echo $fila_id; ?>" nombreEliminar="<? echo $fila_nombre; ?>" class="btn btn-eliminar btn-accion <?php echo $aux; ?>"><i class="icn-trash"></i></a>
 						    </td>
 						  </tr>
 						  <?php
@@ -66,12 +60,12 @@ class MODULOS{
 			</div>
 		</div>
 		<?php
-				$this->class_modulo->script_form($this->query,"modulos/modulos/modulos.adm.php",$this->id_mod);
+				$this->fmt->class_modulo->script_form("modulos/modulos/modulos.adm.php",$this->id_mod);
   }  // fin busqueda
 
 	function form_nuevo(){
-		$botones = $this->class_pagina->crear_btn("modulos.adm.php?tarea=busqueda&id_mod=$this->id_mod","btn btn-link  btn-volver","icn-chevron-left","volver"); // link, clase, icono, nombre
-		$this->class_pagina->crear_head_form("Nuevo Modulo", $botones,"");// nombre, botones-left, botones-right
+		$botones = $this->fmt->class_pagina->crear_btn("modulos.adm.php?tarea=busqueda&id_mod=$this->id_mod","btn btn-link  btn-volver","icn-chevron-left","volver"); // link, clase, icono, nombre
+		$this->fmt->class_pagina->crear_head_form("Nuevo Modulo", $botones,"");// nombre, botones-left, botones-right
 		echo "<a href='javascript:location.reload()'><i class='icn-sync'></i></a>";
 		?>
 		<div class="body-modulo col-xs-6 col-xs-offset-3">
@@ -81,7 +75,7 @@ class MODULOS{
 				<div class="form-group control-group">
 					<label>Nombre Modulo</label>
 					<div class="input-group controls">
-						<span class=" color-border-gris-a  color-text-gris input-group-addon form-input-icon"><i class="<? echo $this->class_pagina->traer_mod_icono($this->query,$this->id_mod); ?>"></i></span>
+						<span class=" color-border-gris-a  color-text-gris input-group-addon form-input-icon"><i class="<? echo $this->fmt->class_modulo->icono_modulo($this->id_mod); ?>"></i></span>
 						<input class="form-control input-lg color-border-gris-a color-text-gris form-nombre"  id="inputNombre" name="inputNombre" placeholder=" " type="text" autofocus />
 					</div>
 				</div>
@@ -116,18 +110,18 @@ class MODULOS{
 	}
 
 	function form_editar(){
-		$botones = $this->class_pagina->crear_btn("modulos.adm.php?tarea=busqueda&id_mod=$this->id_mod","btn btn-link  btn-volver","icn-chevron-left","volver"); // link, clase, icono, nombre
-		$this->class_pagina->crear_head_form("Editar Modulo", $botones,"");// nombre, botones-left, botones-right
+		$botones = $this->fmt->class_pagina->crear_btn("modulos.adm.php?tarea=busqueda&id_mod=$this->id_mod","btn btn-link  btn-volver","icn-chevron-left","volver"); // link, clase, icono, nombre
+		$this->fmt->class_pagina->crear_head_form("Editar Modulo", $botones,"");// nombre, botones-left, botones-right
 		echo "<a href='javascript:location.reload()'><i class='icn-sync'></i></a>";
-		$this->class_pagina->validar_get ( $_GET['id'] );
+		$this->fmt->get->validar_get ( $_GET['id'] );
 		$id = $_GET['id'];
 
 		$sql="select mod_id, mod_nombre, mod_descripcion, mod_url, mod_tipo, mod_icono, mod_activar from modulos	where mod_id='".$id."'";
-		$rs=$this->query->consulta($sql);
-		$num=$this->query->num_registros($rs);
+		$rs=$this->fmt->query->consulta($sql);
+		$num=$this->fmt->query->num_registros($rs);
 			if($num>0){
 				for($i=0;$i<$num;$i++){
-					list($fila_id,$fila_nombre,$fila_descripcion,$fila_url,$fila_tipo,$fila_icono,$fila_activar)=$this->query->obt_fila($rs);
+					list($fila_id,$fila_nombre,$fila_descripcion,$fila_url,$fila_tipo,$fila_icono,$fila_activar)=$this->fmt->query->obt_fila($rs);
 				}
 			}
 		?>
@@ -177,7 +171,7 @@ class MODULOS{
 			</form>
 		</div>
 		<?php
-		 $this->class_modulo->script_form($this->query,"modulos/modulos/modulos.adm.php",$this->id_mod);
+		 $this->fmt->class_modulo->script_form($this->fmt->query,"modulos/modulos/modulos.adm.php",$this->id_mod);
 	}
 
 	function ingresar(){
@@ -199,7 +193,7 @@ class MODULOS{
 
 		$sql="insert into modulos (".$ingresar.") values (".$valores.")";
 
-		$this->query->consulta($sql);
+		$this->fmt->query->consulta($sql);
 
 		header("location: modulos.adm.php?id_mod=".$this->id_mod);
 	} // fin funcion ingresar
@@ -217,27 +211,27 @@ class MODULOS{
 						mod_activar='".$_POST['inputActivar']."'
 	          WHERE mod_id='".$_POST['inputId']."'";
 
-			$this->query->consulta($sql);
+			$this->fmt->query->consulta($sql);
 		}
 			header("location: modulos.adm.php?id_mod=".$this->id_mod);
 	}
 
 	function eliminar(){
-		$this->class_pagina->validar_get ( $_GET['id'] );
+		$this->fmt->get->validar_get ( $_GET['id'] );
 		$id= $_GET['id'];
 		$sql="DELETE FROM modulos WHERE mod_id='".$id."'";
-		$this->query->consulta($sql);
+		$this->fmt->query->consulta($sql);
 		$up_sqr6 = "ALTER TABLE modulos AUTO_INCREMENT=1";
-		$this->query->consulta($up_sqr6);
+		$this->fmt->query->consulta($up_sqr6);
 		header("location: modulos.adm.php?id_mod=".$this->id_mod);
 	}
 
 	function activar(){
-		$this->class_pagina->validar_get ( $_GET['estado'] );
-		$this->class_pagina->validar_get ( $_GET['id'] );
+		$this->fmt->get->validar_get ( $_GET['estado'] );
+		$this->fmt->get->validar_get ( $_GET['id'] );
 		$sql="update modulos set
 				mod_activar='".$_GET['estado']."' where mod_id='".$_GET['id']."'";
-		$this->query->consulta($sql);
+		$this->fmt->query->consulta($sql);
 		header("location: modulos.adm.php?id_mod=".$this->id_mod);
 	}
 

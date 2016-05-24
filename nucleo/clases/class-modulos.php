@@ -45,9 +45,9 @@ class CLASSMODULOS{
 	function script_form($ruta,$id_mod){
 		?>
 			<script language="JavaScript">
-				$("#btn-eliminar").click(function() {
-					id = $( this ).attr("id_eliminar");
-					nombre = $( this ).attr("nombre_eliminar");
+				$(".btn-eliminar").click(function() {
+					id = $( this ).attr("idEliminar");
+					nombre = $( this ).attr("nombreEliminar");
 				  url = "<? echo _RUTA_WEB.$ruta; ?>?tarea=eliminar&id_mod=<? echo $id_mod; ?>&id="+id;
 					if(confirm('¿Estas seguro de ELIMINAR: "'+ nombre +'" ?')){
 					  //alert(url);

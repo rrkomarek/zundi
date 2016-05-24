@@ -42,7 +42,7 @@ $fmt = new CONSTRUCTOR();
 			data:{ inputEmail:ie , inputPassword:ip },
 			success: function(msg){
         //alert(msg);
-        if ((msg!="false")&&(msg!="sin-rol")) {
+        if ((msg!="false")&&(msg!="sin-rol")&&(msg!="rol-desactivado")) {
           $("#mensaje-login").html("<?php echo $this->fmt->mensaje->login_ok(); ?>");
           redireccionar_tiempo(msg,800); // core.js
         }
@@ -50,9 +50,13 @@ $fmt = new CONSTRUCTOR();
           $("#mensaje-login").html("<?php echo $this->fmt->error->error_rol(); ?>");
           toggleIdCerrar("error_login", 6000);  // core.js
         }
+        if(msg=="rol-desactivado"){
+          $("#mensaje-login").html("<?php echo $this->fmt->error->error_rol_desactivado(); ?>");
+          toggleIdCerrar("error_login", 6000);  // core.js
+        }
         if (msg=="false") {
-            $("#mensaje-login").html("<?php echo $this->fmt->error->error_login(); ?>");
-            toggleIdCerrar("error_login", 3000); // core.js
+          $("#mensaje-login").html("<?php echo $this->fmt->error->error_login(); ?>");
+          toggleIdCerrar("error_login", 3000); // core.js
         }
 			}
 		});

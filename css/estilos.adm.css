@@ -53,10 +53,49 @@ body {}
 	padding-left  : 5px !important;
 }
 
+.acordion .panel-heading{
+	padding: 0px;
+	margin-top:1px;
+}
+
+.acordion  .panel, .acordion .panel-heading, .acordion .panel-default>.panel-heading{
+	background-color: transparent;
+	color:#666;
+	border: 0px;
+	-webkit-box-shadow: none;
+	box-shadow:  none;
+}
+.acordion .panel-collapse, .acordion .panel-body{
+	border: 0px !important;
+	padding:5px 10px;
+}
+
 .img-user {
 	float       : left;
 	margin-top  : 10px;
 	margin-left : 15px;
+}
+
+.table .img-user {
+	float       : left;
+	margin-top  : 0px;
+	margin-left : 0px;
+	width: 40px;
+	height: 40px;
+}
+
+.table .nombre-user{
+	margin-top:8px;
+	margin-left: 10px;
+	display: inline-block;
+}
+
+.table .td-user{
+	padding-top:15px;
+	display:block-inline;
+}
+.checkbox{
+	margin-left: 25px;
 }
 
 .menu-user {
@@ -217,6 +256,10 @@ padding-left: 0px;
 	padding-top: 20px;
 }
 
+.body-error{
+	margin-top: 35px;
+}
+
 .bloque-modulo {
 	display       : block;
 	/*padding-right : 60px;
@@ -294,7 +337,9 @@ padding-left: 0px;
 }
 
 /* tablas */
-
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+   
+}
 
 .table td { padding-left: 15px !important; }
 .btn-accion {

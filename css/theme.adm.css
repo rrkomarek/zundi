@@ -49,8 +49,14 @@ a { color: #007AFF; cursor: pointer !important; }
   background-color: #adb8c3;
 }
 .table td {
-  font-size: 18px;
+  font-size: 1.05em;
   font-weight: normal;
+  line-height: 2 !important;
+  color:#BABABA;
+}
+
+.table .estado a{
+  padding: 5px 8px;
 }
 
 .table>thead>tr>th{
@@ -66,11 +72,8 @@ border-color: #f4f4f4;
   background-color: #f9f9f9 !important;
 }
 
-.table .col-tipo-modulo{
-  font-size: 14px;
-  text-transform: capitalize;
-  padding-top: 12px;
-  color:#BABABA;
+.table .col-nombre{
+  color:#444;
 }
 table.table{
   margin-top: 0px !important;
@@ -516,6 +519,7 @@ font-weight: bold;
   width         : 60px;
   height        : 60px;
   border-radius : 30px;
+  border:1px solid #adb8c3;
 }
 
 .btn-perfil {

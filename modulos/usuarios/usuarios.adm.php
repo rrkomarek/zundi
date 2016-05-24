@@ -2,12 +2,12 @@
 require_once("../../nucleo/clases/class-constructor.php");
 $fmt = new CONSTRUCTOR();
 
-require_once('modulos.class.php');
+require_once('usuarios.class.php');
 
 $fmt->get->validar_get( $_GET['tarea'] );
 $tarea = $_GET['tarea'];
 
-$form =new MODULOS($fmt);
+$form =new USUARIOS($fmt);
 
 echo $fmt->header->header_modulo();
 

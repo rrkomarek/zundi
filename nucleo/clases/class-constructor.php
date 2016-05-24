@@ -77,7 +77,7 @@ class CONSTRUCTOR{
     require_once(_RUTA_HOST."nucleo/clases/class-modulos.php");
     require_once(_RUTA_HOST."nucleo/clases/class-paginas.php");
     require_once(_RUTA_HOST."nucleo/clases/class-nav.php");
-    require_once(_RUTA_HOST."nucleo/clases/class-cateogorias.php");
+    require_once(_RUTA_HOST."nucleo/clases/class-categorias.php");
 
 
     // $get = new GET($this);
@@ -108,7 +108,7 @@ class CONSTRUCTOR{
     $this->class_modulo = new CLASSMODULOS($this);
     $this->class_sistema = new CLASSSISTEMAS($this);
     $this->nav = new NAV($this);
-    $this->cagegoria = new CATEGORIA($this);
+    $this->categoria = new CATEGORIA($this);
 
 
   }

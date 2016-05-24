@@ -36,9 +36,10 @@ class CLASSPAGINAS{
 		?>
 		<div class="head-modulo">
 		<h1 class="title-page pull-left"><i class="<? echo $icon; ?>"></i> <? echo $nom; ?></h1>
-		 	<div class="head-botones pull-right">
-			 	<?php echo $botones; ?>
-		 	</div>
+			<a href='javascript:location.reload()'><i class='icn-sync'></i></a>
+			<div class="head-botones pull-right">
+				<?php echo $botones; ?>
+			</div>
 		</div>
 		<?php
 	}  // fin crear head
@@ -51,7 +52,7 @@ class CLASSPAGINAS{
 			<div class="head-botones pull-left">
 				 	<?php echo $botones_left; ?>
 			</div>
-			<h1 class="title-form col-xs-4 col-xs-offset-3"><? echo $nombre; ?></h1>
+			<h1 class="title-form col-xs-4 col-xs-offset-3"><? echo $nombre; ?> <a href='javascript:location.reload()'><i class='icn-sync'></i></a></h1>
 			<? if ($botones_right!=""){ ?>
 				<div class="head-botones pull-right">
 						<?php echo $botones_right; ?>
@@ -66,7 +67,7 @@ class CLASSPAGINAS{
 	function crear_btn($Link,$Clase,$Icon,$Nom){
 		$Botones ='<a href="'.$Link.'" class="'.$Clase.'">
 			 <i class="'.$Icon.'"></i> '.$Nom.'
-			 </a>';
+			 </a> ';
 		return $Botones;
 	} // fin btn nuevo
 

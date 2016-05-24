@@ -38,7 +38,7 @@ class SISTEMAS{
                 list($fila_id,$fila_nombre,$fila_descripcion,$fila_icono,$fila_tipo,$fila_activar,$fila_orden)=$this->fmt->query->obt_fila($rs);
               ?>
               <tr>
-                <td><i class="icn <?php echo $fila_icono; ?>"></i> <?php echo $fila_nombre; ?></td>
+                <td  class="col-nombre"><i class="icn <?php echo $fila_icono; ?>"></i> <?php echo $fila_nombre; ?></td>
                 <?php // if($fila_tipo=="2"){ $aux ="disabled"; } ?>
                 <td class="col-tipo-modulo"><?php echo $this->tipo_modulo($fila_tipo); ?></td>
                 <td class="estado">
@@ -49,7 +49,7 @@ class SISTEMAS{
                 <td class="col-xl-offset-2 acciones">
 
                   <a  id="btn-editar-modulo" class="btn btn-accion btn-editar <?php echo $aux; ?>" href="sistemas.adm.php?tarea=form_editar&id=<? echo $fila_id; ?>&id_mod=<? echo $this->id_mod; ?>" title="Editar <? echo $fila_id."-".$fila_url; ?>" ><i class="icn-pencil"></i></a>
-                  <a  title="eliminar" type="button" id_eliminar="<? echo $fila_id; ?>" nombre_eliminar="<? echo $fila_nombre; ?>" id="btn-eliminar" class="btn btn-eliminar btn-accion <?php echo $aux; ?>"><i class="icn-trash"></i></a>
+                  <a  title="eliminar <? echo $fila_id; ?>" type="button" idEliminar="<? echo $fila_id; ?>" nombreEliminar="<? echo $fila_nombre; ?>" class="btn btn-eliminar btn-accion <?php echo $aux; ?>"><i class="icn-trash"></i></a>
                 </td>
               </tr>
               <?php
