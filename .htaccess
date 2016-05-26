@@ -8,5 +8,8 @@ Rewriterule ^inicio$  index.php?cat=1&pla=1
 Rewriterule ^raiz$  index.php?cat=1&pla=1
 Rewriterule ^dashboard$  nucleo/dashboard.php
 Rewriterule ^landicorp$  index.php?cat=2&pla=1
+Rewriterule ^mainter$  index.php?cat=3&pla=1
 Rewriterule ^utilar$  index.php?cat=4&pla=1
 Rewriterule ^dashboard$  nucleo/dashboard.php
+Rewriterule ^conozca-landicorp$  index.php?cat=5&pla=1
+Rewriterule ^contacto-landicorp$  index.php?cat=7&pla=1

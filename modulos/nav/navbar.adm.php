@@ -18,7 +18,7 @@
 
     $menu_config .= $this->fmt->nav->construir_sistemas_rol( $id_rol, $id_usu);
 
-    $menu_config .= $this->fmt->nav->construir_title_menu("Administración");  
+    $menu_config .= $this->fmt->nav->construir_title_menu("Administración");
     $menu_config .= $this->fmt->nav->construir_btn_sidebar("btn-menu-sidebar btn-usuarios btn-menu-ajax","5");
     $menu_config .= $this->fmt->nav->construir_btn_sidebar("btn-menu-sidebar btn-config btn-menu-ajax","4"); // class a, id modulo
     $menu_config .= $this->fmt->nav->construir_btn_sidebar("btn-menu-sidebar btn-atajos-config btn-menu-ajax","3");

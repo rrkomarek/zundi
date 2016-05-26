@@ -11,11 +11,13 @@ class PLANTILLA{
 		var $cat_theme;
 		var $cat_css;
 		var $cat_clase;
+		var $cat_ruta_amigable;
 		var $pla_id;
 		var $pla_icono;
 		var $pla_css;
 		var $css_cont;
 		var $pla_codigos;
+		var $pla_onload;
 		var $fmt;
 		//var $url;
 
@@ -37,9 +39,11 @@ class PLANTILLA{
 			cat_clase,
 			cat_css,
 			cat_theme,
+			cat_ruta_amigable,
 			pla_icono,
 			pla_css,
-			pla_codigos
+			pla_codigos,
+			pla_onload
 			FROM
 			plantilla,
 			categoria
@@ -57,10 +61,12 @@ class PLANTILLA{
 					$this->cat_css 				= $fila["cat_css"];
 					$this->cat_clase 			= $fila["cat_clase"];
 					$this->cat_theme 			= $fila["cat_theme"];
+					$this->cat_ruta_amigable 		= $fila["cat_ruta_amigable"];
 					$this->pla_id			 		= $fila["pla_id"];
 					$this->pla_icono   		= $fila["pla_icono"];
 					$this->pla_css     		= $fila["pla_css"];
 					$this->pla_codigos 		= $fila["pla_codigos"];
+					$this->pla_onload			= $fila["pla_onload"];
 
 				}else{
 					return false;
@@ -76,16 +82,16 @@ class PLANTILLA{
 
 				echo "	<!-- inicio css plantilla contenedores  -->"."\n";
 
-				if($this->pla_css!=""){
+				if(!empty($this->pla_css)){
 					echo '	<link rel="stylesheet" href="'._RUTA_WEB.$this->pla_css.'" rel="stylesheet" type="text/css">'."\n";
 				}
-				if( $this->cat_css!=""){
+				if(!empty($this->cat_css)){
 					echo '	<link rel="stylesheet" href="'._RUTA_WEB.$this->cat_css.'" rel="stylesheet" type="text/css">'."\n";
 				}
 
 				$this->obtener_css($cat,$pla);
 
-				if(isset($this->cat_theme)){
+				if(!empty($this->cat_theme)){
 					echo '	<link rel="stylesheet" href="'._RUTA_WEB.$this->cat_theme.'" rel="stylesheet" type="text/css">'."\n";
 				}
 
@@ -93,10 +99,10 @@ class PLANTILLA{
 
 				echo "	<!-- inicio js plantilla contenedores  -->"."\n";
 
-				if ($this->pla_codigos != ""){
+				if (!empty($this->pla_codigos)){
 				    echo $this->pla_codigos;
 				}
-				if ($this->cat_codigos != ""){
+				if (!empty($this->cat_codigos)){
 				    echo $this->cat_codigos;
 				}
 
@@ -114,10 +120,9 @@ class PLANTILLA{
 				}*/
 
 				//echo '<body onload="PaginaCargada();" class="PagBody loading" role="document" data-spy="scroll" data-target="#navigation" data-offset="80" >'."\n";
-				echo '<body class="pag-body loading" role="document" data-spy="scroll" data-target="#navigation" data-offset="80" >'."\n";
+				echo '<body class="pag-body loading" id="body-'.$this->cat_ruta_amigable.'" role="document" data-spy="scroll" data-target="#navigation" data-offset="80" >'."\n";
 				echo '	<div id="wrapper">'."\n";
-				echo '		<div id="preloader_logo"></div>'."\n";
-				echo '		<div id="preloader_body"></div>'."\n";
+				echo '		<div class="preloader"></div>'."\n";
 
 			/*----------------  Inicio Session administrador --------------- */
 
@@ -147,7 +152,7 @@ class PLANTILLA{
 						$rs_pub = $this->obtener_publicaciones($cont_id,$cat,$pla);
 						$cant = $this->fmt->query->num_registros($rs_pub);
 						if ($cant > 0){
-							//echo "aqui pub";
+							// echo "aqui pub";
 							while ($fila_aux = $this->fmt->query->obt_fila($rs_pub)){
 								$this->cargar_pub($fila_aux["pub_archivo"],$fila_aux["pub_id"],$cat);
 							}
@@ -202,7 +207,7 @@ class PLANTILLA{
 										cont_id,
 										cont_clase,
 										cont_css,
-										cont_id_contenedor,
+										cont_id_padre,
 										cont_codigos
 									FROM
 									    contenedor
@@ -268,18 +273,18 @@ class PLANTILLA{
 						  cont_nombre,
 						  cont_css,
 							cont_clase,
-						  cont_id_contenedor,
+						  cont_id_padre,
 						  cont_codigos
 					FROM
-						 plantilla_rel,
+						 contenedor_plantilla,
 						 plantilla,
 						 contenedor,
 						 categoria
 					WHERE
-						  pla_rel_id_pla = pla_id
-						  AND pla_id =   pla_rel_id_pla
-						  AND cont_id = pla_rel_id_cont
-						  and cat_id = '".$cat."' and cont_id_contenedor ='0'
+						  plantilla_pla_id = pla_id
+						  AND pla_id =   plantilla_pla_id
+						  AND cont_id = contenedor_cont_id
+						  and cat_id = '".$cat."' and cont_id_padre ='0'
 						  and pla_id='".$pla."'
 					 ORDER BY cont_orden asc";
 	   return $this->fmt->query->consulta($consulta);
@@ -289,13 +294,13 @@ class PLANTILLA{
 			$consulta = " SELECT
 								pub_archivo,
 								pub_id,
-								cont_rel_orden
+								pubrel_orden
 						FROM
-							 contenedor_rel inner join publicacion on (cont_rel_id_pub=pub_id)
+							 publicacion_rel inner join publicacion on (pubrel_pub_id=pub_id)
 						WHERE
-								(cont_rel_id_cont = '".$id."' ) and
-								(cont_rel_id_cat= '".$cat."' ) and cont_rel_id_pla='".$pla."' and cont_rel_activar='1'
-						ORDER BY cont_rel_orden asc";
+								(pubrel_cont_id = '".$id."' ) and
+								(pubrel_cat_id= '".$cat."' ) and pubrel_pla_id='".$pla."' and pubrel_activar='1'
+						ORDER BY pubrel_orden asc";
 			//echo $consulta;
 			return $this->fmt->query->consulta($consulta);
 
@@ -305,7 +310,9 @@ class PLANTILLA{
 			$rs = $this->obtener_padre($cat,$pla);
 			if ($this->fmt->query->num_registros($rs) > 0){
 				while ($fila = $this->fmt->query->obt_fila($rs)){
-						echo '<link rel="stylesheet" href="'._RUTA_WEB.$fila["cont_css"].'" rel="stylesheet" type="text/css">'."\n";
+					 if (!empty($fila["cont_css"])){
+						'<link rel="stylesheet" href="'._RUTA_WEB.$fila["cont_css"].'" rel="stylesheet" type="text/css">'."\n";
+						 }
 						$this->obtener_css_hijos($fila["cont_id"],$cat);
 				}
 			}
@@ -315,8 +322,10 @@ class PLANTILLA{
       $rse=$this->tiene_hijos($id_hijo);
 			if ($this->fmt->query->num_registros($rse) > 0){
 			    while ($fila1 = $this->fmt->query->obt_fila($rs)){
+						if (!empty($fila["cont_css"])){
 						echo '<link rel="stylesheet" href="'._RUTA_WEB.$fila["cont_css"].'" rel="stylesheet" type="text/css">'."\n";
-            $this->obtener_css_hijos($fila1["cont_id"],$cat);
+						}
+						$this->obtener_css_hijos($fila1["cont_id"],$cat);
 				}
 			}
 		}

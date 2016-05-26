@@ -117,6 +117,7 @@ table.table{
   border-radius         : 5px;
 }
 
+
 .login .btn-cerrar {}
 
 .login .btn-cerrar:active {
@@ -321,6 +322,27 @@ textarea{
 
 .btn-navbar {
   font-size : 18px;
+}
+
+.btn-user {
+  color:#3292C5 !important;
+}
+
+.btn-perfil:hover{
+border:1px solid #40A9E2;
+background-color: #40A9E2;
+}
+
+.btn-menu{
+  color:#066CBB !important;
+}
+
+.btn-alarma i{
+  color:#E80329 !important;
+}
+
+.btn-mensajes i{
+  color:#0AC5AB !important;
 }
 
 .btn-menu .icn-reorder {

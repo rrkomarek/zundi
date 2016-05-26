@@ -13,6 +13,12 @@ class MENSAJE{
     return "<div  class='btn animated fadeIn color-text-negro-b' id='login_ok'><i class='color-text-verde icn-checkmark-circle'></i> Logín correcto. Redireccionando...</div>";
   }
 
+  function no_existe_categorias_hijas(){
+    return "<div  class='alert alert-warning col-xs-3 col-md-offset-4 col-xs- animated fadeIn color-text-negro-b' ><i class='icn-danger'></i> No existen categorias hijas...</div>";
+  }
+
+
+
 }// fin class mensajes;
 
 ?>

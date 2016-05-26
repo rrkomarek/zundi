@@ -1,0 +1,122 @@
+/* Precargado */
+
+.pre-load-web {
+  z-index    : 1000000;
+  position   : fixed;
+  top        : 0;
+  right      : 0;
+  bottom     : 0;
+  left       : 0;
+  width      : 100%;
+  height     : 100%;
+  background : #fff;
+}
+
+.box-siteloader {
+  margin-top : 30%;
+}
+
+.siteloader,
+.siteloader:after {
+  width         : 40px;
+  height        : 40px;
+  border-radius : 50%;
+}
+
+.siteloader {
+  position          : relative;
+  margin            : 0 auto;
+  border-top        : 2px solid rgba(0, 0, 0, 0.2);
+  border-right      : 2px solid rgba(0, 0, 0, 0.2);
+  border-bottom     : 2px solid rgba(0, 0, 0, 0.2);
+  border-left       : 2px solid #000;
+  text-indent       : -9999em;
+  font-size         : 10px;
+  -webkit-animation : av-load8 0.8s infinite linear;
+  animation         : av-load8  0.8s infinite linear;
+}
+
+@-webkit-keyframes av-load8 {
+  0% {
+    -webkit-transform : rotate(0deg);
+    transform         : rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform : rotate(360deg);
+    transform         : rotate(360deg);
+  }
+}
+
+@keyframes av-load8 {
+  0% {
+    -webkit-transform : rotate(0deg);
+    transform         : rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform : rotate(360deg);
+    transform         : rotate(360deg);
+  }
+}
+
+/* Menu-top */
+
+.menu-top {
+  min-height : 30px;
+}
+
+.menu-top .datos {
+  padding : 8px 0px 6px 15px;
+}
+
+.box-logo, .container-fluid{
+  /*padding-right : 0px;
+  padding-left  : 0px;*/
+}
+.box-carousel{
+  padding-right : 0px;
+  padding-left  : 0px;
+}
+
+.box-logo .brand img {
+  width : 211px;
+}
+
+.box-logo .rs a {
+  display         : inline-block;
+  padding         : 6px;
+  height: 32px;
+  width: 32px;
+  text-decoration : none;
+}
+/* slide */
+
+.icon-angle-left{
+  width: 50px;
+  height: 50px;
+  margin-top: -10px;
+  font-size: 2.4em;
+
+  right: 30%;
+  position: absolute;
+  top:50%;
+  padding: 0px 5px 5px 0px;
+}
+.icon-angle-right{
+  width: 50px;
+  height: 50px;
+  margin-top: -10px;
+  font-size: 2.4em;
+
+  left: 30%;
+  position: absolute;
+  top:50%;
+  padding: 0px 0px 5px 5px;
+}
+
+.box-text{
+  padding: 30px;
+  display: inline-block;
+  text-align: left;
+}

@@ -17,17 +17,17 @@ class USUARIO{
   }
 
   function id_rol_usuario($id_usu){
-    $sql ="SELECT rol_rel_rol_id FROM roles_rel WHERE rol_rel_usu_id='$id_usu'";
+    $sql ="SELECT roles_rol_id FROM usuarios_roles WHERE usuarios_usu_id='$id_usu'";
     $rs = $this->fmt->query-> consulta($sql);
     $fila = $this->fmt->query->obt_fila($rs);
-    return $fila["rol_rel_rol_id"];
+    return $fila["roles_rol_id"];
   }
 
   function rol_usuario($id_usu){
-    $sql ="SELECT rol_rel_rol_id FROM roles_rel WHERE rol_rel_usu_id='$id_usu'";
+    $sql ="SELECT roles_rol_id FROM usuarios_roles WHERE usuarios_usu_id='$id_usu'";
     $rs = $this->fmt->query-> consulta($sql);
     $fila = $this->fmt->query->obt_fila($rs);
-    $id = $fila["rol_rel_rol_id"];
+    $id = $fila["roles_rol_id"];
     if (isset($id)){
       $sql1 ="SELECT rol_nombre FROM roles WHERE rol_id='$id'";
       $rs1 = $this->fmt->query-> consulta($sql1);
