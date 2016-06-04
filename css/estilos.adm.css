@@ -10,37 +10,41 @@ html {}
 body {}
 
 /*menu*/
-
-.navbar,
-.navbar-collapse,
-.navbar-default,
-.navbar-fixed-top,
-.navbar-inner,
-.navbar .collapse {
+.menu-adm{
+	  z-index: 100;
+}
+.menu-adm,
+.menu-adm .navbar-collapse,
+.menu-adm .navbar-default,
+.menu-adm .navbar-fixed-top,
+.menu-adm .navbar-inner,
+.menu-adm .navbar .collapse {
 	height        : 43px !important;
 	min-height    : 43px !important;
 	margin-bottom : 0px;
 }
 
-
-.navbar-brand .logo-zundi{
+.menu-adm{
+	z-index:180 !important;
+}
+.menu-adm .navbar-brand .logo-zundi{
 	margin-top:9px;
 	margin-left: 10px;
 }
 
-.navbar-brand {
+.menu-adm .navbar-brand {
 	height     : 43px !important;
 	min-height : 43px !important;
 	padding    : 0;
 }
 
-.navbar-brand .navbar-logo {
+.menu-adm .navbar-brand .navbar-logo {
 	max-height  : 30px;
 	margin-top  : 6px;
 	margin-left : 10px;
 }
 
-.navbar-nav>li>.dropdown-menu {
+.menu-adm .navbar-nav>li>.dropdown-menu {
 	margin-top : -1px;
 	border     : 1px solid #e7e7e7;
 }
@@ -67,7 +71,7 @@ body {}
 }
 .acordion .panel-collapse, .acordion .panel-body{
 	border: 0px !important;
-	padding:5px 10px;
+	padding:0px 10px;
 }
 
 .img-user {
@@ -157,7 +161,7 @@ padding-left: 0px;
 }
 
 @media (min-width: 768px) {
-	.navbar-nav>li>a {
+	.menu-adm .navbar-nav>li>a {
 		padding-top    : 10px;
 		padding-bottom : 0px;
 		line-height    : 0px !important;
@@ -169,7 +173,7 @@ padding-left: 0px;
 /*sidebar*/
 
 .sidebar {
-	z-index    : 99;
+	z-index    : 121 !important;
 	position   : fixed;
 	top        : 0px;
 	right      : -250px;
@@ -214,10 +218,10 @@ padding-left: 0px;
 
 .popup-div {
 	display : none;
+	z-index     : 101;
 }
 
 .popup-div.on {
-	z-index     : 98;
 	display     : block !important;
 	position    : fixed;
 	top         : 43px;
@@ -338,7 +342,7 @@ padding-left: 0px;
 
 /* tablas */
 .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
-   
+
 }
 
 .table td { padding-left: 15px !important; }

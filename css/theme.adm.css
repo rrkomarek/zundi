@@ -401,11 +401,13 @@ background-color: #40A9E2;
   background-color : #fafafa;
   font-family : "Lato-Light",
                 sans-serif !important;
+  z-index: 110;
 }
 .sidebar.on{
   -webkit-box-shadow: -5px 0px 15px -8px rgba(0,0,0,0.75);
   -moz-box-shadow: -5px 0px 15px -8px rgba(0,0,0,0.75);
   box-shadow: -5px 0px 15px -8px rgba(0,0,0,0.75);
+
 }
 
 .sidebar-inner .title-menu{

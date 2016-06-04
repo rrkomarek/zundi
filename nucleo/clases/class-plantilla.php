@@ -78,7 +78,7 @@ class PLANTILLA{
 
 		function dibujar_cabecera($cat,$pla){
 
-				echo $this->fmt->header->header_html();
+				echo $this->fmt->header->header_html($cat);
 
 				echo "	<!-- inicio css plantilla contenedores  -->"."\n";
 
@@ -145,6 +145,7 @@ class PLANTILLA{
 			echo "<!--  Inicio Cuerpo  -->"."\n\n";
 				$rs = $this->obtener_padre($cat,$pla);
 				$num = $this->fmt->query->num_registros($rs);
+				//echo "num:"+$num;
 				if ($num > 0){
 					list($cont_id, $cont_nombre, $cont_css,$cont_clase, $con_id_contenedor, $cont_codigos) = $this->fmt->query->obt_fila($rs);
 					//echo "id_cont:".$cont_id;
@@ -272,7 +273,7 @@ class PLANTILLA{
 						  cont_id,
 						  cont_nombre,
 						  cont_css,
-							cont_clase,
+						  cont_clase,
 						  cont_id_padre,
 						  cont_codigos
 					FROM

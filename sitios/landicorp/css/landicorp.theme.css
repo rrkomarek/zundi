@@ -25,6 +25,136 @@ a {
 
 /* Menu-top */
 
+
+.pre-load-web {
+  z-index    : 1000000;
+  position   : fixed;
+  top        : 0;
+  right      : 0;
+  bottom     : 0;
+  left       : 0;
+  width      : 100%;
+  height     : 100%;
+  background : #fff;
+}
+
+.logo-loading{
+	width: 300px;
+	height: 128px;
+	background: url("../images/Logo-Landicorp-2016-300x128.png") no-repeat;
+	display: inline-block;
+	background-size: 100%;
+}
+
+.box-siteloader {
+  margin-top : 20%;
+}
+
+.siteloader,
+.siteloader:after {
+  width         : 40px;
+  height        : 40px;
+  border-radius : 50%;
+}
+
+.siteloader {
+  position          : relative;
+  margin            : 0 auto;
+  border-top        : 2px solid rgba(0, 0, 0, 0.2);
+  border-right      : 2px solid rgba(0, 0, 0, 0.2);
+  border-bottom     : 2px solid rgba(0, 0, 0, 0.2);
+  border-left       : 2px solid #000;
+  text-indent       : -9999em;
+  font-size         : 10px;
+  -webkit-animation : av-load8 0.8s infinite linear;
+  animation         : av-load8  0.8s infinite linear;
+}
+
+@-webkit-keyframes av-load8 {
+  0% {
+    -webkit-transform : rotate(0deg);
+    transform         : rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform : rotate(360deg);
+    transform         : rotate(360deg);
+  }
+}
+
+@keyframes av-load8 {
+  0% {
+    -webkit-transform : rotate(0deg);
+    transform         : rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform : rotate(360deg);
+    transform         : rotate(360deg);
+  }
+}
+
+/* Menu-top */
+
+.menu-top {
+  min-height : 30px;
+}
+
+.menu-top .datos {
+  padding : 8px 0px 6px 15px;
+}
+
+.box-logo, .container-fluid{
+  /*padding-right : 0px;
+  padding-left  : 0px;*/
+}
+.box-carousel{
+  padding-right : 0px;
+  padding-left  : 0px;
+}
+
+.box-logo .brand img {
+  width : 211px;
+}
+
+.box-logo .rs a {
+  display         : inline-block;
+  padding         : 6px;
+  height: 32px;
+  width: 32px;
+  text-decoration : none;
+}
+/* slide */
+
+.icon-angle-left{
+  width: 50px;
+  height: 50px;
+  margin-top: -10px;
+  font-size: 2.4em;
+
+  right: 30%;
+  position: absolute;
+  top:50%;
+  padding: 0px 5px 5px 0px;
+}
+.icon-angle-right{
+  width: 50px;
+  height: 50px;
+  margin-top: -10px;
+  font-size: 2.4em;
+
+  left: 30%;
+  position: absolute;
+  top:50%;
+  padding: 0px 0px 5px 5px;
+}
+
+.box-text{
+  padding: 30px;
+  display: inline-block;
+  text-align: left;
+}
+
 .menu-top {
   background-color : #e1e1e1;
   font-size        : 13px;
@@ -35,6 +165,7 @@ a {
 
 .box-logo .rs {
   margin-top : 30px;
+  display: none;
 }
 
 .box-logo .rs a {
@@ -72,6 +203,7 @@ a {
   border-color     : none;
   border-radius    : 0px;
   background-color : #003995 !important;
+      margin-bottom: 0px;
 }
 
 .menu-general .brand { padding-left: 15px; }
@@ -125,6 +257,18 @@ a {
 /* carosuel */
 .carousel {
   float:left;
+  width: 100%;
+}
+.carousel .carousel-inner{
+  padding-left: 0px;
+  padding-right: 0px;
+}
+.carousel .carousel-inner .item{
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.carousel .carousel-inner .item img{
   width: 100%;
 }
 
@@ -254,7 +398,10 @@ a {
 .quienes-somos .box-title {
   text-align: center;
   display: inline-block;
+  width: 100%;
 }
+
+.quienes-somos .box-title img{ margin:0px auto !important; }
 
 .quienes-somos .box-title h1{
   margin:55px 0px 25px 0px;
@@ -350,4 +497,202 @@ a {
 .form-contacto strong{
   font-family : 'sf_ui_bold';
   color:#3b5998;
+}
+
+.rs-footer{
+display:none;
+}
+
+.box-footer .copy{
+	float: left;
+	font-size: 12px;
+	margin-top: 12px;
+}
+
+.box-footer .menu-footer{
+	float: right;
+}
+.rs-copy{ 
+	display: none; 
+}
+
+.btn-m6 { display: none !important; }
+
+@media screen and (max-width: 570px) {
+
+	.pre-load-web .box-siteloader .logo-loading{
+		width: 180px;
+		height: 70px;
+	}
+	.datos{
+		font-size: 11px;
+		margin-right: 10px;
+		padding-left: 0px !important;
+		padding-right: 0px !important;
+	}
+	.rs{
+		display:none;
+	}
+	.box-logo{
+		margin-left: 0px;
+		width: 180px;
+		position: relative;
+		z-index: 90;
+		float: left;
+		height: 75px;
+	}
+	.brand{
+		position: absolute;
+		top:0;
+	}
+	.navbar-toggle{
+		border:1px solid #ccc;
+		margin-top: 18px;
+	}
+	.navbar-collapse, .navbar-nav{
+		background-color:  #1e62bd !important;
+		height: auto;
+		min-height: auto;
+		margin:0;
+	}
+	.navbar-collapse{
+		padding-left: 15px !important;
+		margin-top: 10px;
+	}
+	.menu-general .navbar-collapse.in{
+		overflow-y: visible;
+	}
+	
+	.menu-general .container-fluid>.navbar-collapse,
+	.menu-general .container-fluid>.navbar-header, 
+	.menu-general .container>.navbar-collapse, 
+	.menu-general .container>.navbar-header {
+    	margin-right: -16px;
+		margin-left: -16px;
+	}
+	.menu-general{
+		width: 100%;
+		background: transparent !important;
+		z-index: 80;
+		right: 0;
+		position: absolute;
+		top:28px;
+	}
+	.menu-general .nav<a{
+		color:#fff !important;
+	}
+	.menu-general .nav a{
+		color:#fff !important;
+		width: 100% !important;
+	}
+	.caruosel{
+		border:1px solid red;
+	}
+	
+	.carousel .carousel-indicators {
+    	bottom: -40px;
+	}
+	
+	.carousel-control {
+		width: 30%;
+	}
+	
+	.carousel-control .icon-angle-left{
+		width: 50px;
+		height: 45px;
+		top:40%;
+		left:20%;
+		font-size: 32px;
+		padding-top: 4px;
+	}
+	.carousel-control .icon-angle-right{
+		width: 50px;
+		height: 45px;
+		top:40%;
+		right:20%;
+		font-size: 32px;
+		padding-top: 4px;
+	}
+	.box-text{
+		padding-bottom: 0px;
+		padding-top: 0px;	
+	}
+	
+	.box-text h3{
+		font-size: 16px;
+	}
+	.box-text .textwidget{
+		font-size: 14px;
+	}
+	#footer .row{
+		margin:20px 0px;
+	}
+	
+	#footer .container{
+		padding-left: 0px;
+		padding-right: 0px;
+	}
+	.box-footer .pull-left{ float:right; }
+	.box-footer .pull-rigth{ float: left; }
+	.rs-footer{
+		display:block;
+		width: 100%;
+		text-align: center;
+		clear: both;
+		margin: 20px 0px;
+		display:none;
+	}
+	.rs-footer a{
+		color:#fff;
+		margin-left: 10px;
+		font-size: 18px; 
+	}
+	.box-footer .copy{
+		float: right;
+		display: none;
+	}
+	
+	.box-footer .menu-footer{
+		float: left;
+	}
+	.rs-copy{
+		display: block;
+		font-size: 11px;
+		margin-bottom: 15px;
+		display:none;
+	}
+	.quienes-somos .box-text{
+		padding-left: 0px;
+		padding-right: 0px;
+		text-align: center;
+	}
+	
+	.quienes-somos .box-title{
+		margin-top: 20px;
+	}
+	
+	.quienes-somos .box-title h1{
+		margin-top: 20px;
+		margin-bottom: 10px;
+	}
+	.quienes-somos .box-title .hr-inner{
+		margin-bottom: 10px;
+	}
+	#map{
+		height: 230px;
+	}
+	
+	.box-form{
+		padding-left: 0px;
+		padding-right: 0px;
+		margin-bottom: 20px;
+	}
+	
+	.box-form .col-md-6{
+		width: 100%; 
+		float: left;
+		clear: both;
+		margin:10px 0px;
+	}
+	
 }

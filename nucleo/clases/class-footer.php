@@ -20,7 +20,7 @@ class FOOTER{
 
   function footer_modulo(){
     $aux  = '<div class="footer-pag" class="container-fluid">'."\n";
-    $aux .= '2016 ® Wappcom &nbsp;| &nbsp;  power  <i class="icn-zundi-o"></i>'._VZ."\n";
+    $aux .= '2016 <i class="icn-cc"></i> Wappcom &nbsp;| &nbsp;  power  <i class="icn-zundi-o"></i>'._VZ."\n";
     $aux .= '</div>'."\n";
     $aux .= $this->js();
     $aux .= '</body>'."\n";

@@ -19,11 +19,14 @@
     $menu_config .= $this->fmt->nav->construir_sistemas_rol( $id_rol, $id_usu);
 
     $menu_config .= $this->fmt->nav->construir_title_menu("Administración");
-    $menu_config .= $this->fmt->nav->construir_btn_sidebar("btn-menu-sidebar btn-usuarios btn-menu-ajax","5");
-    $menu_config .= $this->fmt->nav->construir_btn_sidebar("btn-menu-sidebar btn-config btn-menu-ajax","4"); // class a, id modulo
-    $menu_config .= $this->fmt->nav->construir_btn_sidebar("btn-menu-sidebar btn-atajos-config btn-menu-ajax","3");
-    $menu_config .= $this->fmt->nav->construir_btn_sidebar("btn-menu-sidebar btn-modulos btn-menu-ajax","2");
-    $menu_config .= $this->fmt->nav->construir_btn_sidebar("btn-menu-sidebar btn-sistemas btn-menu-ajax","1");
+
+    $menu_config .= $this->fmt->nav->construir_sistemas_esenciales("",$id_rol, $id_usu);
+
+    // $menu_config .= $this->fmt->nav->construir_btn_sidebar("btn-menu-sidebar btn-usuarios btn-menu-ajax","5");
+    // $menu_config .= $this->fmt->nav->construir_btn_sidebar("btn-menu-sidebar btn-config btn-menu-ajax","4"); // class a, id modulo
+    // $menu_config .= $this->fmt->nav->construir_btn_sidebar("btn-menu-sidebar btn-atajos-config btn-menu-ajax","3");
+    // $menu_config .= $this->fmt->nav->construir_btn_sidebar("btn-menu-sidebar btn-modulos btn-menu-ajax","2");
+    // $menu_config .= $this->fmt->nav->construir_btn_sidebar("btn-menu-sidebar btn-sistemas btn-menu-ajax","1");
 
 
     // $menu_config .= cargar_sistemas( $id_rol, $id_mod);
@@ -35,7 +38,7 @@
   <style>
     #page-content-wrapper{ margin-top: 43px; }
   </style>
-  <div  class="navbar navbar-default navbar-fixed-top color-bg-blanco" role="navigation">
+  <div  class="navbar navbar-default navbar-fixed-top color-bg-blanco menu-adm" role="navigation">
     <div class="navbar-inner"> <!-- incicio navbar-inner -->
       <div class="dropdown_container">
         <div class="navbar-header">

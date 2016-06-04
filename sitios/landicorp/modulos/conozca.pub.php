@@ -9,13 +9,13 @@ require_once("header.pub.php");
   <div class="container">
     <div class="box-text">
       <span class="box-title">
-        <img class="img-responsive" src="sitios/landicorp/images/quienes-somos.png">
-        <h1>QUIENES SOMOS</h1>
+        <img class="img-responsive" src="sitios/landicorp/images/quienes-somos.jpg">
+        <h1>QUIÉNES SOMOS</h1>
         <span class="hr-inner"></span>
       </span>
       <span>
         <p>La unión de un grupo de empresas que trabajan bajo los principios de competitividad y ética empresarial  mediante la optimización de sus recursos, aprovechando la oportunidad de los mercados y mirando permanentemente al futuro sin dejar de crecer.</p>
-        <p>•	La Innovación y el Desarrollo en el área de la genética vegetal, así como el suministro de partes y piezas vehiculares e industriales, de herramientas y materiales para la construcción, suministro de equipos de transporte para carga y pasajeros, además de la comercialización de utensilios de uso doméstico, nos identifica como la más sólida y segura corporación estratégica en todo tipo de mercado.</p>
+        <p>La Innovación y el Desarrollo en el área de la genética vegetal, así como el suministro de partes y piezas vehiculares e industriales, de herramientas y materiales para la construcción, suministro de equipos de transporte para carga y pasajeros, además de la comercialización de utensilios de uso doméstico, nos identifica como la más sólida y segura corporación estratégica en todo tipo de mercado.</p>
         <p><strong>Visión:</strong>
         Crear empresas especializadas según la necesidad de los sectores productivos, diversificando las áreas de influencia de cada una de ellas de acuerdo al mercado de referencia específico.
         </p>

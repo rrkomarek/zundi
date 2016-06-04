@@ -10,13 +10,26 @@ class NAV{
   }
 
   function construir_sistemas_rol($id_rol,$id_usu){  // revisar por roles
-    $sql ="SELECT sis_id, sis_nombre, sis_icono FROM sistemas where sis_activar='1'";
+    $sql ="SELECT sis_id, sis_nombre, sis_icono FROM sistemas where sis_activar='1' ORDER BY sis_id DESC";
     $rs = $this->fmt->query->consulta($sql);
     $num = $this->fmt->query->num_registros($rs);
       if($num>0){
         for($i=0;$i < $num; $i++){
           list($fila_id,$fila_nombre,$fila_icono) = $this->fmt->query->obt_fila($rs);
           $aux .= $this->acordion($fila_id, "btn-menu-sidebar", $fila_nombre, $fila_icono); //$nombre, $menu, $id_sistema, $id_modulo
+        }
+      }
+    return $aux;
+  }
+
+  function construir_sistemas_esenciales($id_rol, $id_usu){
+    $sql ="SELECT mod_id  FROM modulos where mod_tipo='2' ORDER BY mod_id DESC";
+    $rs = $this->fmt->query->consulta($sql);
+    $num = $this->fmt->query->num_registros($rs);
+      if($num>0){
+        for($i=0;$i < $num; $i++){
+          list($fila_id) = $this->fmt->query->obt_fila($rs);
+          $aux .=  $this->construir_btn_sidebar("btn-menu-sidebar btn-menu-ajax", $fila_id);
         }
       }
     return $aux;
@@ -75,11 +88,24 @@ class NAV{
         </div>
         <div id="collapse-'.$id.'" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-'.$id.'">
           <div class="panel-body">
-            Hola
+            '.$this->traer_modulos($id).'
           </div>
         </div>
       </div>
     </div>';
+    return $aux;
+  }
+
+  function traer_modulos($id){
+    $sql ="SELECT modulos_mod_id FROM sistemas_modulos where sistemas_sis_id='$id' ORDER BY modulos_mod_id DESC ";
+    $rs = $this->fmt->query->consulta($sql);
+    $num =$this->fmt->query->num_registros($rs);
+    if ($num>0){
+      for ($i=0; $i<$num; $i++){
+        list($fila_id) = $this->fmt->query->obt_fila($rs);
+        $aux .= $this->construir_btn_sidebar("btn btn-sm-sidebar btn-menu-ajax",$fila_id);
+      }
+    }
     return $aux;
   }
 
@@ -97,7 +123,7 @@ class NAV{
         }else{
           $url= $fila_ruta_amigable; $destino="";
         }
-        $aux .= $this->fmt_li("","",$fila_nombre, $url, $destino );
+        $aux .= $this->fmt_li($fila_id,"","",$fila_nombre, $url, $destino );
       }
     }
     return $aux;
@@ -120,15 +146,15 @@ class NAV{
         if ( $this->tiene_cat_hijos($fila_id) ){
           $aux .= $this->fmt_li_hijos($fila_id, $fila_nombre);
         } else {
-          $aux .= $this->fmt_li("","",$fila_nombre, $url, $destino );
+          $aux .= $this->fmt_li($fila_id,"","",$fila_nombre, $url, $destino );
         }
       }
       return $aux;
     }
   }
 
-  function fmt_li($clase, $icono, $nombre,$url, $destino ){
-    $aux = '<li class="'.$clase.'"><a href="'.$url.'" target="'.$destino.'"><i class="'.$icono.'"></i>'.$nombre.'</a></li>';
+  function fmt_li($id, $clase, $icono, $nombre,$url, $destino ){
+    $aux = '<li class="'.$clase.' btn-m'.$id.'"><a href="'.$url.'" target="'.$destino.'"><i class="'.$icono.'"></i>'.$nombre.'</a></li>';
     return $aux;
   }
 

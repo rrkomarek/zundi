@@ -44,10 +44,10 @@ require_once("header.pub.php");
 
 </div> <!-- Fin de Bloque -->
 
-<div class="container-fluid mensaje-1 animated fadeInUp">
+<!--<div class="container-fluid mensaje-1 animated fadeInUp">
     <h2 class="col-xs-7 col-xs-offset-1"><b>LANDICORP</b> es el resultado de la unión de un grupo de empresas que trabajan bajo los principios de competitividad y ética empresarial.</h2>
     <a href="<? echo _RUTA_WEB; ?>contacto-landicorp" class="">CONTÁCTENOS</a>
-</div>
+</div>-->
 <?
 require_once("footer.pub.php");
 ?>

@@ -1,0 +1,93 @@
+@import "sf-ui-font.css";
+
+/* navbar */
+
+body,
+html {
+  display : block;
+  height  : 100%;
+  margin  : 0;
+  border  : 0;
+}
+
+body {
+  color            : #2c353d;
+  background-color : #F4F6F7 !important;
+  text-align       : center;
+  font-family      : "sf_ui_light",
+                     helvetica,
+                     arial !important;
+}
+
+
+/* Menu-top */
+
+.menu-top {
+  min-height : 30px;
+  background-color: #2A3E50;
+  padding-left: 5px;
+}
+
+.menu-top .datos {
+  padding : 0px 0px 0px 15px;
+  
+}
+
+.menu-top .text{
+	color:#ccc;
+	margin-top: 8px;
+	font-family: "sf_ui_light",helvetica,arial !important;
+	display:inline-block;
+	font-size: 12px;
+}
+
+.menu-top .datos .brand-top{
+	height: 18px;
+	margin-top: -8px;
+	display:inline-block;
+}
+
+.menu-top .rs-top a i{
+	font-size: 18px;
+	color:#ccc;
+	padding:5px 6px;
+	display: inline-block;
+	text-decoration: none;
+}
+
+.menu-top .rs-top a i:hover{
+	color:#4a6bc8;
+}
+
+.navbar{
+	background-color: transparent !important;
+}
+
+.brand {
+	float: left;
+	margin-top:15px;
+}
+
+/* nav */
+
+.menu .navbar-collapse{
+	float:right;
+	border:1px solid red;
+	margin-top: 15px;
+	min-height: 30px;
+}
+
+.menu .navbar-nav>li>a{
+	font-family: "sf_ui_light",helvetica,arial !important;
+	color:#777;
+	border:1px solid red;		
+}
+
+@media screen and (max-width: 570px) {
+	.menu .container{ padding-left: 10px; }
+	.brand img{
+		width: 120px;
+	}
+	
+}
+

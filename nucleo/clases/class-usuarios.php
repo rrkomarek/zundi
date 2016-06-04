@@ -59,5 +59,47 @@ class USUARIO{
     return $fila["usu_imagen"];
   }
 
+  function opciones_roles(){
+		$sql ="SELECT rol_id, rol_nombre FROM roles";
+		$rs = $this->fmt->query -> consulta($sql);
+		$num = $this->fmt->query -> num_registros($rs);
+		$aux="";
+		if ($num > 0){
+			for ( $i=1; $i <= $num; $i++){
+				list($fila_id, $fila_nombre) = $this->fmt->query->obt_fila($rs);
+				$aux .= '<div class="checkbox">';
+				$aux .= '<label>';
+				$aux .= '<input type="checkbox" name="inputRol[]" value="'.$fila_id.'">';
+				$aux .= '<i class="'.$fila_icono.'"></i> '.$fila_nombre;
+				$aux .= '</label>';
+				$aux .= '</div>';
+			}
+		} else {
+			$aux =" no existen roles registrados";
+		}
+		return $aux;
+	}
+
+	function opciones_grupos(){
+		$sql ="SELECT rol_grupo_id, rol_grupo_nombre FROM roles_grupo";
+		$rs = $this->fmt->query -> consulta($sql);
+		$num = $this->fmt->query -> num_registros($rs);
+		$aux="";
+		if ($num > 0){
+			for ( $i=1; $i <= $num; $i++){
+				list($fila_id, $fila_nombre) = $this->fmt->query->obt_fila($rs);
+				$aux .= '<div class="checkbox">';
+				$aux .= '<label>';
+				$aux .= '<input type="checkbox" name="inputRolGrupo[]" value="'.$fila_id.'">';
+				$aux .= '<i class="'.$fila_icono.'"></i> '.$fila_nombre;
+				$aux .= '</label>';
+				$aux .= '</div>';
+			}
+		} else {
+			$aux =" no existen roles registrados";
+		}
+		return $aux;
+	}
+
 
 }

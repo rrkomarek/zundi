@@ -9,6 +9,4 @@
       define('_PASSWORD','asdf123A');
       define('_BASE_DE_DATOS','landicorp');
     }
-
-  
 ?>

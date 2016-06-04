@@ -20,7 +20,7 @@ class AUTENTIFICACION{
 	    autentificar($plantilla,$cat,$pla,$query,$sesion);
     } else {
 	    //echo "no autentificado</br>";
-		  if( $this->verificar_categoria($this->fmt->query,$cat) or autentifar($cat,$this->fmt->sesion)){
+		  if( $this->verificar_categoria($this->fmt->query,$cat) or $this->autentifar($cat,$this->fmt->sesion)){
         //echo "Ingreso normal de usuario</br>";
 			  $this->ingresar($this->fmt->plantilla,$cat,$pla);
 		  }else{

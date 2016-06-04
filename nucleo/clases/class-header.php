@@ -9,11 +9,11 @@ class HEADER{
     $this->fmt = $fmt;
   }
 
-  function header_html(){
+  function header_html($cat){
     $aux  = '<!DOCTYPE HTML>'."\n";
     $aux .= '<html id="pagIndex" lang="ES">'."\n";
     $aux .= '<head>'."\n";
-    $aux .= '	<title> '.$this->nombre_sitio().'</title>'."\n"; //Trabajar
+    $aux .= '	<title> '.$this->nombre_sitio($cat).'</title>'."\n"; //Trabajar
     $aux .= '	<link rel="shortcut icon" href="'._RUTA_WEB.$this->get_favicon($cat).'" />'."\n";  //Trabajar
     $aux .= '        <!--  Este sitio esta desarrollado en zundi cms -> http://github.com/zundi -->'."\n";
     $aux .= '	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">'."\n";
@@ -35,17 +35,50 @@ class HEADER{
     return $aux;
   }
 
-  function nombre_sitio(){
-    $consulta = "SELECT conf_nombre_sitio FROM configuracion";
-    $rs = $this->fmt->query->consulta($consulta);
-    $fila = $this->fmt->query->obt_fila($rs);
-    $nombre=$fila["conf_nombre_sitio"];
-    if (empty($nombre)){ $nombre = _VZ; }
+  function nombre_sitio($cat){
+	$cat_tipo =  $this->fmt->categoria->categoria_id_tipo($cat);
+	$cat_padre= $this->fmt->categoria->categoria_id_padre($cat);
+	$cat_nombre= $this->fmt->categoria->nombre_categoria($cat);
+	
+	if ( ($cat_padre=='0')&&($cat_tipo=='2')||($cat=='1')) {
+		$nombre = $cat_nombre;
+	}else{
+		$cat_padre_sitio =  $this->fmt->categoria->categoria_padre_sitio($cat);
+		if (!empty($cat_padre_sitio)){
+			$nombre= $this->fmt->categoria->nombre_categoria($cat_padre_sitio)." - ".$cat_nombre;
+		}else{
+	    	$consulta = "SELECT conf_nombre_sitio FROM configuracion";
+			$rs = $this->fmt->query->consulta($consulta);
+			$fila = $this->fmt->query->obt_fila($rs);
+			$nombre=$fila["conf_nombre_sitio"];
+			if (empty($nombre)){ $nombre = _VZ; }
+	    }
+    }
     return $nombre;
   }
 
-  function get_favicon($idcat){
-    return "images/favicon.ico";
+  function get_favicon($cat){
+    
+    
+	$cat_tipo = $this->fmt->categoria->categoria_id_tipo($cat);
+	$cat_padre= $this->fmt->categoria->categoria_id_padre($cat);
+	
+	
+	if ( ($cat_padre=='0')&&($cat_tipo=='2')||($cat=='1')) {
+		$cat_favicon= $this->fmt->categoria->favicon_categoria($cat);
+		if (!empty($cat_favicon)){
+			return $cat_favicon;
+		} else {
+			return "images/favicon.ico";
+		}
+	}else{
+		$cat_padre_sitio =  $this->fmt->categoria->categoria_padre_sitio($cat);
+		if (!empty($cat_padre_sitio)){
+			return $this->fmt->categoria->favicon_categoria($cat_padre_sitio);
+		}else{
+	    	return "images/favicon.ico";
+	    }
+    }
   }
 
   function padre_cat($cat){

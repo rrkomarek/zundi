@@ -24,6 +24,7 @@ class SISTEMAS{
             <tr>
               <th>Nombre del Sistema</th>
               <th>Tipo</th>
+							<th>Modulos</th>
               <th>Publicación</th>
               <th class="col-xl-offset-2">Acciones</th>
             </tr>
@@ -40,7 +41,8 @@ class SISTEMAS{
               <tr>
                 <td  class="col-nombre"><i class="icn <?php echo $fila_icono; ?>"></i> <?php echo $fila_nombre; ?></td>
                 <?php // if($fila_tipo=="2"){ $aux ="disabled"; } ?>
-                <td class="col-tipo-modulo"><?php echo $this->tipo_modulo($fila_tipo); ?></td>
+                <td class="col-tipo-modulo"><?php echo $this->tipo_sistema($fila_tipo); ?></td>
+								<td ><?php echo $this->fmt->class_sistema->modulos_sistema($fila_id); ?> </td>
                 <td class="estado">
                   <?php
                     $this->fmt->class_modulo->estado_publicacion($fila_activar,"modulos/sistemas/sistemas.adm.php", $this->id_mod,$aux, $fila_id ); // query, id item, ruta, id modulo, aux disabled
@@ -90,7 +92,10 @@ class SISTEMAS{
 					<label>Icono Sistema</label>
 					<input class="form-control" id="inputIcono" name="inputIcono"  placeholder="" />
 				</div>
-
+				<div class="form-group">
+					<label>Modulos:  </label>
+					<?php echo $this->fmt->class_sistema->opciones_modulos("");  ?>
+				</div>
 				<div class="form-group">
 					<label>Tipo Sistema:  </label>
 					<select class="form-control form-select" name="inputTipo" id="inputTipo">
@@ -110,7 +115,6 @@ class SISTEMAS{
 
 		$botones = $this->fmt->class_pagina->crear_btn("sistemas.adm.php?tarea=busqueda&id_mod=$this->id_mod","btn btn-link  btn-volver","icn-chevron-left","volver"); // link, clase, icono, nombre
 		$this->fmt->class_pagina->crear_head_form("Editar Sistema", $botones,"");// nombre, botones-left, botones-right
-		echo "<a href='javascript:location.reload()'><i class='icn-sync'></i></a>";
 		$this->fmt->get->validar_get ( $_GET['id'] );
 		$id = $_GET['id'];
 
@@ -146,7 +150,12 @@ class SISTEMAS{
 				</div>
 
 				<div class="form-group">
-					<label>Tipo modulo:  </label>
+					<label>Modulos:  </label>
+					<?php echo $this->fmt->class_sistema->opciones_modulos($fila_id);  ?>
+				</div>
+
+				<div class="form-group">
+					<label>Tipo Sistema:  </label>
 					<select class="form-control form-select" name="inputTipo" id="inputTipo">
 						<?  echo $this->opciones_tipo($fila_tipo);  ?>
 					</select>
@@ -160,7 +169,7 @@ class SISTEMAS{
 					</label>
 				</div>
 				<div class="form-group form-botones">
-					 <button  type="button" class="btn btn-danger btn-eliminar color-bg-rojo-a" id_eliminar="<? echo $fila_id; ?>" nombre_eliminar="<? echo $fila_nombre; ?>" name="btn-accion" id="btn-eliminar" value="eliminar"><i class="icn-trash" ></i> Eliminar Sistema</button>
+					 <button  type="button" class="btn btn-danger btn-eliminar color-bg-rojo-a" idEliminar="<? echo $fila_id; ?>" nombreEliminar="<? echo $fila_nombre; ?>" name="btn-accion" id="btn-eliminar" value="eliminar"><i class="icn-trash" ></i> Eliminar Sistema</button>
 
 					 <button type="submit" class="btn btn-info  btn-actualizar hvr-fade btn-lg color-bg-celecte-c btn-lg" name="btn-accion" id="btn-activar" value="actualizar"><i class="icn-sync" ></i> Actualizar</button>
 				</div>
@@ -187,8 +196,21 @@ class SISTEMAS{
 									 $activar."'";
 
 		$sql="insert into sistemas (".$ingresar.") values (".$valores.")";
-
 		$this->fmt->query->consulta($sql);
+
+		$sql="select max(sis_id) as id_sis from sistemas";
+		$rs= $this->fmt->query->consulta($sql);
+		$fila = $this->fmt->query->obt_fila($rs);
+	  $id = $fila ["id_sis"];
+
+		$mod = $_POST['inputModulo'];
+		$cont_mod= count($mod);
+		$ingresar1 ="sistemas_sis_id, modulos_mod_id";
+		for($i=0; $i < $cont_mod; $i++){
+			$valores1 = "'".$id."','".$mod[$i]."'";
+			$sql1="insert into sistemas_modulos (".$ingresar1.") values (".$valores1.")";
+			$this->fmt->query->consulta($sql1);
+		}
 
 		header("location: sistemas.adm.php?id_mod=".$this->id_mod);
 	} // fin funcion ingresar
@@ -204,17 +226,34 @@ class SISTEMAS{
 						sis_icono='".$_POST['inputIcono']."',
 						sis_activar='".$_POST['inputActivar']."'
 	          WHERE sis_id='".$_POST['inputId']."'";
-
 			$this->fmt->query->consulta($sql);
+
+			$sql1="DELETE FROM sistemas_modulos WHERE sistemas_sis_id='".$_POST['inputId']."'";
+			$this->fmt->query->consulta($sql1);
+
+			$mod = $_POST['inputModulo'];
+			$cont_mod= count($mod);
+			$ingresar1 ="sistemas_sis_id, modulos_mod_id";
+			for($i=0; $i < $cont_mod; $i++){
+				$valores1 = "'".$_POST['inputId']."','".$mod[$i]."'";
+				$sql1="insert into sistemas_modulos (".$ingresar1.") values (".$valores1.")";
+				$this->fmt->query->consulta($sql1);
+			}
+
 		}
-			header("location: sistemas.adm.php?id_mod=".$this->id_mod);
+		header("location: sistemas.adm.php?id_mod=".$this->id_mod);
 	}
 
 	function eliminar(){
 		$this->fmt->get->validar_get ( $_GET['id'] );
 		$id= $_GET['id'];
+
+		$sql1="DELETE FROM sistemas_modulos WHERE sistemas_sis_id='".$id."'";
+		$this->fmt->query->consulta($sql1);
+
 		$sql="DELETE FROM sistemas WHERE sis_id='".$id."'";
 		$this->fmt->query->consulta($sql);
+
 		$up_sqr6 = "ALTER TABLE sistemas AUTO_INCREMENT=1";
 		$this->fmt->query->consulta($up_sqr6);
 		header("location: sistemas.adm.php?id_mod=".$this->id_mod);
@@ -229,7 +268,7 @@ class SISTEMAS{
 		header("location: sistemas.adm.php?id_mod=".$this->id_mod);
 	}
 
-	function tipo_modulo($sis_tipo){
+	function tipo_sistema($sis_tipo){
 
 		switch ($sis_tipo) {
 			case '0':
@@ -275,21 +314,20 @@ class SISTEMAS{
 	function opciones_tipo($fila_tipo){
 		$tipos = Array();
 		for ($i = 0; $i <= 10; $i++) {
-			$tipos [$i]= $this->tipo_modulo($i);
+			$tipos [$i]= $this->tipo_sistema($i);
 		}
 
 		for ($i = 0; $i <= 10; $i++) {
-			if (isset($fila_tipo)){
+			if (!empty($fila_tipo)){
 				if ($fila_tipo==$i){ $sel="selected"; } else {$sel="";}
 			}else {
 			$sel="";
 			}
-			$aux .='<option value="'.$i.'" '.$sel.'?>'.$tipos[$i].'</option>';
+			$aux .='<option value="'.$i.'" '.$sel.'>'.$tipos[$i].'</option>';
 		}
 		return $aux;
 
 	}
-
 
 } // fin clase
 ?>

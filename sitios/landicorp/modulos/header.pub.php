@@ -4,11 +4,11 @@ require_once(_RUTA_HOST."nucleo/clases/class-constructor.php");
 $fmt = new CONSTRUCTOR;
 ?>
 <!-- inicio css y script -->
-<script type='text/javascript' src='<? echo _RUTA_WEB; ?>sitios/landicorp/js/scripts.js'></script>
+<script type='text/javascript' src='sitios/landicorp/js/scripts.js'></script>
 <!-- pre-loader-->
 <div class='pre-load-web'>
   <div class='box-siteloader'>
-    <img class='logo' src='<? echo _RUTA_WEB; ?>sitios/landicorp/images/logo-landicorp-2016-300x128.png' alt='Loading' title='Loading' />
+    <div class='logo-loading' title='Loading'></div>
     <div class='siteloader'>
       <div class='siteloader-extra'></div>
     </div>
@@ -17,7 +17,7 @@ $fmt = new CONSTRUCTOR;
 <!-- inicio menu-top -->
 <div class="container-fluid menu-top">
 	<div class="datos pull-right">
-    <i class="icon-phone"></i> Telf.: +591 3 33-5204 | Email: <a href="mailto:info@landicorp.com.bo">info@landicorp.com.bo</a>
+    <i class="icon-phone"></i> Telf.: (+591 3) 338-8100 | Email: <a href="mailto:info@landicorp.com.bo">info@landicorp.com.bo</a>
   </div>
 </div>
 
@@ -42,10 +42,7 @@ $fmt = new CONSTRUCTOR;
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
+        <i class="icn-reorder"></i>
       </button>
     </div>
     <!-- Collect the nav links, forms, and other content for toggling -->

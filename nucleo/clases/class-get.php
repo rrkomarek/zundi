@@ -12,7 +12,8 @@ class GET{
   function get_categoria_index(){
     //echo "Ingreso get categoria</br>";
     if ( (isset($_GET["cat"]) && !empty($_GET["cat"])) ) {
-      $id_categoria = mysql_real_escape_string( $_GET["cat"] );
+	  $this->validar_get($_GET["cat"]);
+      $id_categoria =   $_GET["cat"];
     }else{
       $id_categoria = 1;
     }
@@ -22,7 +23,8 @@ class GET{
   function get_plantilla_index($query,$id_categoria){
     //echo "Ingreso get plantilla</br>";
     if ( (isset($_GET["pla"]) && !empty($_GET["pla"])) ) {
-      $id_plantilla = mysql_real_escape_string( $_GET["pla"] );
+	  $this->validar_get($_GET["pla"]);
+      $id_plantilla =  $_GET["pla"];
     }else{
       $id_plantilla = $this->obtener_plantilla($query,$id_categoria);
     }
