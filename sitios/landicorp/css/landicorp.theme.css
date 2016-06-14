@@ -152,7 +152,7 @@ a {
 .box-text{
   padding: 30px;
   display: inline-block;
-  text-align: left;
+  text-align:justify;
 }
 
 .menu-top {
@@ -392,8 +392,9 @@ a {
   font-size: 13px;
 }
 .quienes-somos{
-  margin-top: 30px;
+  padding-top: 30px;
   margin-bottom: 30px;
+  background-color: #fff;
 }
 .quienes-somos .box-title {
   text-align: center;
@@ -415,6 +416,7 @@ a {
   line-height: 1.9;
   color:#666;
   margin-bottom: 16px;
+  text-align: justify;
 }
 
 .quienes-somos .box-text strong, .quienes-somos .box-text b{
@@ -423,6 +425,10 @@ a {
   clear: both;
   color:#333;
   display: inline-block;
+}
+
+.qs-movil{
+	display:none;  
 }
 
 .hr-inner{
@@ -464,8 +470,8 @@ a {
 .form-group p{
   padding-left: 0px;
   padding-right: 0px;
-  width: 48%;
-  margin-right: 5px;
+  width: 47%;
+  margin-right: 20px;
 }
 
 .form-contacto  .col-xs-8{
@@ -483,8 +489,10 @@ a {
   color: #919191;
   border-radius: 2px;
 }
+
+
 #inputMotivo { font-size: 14px; }
-#inputConsulta { width: 97%; }
+#inputConsulta { width: 96%; }
 
 .form-contacto .btn-primary{
   border-radius: 3px;
@@ -693,6 +701,13 @@ display:none;
 		float: left;
 		clear: both;
 		margin:10px 0px;
+	}
+	
+	#qsimg_hype_container {
+		display: none;
+	}
+	.qs-movil{
+		display:block !important;  
 	}
 	
 }

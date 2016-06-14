@@ -603,3 +603,10 @@ font-weight: bold;
   border-radius : 4px;
   font-size     : 11px;
 }
+
+
+/* catorias */
+.btn-i:hover{
+	color:#007AFF;
+  cursor:pointer;
+}

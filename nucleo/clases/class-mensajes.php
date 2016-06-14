@@ -11,7 +11,7 @@ class MENSAJE{
 
 
   function mail_ok(){
-    return "<div role='alert' class='alert alert-success animated fadeIn' id='success_mail'><i class='icn-checkmark-circle'></i> Se envio correctamente su consulta nos contactaremos con usted lo antes posible.</div>";
+    return "<div role='alert' class='alert alert-success animated fadeIn' id='success_mail'><i class='icn-checkmark-circle'></i> Su consulta se envió correctamente, nos pondremos en contacto con usted lo antes posible.</div>";
   }
 
   function login_ok(){

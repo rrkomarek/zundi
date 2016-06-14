@@ -154,7 +154,7 @@ class NAV{
   }
 
   function fmt_li($id, $clase, $icono, $nombre,$url, $destino ){
-    $aux = '<li class="'.$clase.' btn-m'.$id.'"><a href="'.$url.'" target="'.$destino.'"><i class="'.$icono.'"></i>'.$nombre.'</a></li>';
+    $aux = '<li id="btn-m'.$id.'" class="btn-m'.$id.' '.$clase.'"><a href="'.$url.'" target="'.$destino.'"><i class="'.$icono.'"></i><span>'.$nombre.'</span></a></li>';
     return $aux;
   }
 

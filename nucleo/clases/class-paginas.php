@@ -37,9 +37,24 @@ class CLASSPAGINAS{
 		<div class="head-modulo">
 		<h1 class="title-page pull-left"><i class="<? echo $icon; ?>"></i> <? echo $nom; ?></h1>
 			<a href='javascript:location.reload()'><i class='icn-sync'></i></a>
+			<?php if (!empty($botones)){ ?>
 			<div class="head-botones pull-right">
 				<?php echo $botones; ?>
 			</div>
+			<?php } ?>
+		</div>
+		<?php
+	}  // fin crear head
+	function crear_head_mod( $icon, $nom,$botones){
+		?>
+		<div class="head-modulo">
+		<h1 class="title-page pull-left"><i class="<? echo $icon; ?>"></i> <? echo $nom; ?></h1>
+			<a href='javascript:location.reload()'><i class='icn-sync'></i></a>
+			<?php if (!empty($botones)){ ?>
+			<div class="head-botones pull-right">
+				<?php echo $botones; ?>
+			</div>
+			<?php } ?>
 		</div>
 		<?php
 	}  // fin crear head

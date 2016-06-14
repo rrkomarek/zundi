@@ -9,6 +9,12 @@ html {}
 
 body {}
 
+#page-content-wrapper{
+	position: relative;
+	    box-sizing: border-box;
+			display: inline-block;
+float:left;
+}
 /*menu*/
 .menu-adm{
 	  z-index: 100;
@@ -493,4 +499,41 @@ padding-left: 0px;
 	display    : inline-block;
 	margin-top : 10px;
 	padding    : 8px 12px;
+}
+
+/* Arbol categorias */
+.arbol{
+	padding: 15px 25px;
+	position: relative;
+}
+
+.arbol .nodo{
+	position: relative;
+	padding-left: 35px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+}
+
+.arbol .nodo-hijo{
+	position: relative;
+	padding-top: 3px;
+	padding-bottom: 3px;
+}
+
+.arbol .nodo .i-nodo{
+	position: absolute;
+	top:-5px;
+	left:1px;
+	font-size: 26px;
+	color:#ccc;
+}
+
+.arbol .nodo-hijo .i-nodo{
+	font-size: 26px;
+	top:-5px;
+	position: absolute;
+	color:#ccc;
+}
+
+.arbol .btn-i:hover{
 }

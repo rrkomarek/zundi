@@ -1,0 +1,38 @@
+.cnt-box-head{
+	padding: 15px;
+}
+.cnt-box-head label{
+	font-family : "Lato-Light",sans-serif !important;
+	font-size: 13px;
+}
+
+.btn-i{
+	color:#eee;
+}
+
+.btn-i:hover{
+}
+
+.cnt-box{
+	padding: 15px;
+	background-color: #f7f7f7;
+	border-radius: 4px;
+}
+
+.cnt-publicacion{
+	padding: 7px 15px 7px 5px;
+	border:1px solid #c1dbe7;
+	background-color: #fff;
+	border-radius: 4px;
+}
+
+
+
+.cnt-publicacion .btn-i{
+	color:#aaa;
+	margin-left:7px;
+}
+
+.cnt-publicacion .btn-i:hover{
+	color:#007AFF;
+}

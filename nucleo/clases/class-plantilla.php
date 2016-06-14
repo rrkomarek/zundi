@@ -294,7 +294,9 @@ class PLANTILLA{
 		function obtener_publicaciones($id,$cat,$pla){
 			$consulta = " SELECT
 								pub_archivo,
+								pub_nombre,
 								pub_id,
+								pubrel_activar,
 								pubrel_orden
 						FROM
 							 publicacion_rel inner join publicacion on (pubrel_pub_id=pub_id)
@@ -330,6 +332,21 @@ class PLANTILLA{
 				}
 			}
 		}
+
+		function traer_opciones_plantilla($pla){
+			$consulta = "SELECT pla_id, pla_nombre FROM plantilla  ORDER BY pla_id";
+			$rs = $this->fmt->query->consulta($consulta);
+			$num=$this->fmt->query->num_registros($rs);
+				if($num>0){
+				for($i=0;$i<$num;$i++){
+					list($fila_id,$fila_nombre)=$this->fmt->query->obt_fila($rs);
+					if ((!empty($pla))&&($fila_id==$pla)){ $aux="selected";}else{$aux="";}
+					echo "<option class='' value='$fila_id' $aux> ".$fila_nombre;
+					echo "</option>";
+				}
+			}
+		}
+
 
 }  /*  Fin de plantilla */
 ?>

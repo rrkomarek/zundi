@@ -10,15 +10,15 @@ class MAIL {
 	}
 
 	function traer_smtp(){
-		$row["smtp"]="mail.page4face.com";
-		$row["port"]=25;
-		$row["salida_correo"]="landicorp@page4face.com";
-		$row["contracena_sa"]="Landicorp123A!";
-		$row["entrada_correo"]="landicorp@page4face.com";
+		$row["smtp"]="smtp.office365.com";
+		$row["port"]=587;
+		$row["salida_correo"]="contactoweb@landicorp.com.bo";
+		$row["contracena_sa"]="MRLPeb81.2";
+		$row["entrada_correo"]="contactoweb@landicorp.com.bo";
 		return $row;
 	}
 
-	function enviar($correo,$mensaje,$asunto,$nombre){
+	function enviar($correo,$nombre_c,$mensaje,$asunto,$nombre){
 		require_once("../includes/phpmailer/PHPMailerAutoload.php");
 
 		$rw=$this->traer_smtp();
@@ -39,7 +39,7 @@ class MAIL {
 		$mail->setFrom($rw['entrada_correo'], $nombre);
 
 		//$mail->addReplyTo($rw['entrada_correo'], $nombre);
-		$mail->addAddress($correo);     // Add a recipient
+		$mail->addAddress($correo, $nombre_c);     // Add a recipient
 
 		$mail->isHTML(true);                                  // Set email format to HTML
 

@@ -36,7 +36,10 @@
 ?>
 <!-- inicio navbar  -->
   <style>
-    #page-content-wrapper{ margin-top: 43px; }
+    #page-content-wrapper{ margin-top: 43px; position:relative; }
+    .nav-bar-m, .side-bar-m, .boby-page-m{
+      margin-top: 43px;
+    }
   </style>
   <div  class="navbar navbar-default navbar-fixed-top color-bg-blanco menu-adm" role="navigation">
     <div class="navbar-inner"> <!-- incicio navbar-inner -->

@@ -6,7 +6,7 @@ $fmt = new CONSTRUCTOR;
 require_once("header.pub.php");
 ?>
 <div class="container-fluid box-carousel" > <!-- Inicio de Bloque -->
-    <div id="myCarousel" class="carousel slide carousel-fade" data-delay="1000" data-ride="carousel">
+    <div id="myCarousel" class="carousel slide carousel-fade" data-delay="800" data-ride="carousel">
         <!-- Carousel indicators -->
         <ul class="carousel-indicators">
             <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -43,7 +43,11 @@ require_once("header.pub.php");
     </div>
 
 </div> <!-- Fin de Bloque -->
-
+<script>
+	$('.carousel').carousel({
+    	pause: "false"
+	});
+</script>
 <!--<div class="container-fluid mensaje-1 animated fadeInUp">
     <h2 class="col-xs-7 col-xs-offset-1"><b>LANDICORP</b> es el resultado de la unión de un grupo de empresas que trabajan bajo los principios de competitividad y ética empresarial.</h2>
     <a href="<? echo _RUTA_WEB; ?>contacto-landicorp" class="">CONTÁCTENOS</a>

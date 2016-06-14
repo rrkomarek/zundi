@@ -9,8 +9,8 @@ require_once("header.pub.php");
 
 <div id="map" ></div>
 
-<div class="container-fluid form-contacto">
-  <div class="col-xs-12 col-md-8 col-md-offset-1 box-form">
+<div class="container form-contacto">
+  <div class="col-xs-12 col-md-8 col-md-offset-0 box-form">
     <h3 class="">CONTÁCTENOS</h3>
     <div class="ref"><p>Queremos escucharte</p></div>
     <span class="hr-inner"></span>
@@ -18,21 +18,21 @@ require_once("header.pub.php");
       <fieldset>
         <h3 class="title">Ingresa los siguientes datos:</h3>
         <div class="form-group" >
-          <p class="col-md-6">
+          <p class="col-md-5">
             <label>Nombre <span class="required" title="required" alt="Requerido" >*</span></label>
             <input required name="inputNombre" class="form-control input-lg" type="text" id="inputNombre" value="">
           </p>
-          <p class="col-md-6" >
+          <p class="col-md-5" >
             <label>E-Mail <span class="required" title="required" alt="Requerido" >*</span></label>
             <input required name="inputEmail" class="form-control input-lg" type="email" id="inputEmail" value="">
           </p>
         </div>
         <div class="form-group">
-          <p class="col-md-6">
+          <p class="col-md-5">
             <label>Teléfono celular o fijo </label>
             <input name="inputTelf" class="form-control input-lg" type="text" id="input" value="">
           </p>
-          <p class="col-md-6">
+          <p class="col-md-5">
             <label>Motivo mensaje </label>
             <select name="inputMotivo" class="form-control input-lg" id="inputMotivo">
               <option value="Acerca de Nuestros Productos">Acerca de Nuestros Productos</option>
@@ -45,12 +45,12 @@ require_once("header.pub.php");
         <p class="form-group">
           <label>Consulta <span class="required" title="required" alt="Requerido" >*</span>
           </label>
-          <textarea required name="inputConsulta" class="form-control input-lg" cols="40" rows="7" id="inputConsulta"></textarea>
+          <textarea required name="inputConsulta" class="form-control input-lg" cols="39" rows="7" id="inputConsulta"></textarea>
           <span></br><span class="required" title="required">*</span> Datos Requeridos</span>
         </p>
         <div class="control-group" id="mensaje-mail"></div> <!--    Mensaje login ajax  -->
         <p class="form-group">
-          <input type="submit" class="btn btn-primary" value="Enviar" class="button" data-sending-label="Enviando">
+          <input type="submit" class="btn btn-primary" value="Enviar" id="Enviar_form" class="button" data-sending-label="Enviando">
         </p>
       </fieldset>
     </form>
@@ -65,11 +65,10 @@ require_once("header.pub.php");
 Av. Noel Kempff Mercado, Esq. Canal Isuto<br>
 Santa Cruz, BOLIVIA</p>
 <p><strong>Contáctenos </strong><br>
-info@landicorp.com.bo<br>
 (+591 3) 338-8100</p>
 <p><strong>Abierto:</strong><br>
-Lun – Vie: 8:00-18:00<br>
-Sáb: 8:00-12:00</p>
+Lun – Vie: 8:00-12:00 y 14:30-18:30<br>
+Sáb: 9:00-12:00</p>
 </div></section></div>
   </div>
 </div>
@@ -119,16 +118,17 @@ function initMap() {
 }
 function action_form(){
 		//alert("entre a acción");
+		$("#Enviar_form").val("Enviando...");
 		var datos = $("#form-contactenos").serialize()
 		$.ajax({
 			url:"<?php echo _RUTA_WEB; ?>nucleo/ajax/ajax-mail.php",
 			type:"post",
 			data:datos,
 			success: function(msg){
-
+			$("#Enviar_form").val("Enviar");
         if (msg!="false") {
           $("#mensaje-mail").html("<?php echo $fmt->mensaje->mail_ok(); ?>");
-		  toggleIdCerrar("success_mail", 6000);
+		  //toggleIdCerrar("success_mail", 6000);
         }
         else{
           $("#mensaje-mail").html("<?php echo $fmt->error->error_mail(); ?>");

@@ -9,7 +9,10 @@ require_once("header.pub.php");
   <div class="container">
     <div class="box-text">
       <span class="box-title">
-        <img class="img-responsive" src="sitios/landicorp/images/quienes-somos.jpg">
+      	<div id="qsimg_hype_container" style="margin:auto;position:relative;width:900px;height:220px;overflow:hidden;" aria-live="polite">
+			<script type="text/javascript" charset="utf-8" src="sitios/landicorp/animacion_qs/qsimg_hype_generated_script.js?46056"></script>
+		</div>
+		<div class="qs-movil"><img class="img-responsive" src="sitios/landicorp/images/qs-movil.png"   /></div>
         <h1>QUIÉNES SOMOS</h1>
         <span class="hr-inner"></span>
       </span>

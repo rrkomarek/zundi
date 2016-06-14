@@ -7,21 +7,21 @@ $fmt = new CONSTRUCTOR;
 <!-- inicio menu-top -->
 <div class="container-fluid menu-top">
 	<div class="datos pull-left">
-		<span class="text">Parte de la Familia :</span> 
+		<span class="text">Parte de la Familia :</span>
 		<a href="http://landicorp.com.bo" target="_blank">
 			<img class="brand-top" src="sitios/landicorp/images/logo-landicorp-small.png" />
-		</a>	
+		</a>
 	</div>
 	<div class="pull-right rs-top">
-		<a href="#"> <i class="icon-facebook"></i></a>
-		<a href="#"> <i class="icon-twitter"></i></a>
-		<a href="mailto:utilar@utilar.com.bo"> <i class="icon-envelope"></i></a>				
+		<!-- <a href="#"> <i class="icon-facebook"></i></a>	
+		<a href="#"> <i class="icon-twitter"></i></a> -->
+		<a href="<?php echo _RUTA_WEB; ?>contacto-utilar"> <i class="icon-envelope"></i></a>
 	</div>
 </div>
 
 <div class="container-fluid menu">
 	<div class="container">
-		
+
 		<!-- inicio menu-general -->
 		<nav class="navbar">
 		  <div class="container">
@@ -29,7 +29,7 @@ $fmt = new CONSTRUCTOR;
 		      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
 		        <i class="icn-reorder"></i>
 		      </button>
-		      <div class="brand"><img src="sitios/utilar/images/logo-utilar.svg"></div>
+		      <div class="brand"><a href="<?php echo _RUTA_WEB; ?>utilar" target="_self"><img src="sitios/utilar/images/logo-utilar.svg"></a></div>
 		    </div>
 		    <!-- Collect the nav links, forms, and other content for toggling -->
 		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -43,6 +43,19 @@ $fmt = new CONSTRUCTOR;
 		    </div><!-- /.navbar-collapse -->
 		  </div><!-- /.container-fluid -->
 		</nav>
-		
+
 	</div>
 </div>
+
+<script type="text/javascript" >
+	 $( window ).load(function() {
+		var contenido = $("#btn-m14 span").html();
+		var element = $("#btn-m14").text().split(' ');
+		$( "#btn-m14 span" ).html( element[0] + " <b>" + element[1] +"</b>");
+
+		var contenido = $("#btn-m15 span").html();
+		var element = $("#btn-m15").text().split(' ');
+		$( "#btn-m15 span" ).html( element[0] + " <b>" + element[1] +"</b>");
+		
+	});
+</script>

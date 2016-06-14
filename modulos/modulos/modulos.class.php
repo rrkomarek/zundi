@@ -171,7 +171,7 @@ class MODULOS{
 			</form>
 		</div>
 		<?php
-		 $this->fmt->class_modulo->script_form($this->fmt->query,"modulos/modulos/modulos.adm.php",$this->id_mod);
+		 $this->fmt->class_modulo->script_form("modulos/modulos/modulos.adm.php",$this->id_mod);
 	}
 
 	function ingresar(){

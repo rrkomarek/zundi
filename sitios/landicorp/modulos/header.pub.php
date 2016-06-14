@@ -17,7 +17,7 @@ $fmt = new CONSTRUCTOR;
 <!-- inicio menu-top -->
 <div class="container-fluid menu-top">
 	<div class="datos pull-right">
-    <i class="icon-phone"></i> Telf.: (+591 3) 338-8100 | Email: <a href="mailto:info@landicorp.com.bo">info@landicorp.com.bo</a>
+    <i class="icon-phone"></i> Telf.: (+591 3) 338-8100</a>
   </div>
 </div>
 

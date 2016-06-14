@@ -16,13 +16,12 @@ $fmt = new CONSTRUCTOR;
         <div class="textwidget"><p>Av. Noel Kempff Mercado, Esq. Canal Isuto<br>
           Santa Cruz, Bolivia</p>
           <p>(+591 3) 338-8100<br>
-            info@landicorp.com.bo</p>
         </div>
     </div>
     <div class="col-md-4  col-xs-12 box-text">
       <h3>Horarios de oficina</h3>
-      <div class="textwidget"><p>Lunes - Viernes: 8:00-18:00<br>
-    Sábado: 8:00-12:00</p>
+      <div class="textwidget"><p>Lunes - Viernes: 8:00-12:00 y 14:30-18:30<br>
+    Sábado: 9:00-12:00</p>
       </div>
     </div>
   </div>
