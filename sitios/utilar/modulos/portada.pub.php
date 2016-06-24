@@ -4,61 +4,50 @@ require_once(_RUTA_HOST."nucleo/clases/class-constructor.php");
 $fmt = new CONSTRUCTOR;
 
 require_once("header.pub.php");
+
+$consulta ="SELECT mul_id,mul_url,mul_descripcion, mul_leyenda, mul_texto_alternativo, mul_orden FROM multimedia, multimedia_rel WHERE mul_rel_cat_id='4' and mul_id=mul_rel_mul_id and mul_activar='1' ORDER BY `multimedia`.`mul_orden` asc";
+$rs =$this->fmt->query->consulta($consulta);
+$num=$this->fmt->query->num_registros($rs);
+if($num>0){
 ?>
 <div id="<? echo $nom;?>" class="Publicacion">
-<?PHP   include($RutaHost.'admin/clases/editar_elemento.php');    ?>
 
 <div id="carousel-m1" class="carousel slide" data-ride="carousel">
   <!-- Indicators -->
   <ol class="carousel-indicators container">
-    <li data-target="#carousel-m1" data-slide-to="0" class="tab-1 active" ></li>
-    <li data-target="#carousel-m1" class="tab-2" data-slide-to="1"></li>
-    <li data-target="#carousel-m1" class="tab-3" data-slide-to="2"></li>
-    <li data-target="#carousel-m1" class="tab-4" data-slide-to="3"></li>
+    <?php
+      for($i=0;$i<$num;$i++){
+        if ($i==0){$aux ='active'; } else { $aux =""; }
+    ?>
+    <li data-target="#carousel-m1" data-slide-to="<?php echo $i; ?>" class="<?php echo $aux; ?>" >
+      <div class="tab-<?php echo $i+1; ?>"></div>
+      <div class="bg"></div>
+    </li>
+    <?php
+      }
+    ?>
   </ol>
 
   <!-- Wrapper for slides -->
   <div class="carousel-inner" role="listbox">
-
-    <div class="item active">
+    <?php
+      for($i=0;$i<$num;$i++){
+        if ($i==0){$aux ='active'; } else { $aux =""; }
+        list($fila_id,$fila_url,$fila_descripcion,$fila_leyenda, $fila_texto,$fila_orden)=$this->fmt->query->obt_fila($rs);
+    ?>
+    <div class="item <?php echo $aux; ?>">
       <div class="caption">
-        <h1>LA DIVERSIDAD ES NUESTRA ALMA</h1>
-        <p>Expertos en Innovación, diseño y tecnología</p>
-        <a href="http://tramontinastore.com/"  target="_blank" class="btn btn-primario" > <span>Ver más</span><div class="shadow-btn"></div> </a>
+        <h1><?php echo $fila_leyenda; ?></h1>
+        <p><?php echo $fila_texto; ?></p>
+        <?php echo $fila_descripcion; ?>
       </div>
       <div class="shadow-item"></div>
-      <div class="imagen" style="background-image:url('sitios/utilar/images/bg-tramontina.jpg')" ></div>
+      <div class="imagen" style="background-image:url('<?php echo $fila_url; ?>')" ></div>
     </div>
+    <?php
+      }
+    ?>
 
-    <div class="item">
-      <div class="caption">
-        <h1>LA TEMPERATURA IDEAL EN TODO MOMENTO</h1>
-        <p>Líderes en productos de conservación térmica</p>
-        <a href="http://www.invictaonline.com.br/"   target="_blank" class="btn btn-primario" > <span>Ver más</span><div class="shadow-btn"></div> </a>
-      </div>
-      <div class="shadow-item"></div>
-      <div class="imagen" style="background-image:url('sitios/utilar/images/bg-invicta.jpg')" ></div>
-    </div>
-
-    <div class="item">
-      <div class="caption">
-        <h1>LA MAYOR LÍNEA DE PLÁSTICOS</h1>
-        <p>Líderes en productos de plásticos con diseños de alta calidad</p>
-        <a href="http://www.plasutil.com.br/plasutil/pt/index.php"  target="_blank" class="btn btn-primario" > <span>Ver más</span><div class="shadow-btn"></div> </a>
-      </div>
-      <div class="shadow-item"></div>
-      <div class="imagen" style="background-image:url('sitios/utilar/images/bg-plasutil.jpg')" ></div>
-    </div>
-
-    <div class="item">
-      <div class="caption">
-        <h1>LA PORCELANA CON TRADICIÓN</h1>
-        <p>Vajillas de calidad hecha por manos artesanas</p>
-        <a href="http://www.porcelanaschmidt.com.br/schmidt/site/index.php" target="_blank" class="btn btn-primario" > <span>Ver más</span><div class="shadow-btn"></div> </a>
-      </div>
-      <div class="shadow-item"></div>
-      <div class="imagen" style="background-image:url('sitios/utilar/images/bg-i.jpg')" ></div>
-    </div>
 
 
   </div>
@@ -71,6 +60,10 @@ require_once("header.pub.php");
     <span class="icn-chevron-right" aria-hidden="true"></span>
   </a>
 </div>
+
+<?php
+}
+?>
 <script>
 	$('.carousel').carousel({
     	pause: "false"

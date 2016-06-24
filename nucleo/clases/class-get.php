@@ -51,6 +51,23 @@ class GET{
     }
   }
 
+  function convertir_url_amigable($cadena){
+  	$cadena= utf8_decode($cadena);
+    $cadena = str_replace(' ', '-', $cadena);
+  	$cadena = str_replace('?', '', $cadena);
+  	$cadena = str_replace('+', '', $cadena);
+  	$cadena = str_replace(':', '', $cadena);
+  	$cadena = str_replace('??', '', $cadena);
+  	$cadena = str_replace('`', '', $cadena);
+  	$cadena = str_replace('!', '', $cadena);
+  	$cadena = str_replace('¿', '', $cadena);
+  	$originales = 'ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûýýþÿ??';
+    $modificadas = 'aaaaaaaceeeeiiiidnoooooouuuuybsaaaaaaaceeeeiiiidnoooooouuuyybyRr';
+    $cadena = strtr($cadena, utf8_decode($originales), $modificadas);
+
+    return $cadena;
+  }
+
 
 }
 

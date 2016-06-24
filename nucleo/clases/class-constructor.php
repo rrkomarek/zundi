@@ -21,6 +21,8 @@ class CONSTRUCTOR{
   var $class_modulo;
   var $class_sistema;
   var $mail;
+  var $archivos;
+  var $form;
 
   function __construct() {
 
@@ -83,6 +85,8 @@ class CONSTRUCTOR{
     require_once(_RUTA_HOST."nucleo/clases/class-nav.php");
     require_once(_RUTA_HOST."nucleo/clases/class-categorias.php");
     require_once(_RUTA_HOST."nucleo/clases/class-mail.php");
+    require_once(_RUTA_HOST."nucleo/clases/class-archivos.php");
+    require_once(_RUTA_HOST."nucleo/clases/class-form.php");
 
 
     // $get = new GET($this);
@@ -115,6 +119,8 @@ class CONSTRUCTOR{
     $this->nav = new NAV($this);
     $this->categoria = new CATEGORIA($this);
     $this->mail = new MAIL($this);
+    $this->archivos = new ARCHIVOS($this);
+    $this->form = new FORM($this);
 
 
   }

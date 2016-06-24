@@ -11,9 +11,9 @@ body {}
 
 #page-content-wrapper{
 	position: relative;
-	    box-sizing: border-box;
-			display: inline-block;
-float:left;
+	box-sizing: border-box;
+	display: inline-block;
+	float:left;
 }
 /*menu*/
 .menu-adm{
@@ -225,6 +225,7 @@ padding-left: 0px;
 .popup-div {
 	display : none;
 	z-index     : 101;
+  overflow-y:scroll;
 }
 
 .popup-div.on {
@@ -251,7 +252,8 @@ padding-left: 0px;
 .footer-pag {
 	width      : 100%;
 	clear      : both;
-	margin-top : 15px;
+	margin-top : 12px;
+	margin-bottom: 12px;
 	display: block;
 	float:left;
 }
@@ -261,9 +263,10 @@ padding-left: 0px;
 
 /*pag*/
 .body-page{
-	padding-right : 40px;
+	padding-right : 50px;
 	padding-left: 40px;
 	padding-top: 20px;
+	overflow-y:scroll;
 }
 
 .body-error{
@@ -275,6 +278,7 @@ padding-left: 0px;
 	/*padding-right : 60px;
 	padding-left: 40px;*/
 	padding-left: 0px;
+	padding-right: 0px;
 }
 
 .head-modulo {
@@ -301,19 +305,29 @@ padding-left: 0px;
 
 .body-modulo{
 	margin-top: 0px;
-	min-height: 81vh;
+	min-height: 83vh;
 }
 
 .frame-mod{
 	border:0px;
 	width: 100%;
 	height: 94vh;
+	overflow-y:scroll;
+}
+
+.oncontentpage{
+	display: none;
+	transition: all 0.3s;
 }
 
 /* form */
 
 .form-modulo{
 	/* padding:20px 0px; */
+}
+
+.form-group{
+	position: relative;
 }
 
 .form-modulo .input-group-addon{
@@ -327,6 +341,11 @@ padding-left: 0px;
 
 .form-select{
 	width: 40%;
+}
+
+input[type="file"] {
+	padding:7px !important;
+	margin-bottom: 7px;
 }
 
 .form-botones{
@@ -536,4 +555,28 @@ padding-left: 0px;
 }
 
 .arbol .btn-i:hover{
+}
+
+.panel-group{
+	margin-bottom:1px;
+}
+
+.arbol-cat{
+	border:1px solid #eee;
+	border-radius: 5px;
+	padding: 10px 20px;
+	overflow-y: scroll;
+	height: 150px;
+}
+.arbol-cat label{
+	display:block;
+}
+.respuesta-form{
+	background-color: #f2eff7;
+	border-radius: 4px;
+	padding: 15px;
+	margin-top: 0px;
+}
+.progress{
+	margin-bottom: 7px;
 }

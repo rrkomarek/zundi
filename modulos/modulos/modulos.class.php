@@ -112,7 +112,7 @@ class MODULOS{
 	function form_editar(){
 		$botones = $this->fmt->class_pagina->crear_btn("modulos.adm.php?tarea=busqueda&id_mod=$this->id_mod","btn btn-link  btn-volver","icn-chevron-left","volver"); // link, clase, icono, nombre
 		$this->fmt->class_pagina->crear_head_form("Editar Modulo", $botones,"");// nombre, botones-left, botones-right
-		echo "<a href='javascript:location.reload()'><i class='icn-sync'></i></a>";
+		//echo "<a href='javascript:location.reload()'><i class='icn-sync'></i></a>";
 		$this->fmt->get->validar_get ( $_GET['id'] );
 		$id = $_GET['id'];
 

@@ -258,18 +258,20 @@ a {
 .carousel {
   float:left;
   width: 100%;
+  height: 465px;
 }
 .carousel .carousel-inner{
   padding-left: 0px;
   padding-right: 0px;
+  text-align: center;
 }
 .carousel .carousel-inner .item{
   padding-left: 0px;
   padding-right: 0px;
-}
-
-.carousel .carousel-inner .item img{
-  width: 100%;
+  height: 465px;
+  background-repeat:no-repeat !important;
+  background-size: auto 100% !important;
+  background-position:center bottom !important;
 }
 
 .carousel-control.left, .carousel-control.right{
@@ -428,7 +430,7 @@ a {
 }
 
 .qs-movil{
-	display:none;  
+	display:none;
 }
 
 .hr-inner{
@@ -520,11 +522,55 @@ display:none;
 .box-footer .menu-footer{
 	float: right;
 }
-.rs-copy{ 
-	display: none; 
+.rs-copy{
+	display: none;
 }
 
 .btn-m6 { display: none !important; }
+
+@media screen and (min-width:1300px){
+  .carousel{
+    height: 75vh !important;
+    transition: all .2s ease;
+	}
+
+  .carousel .carousel-inner .item{
+    height:75vh !important;
+    width: 100%;
+    background-size:100% !important;
+    background-position: center bottom;
+    transition: all .2s ease;
+  }
+}
+
+@media screen and (max-width:1440px){
+  .carousel{
+    height: 47vh !important;
+    transition: all .2s ease;
+	}
+
+  .carousel .carousel-inner .item{
+    height:47vh !important;
+    width: 100%;
+    background-size:100% !important;
+    background-position: center bottom;
+    transition: all .2s ease;
+  }
+}
+@media screen and (max-width: 780px) {
+  .carousel{
+    height: 320px !important;
+    transition: all .2s ease;
+	}
+
+  .carousel .carousel-inner .item{
+    height: 320px !important;
+    width: 100%;
+    background-size:100% !important;
+    background-position: center bottom;
+    transition: all .2s ease;
+  }
+}
 
 @media screen and (max-width: 570px) {
 
@@ -570,10 +616,10 @@ display:none;
 	.menu-general .navbar-collapse.in{
 		overflow-y: visible;
 	}
-	
+
 	.menu-general .container-fluid>.navbar-collapse,
-	.menu-general .container-fluid>.navbar-header, 
-	.menu-general .container>.navbar-collapse, 
+	.menu-general .container-fluid>.navbar-header,
+	.menu-general .container>.navbar-collapse,
 	.menu-general .container>.navbar-header {
     	margin-right: -16px;
 		margin-left: -16px;
@@ -593,18 +639,25 @@ display:none;
 		color:#fff !important;
 		width: 100% !important;
 	}
-	.caruosel{
-		border:1px solid red;
+	.carousel{
+    max-height: 250px !important;
+      transition: all .2s ease;
 	}
-	
+
+  .carousel .carousel-inner .item{
+    max-height: 250px !important;
+    background-size: 100% 100%;
+      transition: all .2s ease;
+  }
+
 	.carousel .carousel-indicators {
     	bottom: -40px;
 	}
-	
+
 	.carousel-control {
 		width: 30%;
 	}
-	
+
 	.carousel-control .icon-angle-left{
 		width: 50px;
 		height: 45px;
@@ -623,9 +676,9 @@ display:none;
 	}
 	.box-text{
 		padding-bottom: 0px;
-		padding-top: 0px;	
+		padding-top: 0px;
 	}
-	
+
 	.box-text h3{
 		font-size: 16px;
 	}
@@ -635,7 +688,7 @@ display:none;
 	#footer .row{
 		margin:20px 0px;
 	}
-	
+
 	#footer .container{
 		padding-left: 0px;
 		padding-right: 0px;
@@ -653,13 +706,13 @@ display:none;
 	.rs-footer a{
 		color:#fff;
 		margin-left: 10px;
-		font-size: 18px; 
+		font-size: 18px;
 	}
 	.box-footer .copy{
 		float: right;
 		display: none;
 	}
-	
+
 	.box-footer .menu-footer{
 		float: left;
 	}
@@ -674,11 +727,11 @@ display:none;
 		padding-right: 0px;
 		text-align: center;
 	}
-	
+
 	.quienes-somos .box-title{
 		margin-top: 20px;
 	}
-	
+
 	.quienes-somos .box-title h1{
 		margin-top: 20px;
 		margin-bottom: 10px;
@@ -689,25 +742,25 @@ display:none;
 	#map{
 		height: 230px;
 	}
-	
+
 	.box-form{
 		padding-left: 0px;
 		padding-right: 0px;
 		margin-bottom: 20px;
 	}
-	
+
 	.box-form .col-md-6{
-		width: 100%; 
+		width: 100%;
 		float: left;
 		clear: both;
 		margin:10px 0px;
 	}
-	
+
 	#qsimg_hype_container {
 		display: none;
 	}
 	.qs-movil{
-		display:block !important;  
+		display:block !important;
 	}
-	
+
 }

@@ -26,5 +26,6 @@ if (file_exists($url)) {
 <script>
 $(".btn-cerrar-pag").click(function () {
     $(".popup-div").removeClass("on");
+    $(".cont_1").removeClass("oncontentpage");
 });
 </script>

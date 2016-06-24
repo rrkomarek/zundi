@@ -26,3 +26,14 @@ Rewriterule ^division-agricola$  index.php?cat=20&pla=1
 Rewriterule ^division-maquinaria$  index.php?cat=21&pla=1
 Rewriterule ^division-construccion$  index.php?cat=22&pla=1
 Rewriterule ^division-pecuaria$  index.php?cat=23&pla=1
+
+
+Rewriterule ^division-agricola/c=6$  index.php?cat=20&pla=1&c=6
+Rewriterule ^division-agricola/c=7$  index.php?cat=20&pla=1&c=7
+Rewriterule ^division-agricola/c=8$  index.php?cat=20&pla=1&c=8
+Rewriterule ^division-agricola/c=9$  index.php?cat=20&pla=1&c=9
+Rewriterule ^division-agricola/c=10$  index.php?cat=20&pla=1&c=10
+Rewriterule ^division-agricola/c=11$  index.php?cat=20&pla=1&c=11
+Rewriterule ^division-agricola/c=12$  index.php?cat=20&pla=1&c=12
+
+Rewriterule ^division-agricola/c=6&p=1$  index.php?cat=20&pla=2&cat_prod=6

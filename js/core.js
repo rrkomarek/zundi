@@ -146,6 +146,8 @@ $(document).ready(function() {
       });
 
     });
+
+
 });
 
 function seleccionar(campo){

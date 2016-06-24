@@ -9,7 +9,7 @@ require_once("nav.pub.php");
    <?php require_once("sidebar.pub.php"); ?>
   </div>
   <div class="body-page-m" id="body-page-m">
-    <div class="page">
+    <div class="page container">
       <div class="title-page"><h1><img src="sitios/mainter/images/logo-mainter-o.svg" ></h1></div>
       <ul>
         <? echo $fmt->nav->traer_cat_hijos_menu("3"); ?>

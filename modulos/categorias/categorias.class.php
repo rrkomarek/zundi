@@ -13,32 +13,33 @@ class CATEGORIAS{
 	}
 
 	function busqueda(){
-    $this->fmt->class_pagina->crear_head( $this->id_mod, ""); // id modulo, botones
+    $this->fmt->class_pagina->crear_head( $this->id_mod,""); // id modulo, botones
     ?>
     <div class="body-modulo">
-      <?php $this->fmt->categoria->arbol_editable(); ?>
+      <?php $this->fmt->categoria->arbol_editable('categoria','cat_','modulos/categorias/categorias.adm.php?id_mod='.$this->id_mod.'&tarea=form_nuevo'); //$select,$from,$where,$orderby,$ruta_modulo,$prefijo
+			?>
     </div>
     <script>
-      $(".btn-activar-i").click(function(e) {
+      $(".btn-activar-i").click(function(e){
         var cat = $( this ).attr("cat");
         var estado = $( this ).attr("estado");
         url="categorias.adm.php?tarea=activar&id="+cat+"&estado="+estado+"&id_mod=<?php echo $this->id_mod; ?>";
         //alert(url);
         window.location=(url);
       });
-      $(".btn-editar-i").click(function(e) {
+      $(".btn-editar-i").click(function(e){
         var cat = $( this ).attr("cat");
         url="categorias.adm.php?tarea=form_editar&id="+cat+"&id_mod=<?php echo $this->id_mod; ?>";
         //alert(url);
         window.location=(url);
       });
-      $(".btn-nuevo-i").click(function(e) {
+      $(".btn-nuevo-i").click(function(e){
         var cat = $( this ).attr("cat");
         url="categorias.adm.php?tarea=form_nuevo&id_padre="+cat+"&id_mod=<?php echo $this->id_mod; ?>";
         //alert(url);
         window.location=(url);
       });
-			$(".btn-contenedores").click(function(e) {
+			$(".btn-contenedores").click(function(e){
 				var cat = $( this ).attr("cat");
 				url="contenedores.adm.php?tarea=editar_contenidos&cat="+cat;
 				//alert(url);
@@ -46,7 +47,7 @@ class CATEGORIAS{
 			});
     </script>
     <?php
-        $this->fmt->class_modulo->script_form("modulos/categorias/categorias.adm.php",$this->id_mod);
+      $this->fmt->class_modulo->script_form("modulos/categorias/categorias.adm.php",$this->id_mod);
   }
 
   function form_editar(){
@@ -202,13 +203,16 @@ class CATEGORIAS{
 		$this->fmt->class_pagina->crear_head_form("Nuevo Categoria", $botones,"");// nombre, botones-left, botones-right
     $this->fmt->get->validar_get ( $_GET['id_padre'] );
 		$id_padre = $_GET['id_padre'];
+		if (empty($id_padre)){
+			$id_padre='0';
+		}
 		?>
 		<div class="body-modulo col-xs-12  col-md-6 col-xs-offset-0 col-md-offset-3">
 			<form class="form form-modulo" action="categorias.adm.php?tarea=ingresar&id_mod=<? echo $this->id_mod; ?>"  method="POST" id="form-nuevo">
 				<div class="form-group" id="mensaje-form"></div>
         <div class="form-group">
 					<label>Nombre Categoria</label>
-					<input class="form-control input-lg required"  id="inputNombre" name="inputNombre" value="<? echo $fila["cat_nombre"]; ?>" placeholder=" " type="text" autofocus />
+					<input class="form-control input-lg required"  id="inputNombre" name="inputNombre" value="" placeholder=" " type="text" autofocus />
 				</div>
 
         <div class="form-group">

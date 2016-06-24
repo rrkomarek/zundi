@@ -52,7 +52,7 @@ class NAV{
     if ($num > 0){
     $aux  ="<li>";
     $aux .='<a  class="'.$clase.'"  title="'.$fila_nombre.'"  icn="'.$fila_icono.'" id="btn-m'.$id_mod.'" id_mod="'.$id_mod.'">';
-    $aux .= "<i class='".$fila_icono."'></i> ".$fila_nombre." </a>";
+    $aux .= "<i class='".$fila_icono."'></i> <span>".$fila_nombre."</span> </a>";
     $aux .= "</li>";
 
     }
@@ -72,7 +72,7 @@ class NAV{
     if ($num > 0){
     $aux ='<li class="dropdown">';
     $aux .='  <a  class="'.$clase.'"  title="'.$fila_nombre.'"  icn="'.$fila_icono.'" id="btn-a'.$id_atj.'" id_atj="'.$id_atj.'">';
-    $aux .='  <i class="'.$fila_icono.'"></i>  '.$fila_nombre.' </a>';
+    $aux .='  <i class="'.$fila_icono.'"></i>  <span>'.$fila_nombre.'</span> </a>';
     $aux .='</li>';
     }
     return $aux;

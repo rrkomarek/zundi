@@ -8,7 +8,7 @@ $fmt = new CONSTRUCTOR;
    <i class="icon-reorder"></i>
    <i class="icon-remove"></i>
  </div>
- <div class="brand"><img src="sitios/mainter/images/logo-mainter.svg" ></div>
+ <div class="brand"><img src="<?php echo _RUTA_WEB; ?>sitios/mainter/images/logo-mainter.svg" ></div>
  <div class="social">
   <i class="icon-facebook"></i>
   <i class="icon-linkedin"></i>
@@ -19,9 +19,9 @@ $fmt = new CONSTRUCTOR;
 </div>
 <script>
   $( document ).ready(function() {
-    console.log( "document loaded" );
+    //console.log( "document loaded" );
     $(".btn-menu-m").click(function() {
-      console.log('click buscar');
+      //console.log('click buscar');
       $( "#body-page-m" ).toggleClass( "on" );
       $( "#btn-menu-m" ).toggleClass( "on" );
     });

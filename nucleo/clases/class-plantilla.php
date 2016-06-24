@@ -135,7 +135,7 @@ class PLANTILLA{
 					require_once(_RUTA_HOST.'nucleo/includes/login.php');
 				}
 
-				echo '		<div id="page-content-wrapper" class="">'."\n";
+				echo '		<div id="page-content-wrapper" class="page-content-wrapper">'."\n";
 				echo '			<div id="popup-div" class="popup-div animated fadeIn"></div>'."\n";
 
 		}
@@ -149,7 +149,7 @@ class PLANTILLA{
 				if ($num > 0){
 					list($cont_id, $cont_nombre, $cont_css,$cont_clase, $con_id_contenedor, $cont_codigos) = $this->fmt->query->obt_fila($rs);
 					//echo "id_cont:".$cont_id;
-					echo '	<div class="'.$cont_class.'" id="'.$cont_nombre.'">'."\n\n";  //inicio publicacion
+					echo '	<div class="cont_'.$cont_id.' '.$cont_class.'" id="'.$cont_nombre.'">'."\n\n";  //inicio publicacion
 						$rs_pub = $this->obtener_publicaciones($cont_id,$cat,$pla);
 						$cant = $this->fmt->query->num_registros($rs_pub);
 						if ($cant > 0){
@@ -175,7 +175,7 @@ class PLANTILLA{
 			$rs=$this->tiene_hijos($id_hijo);
 			$res= $this->obtener_publicaciones($id_hijo,$idcategoria,$id_plantilla);
 			while ($fila = $this->fmt->query->obt_fila($rs)){
-				echo '	<div class="'.$fila["pub_clase"].'" id="'.$fila["pub_nombre"].'">'."\n\n";//inicio publicacion
+				echo '	<div class="cont_'.$id_hijo.' '.$fila["pub_clase"].'" id="'.$fila["pub_nombre"].'">'."\n\n";//inicio publicacion
   				$res = $this->obtener_publicaciones($fila["id"],$cat,$pla);
 					$cant = $this->cnx->num_registros($res);
 					if ($cant > 0){

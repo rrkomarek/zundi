@@ -58,6 +58,12 @@ class CLASSMODULOS{
 		<?php
 	}
 
+  function fecha_hoy($zona){
+    setlocale(LC_TIME,"es_ES");
+    date_default_timezone_set($zona);
+    return date("Y-m-d h:i");
+  }
+
 	function Estructurar_Fecha($Fecha){
 	    $Fechas = explode("-", $Fecha);
 	    $ano=$Fechas[0];
@@ -150,6 +156,19 @@ class CLASSMODULOS{
 		return $fila["mod_nombre"];
 	} //Fion nombre usuario
 
+  function fila_modulo($id,$fila,$from,$prefijo){
+		$sql="select ".$prefijo.$fila." from ".$from." where ".$prefijo."id=$id";
+    $rs=$this->fmt->query->consulta($sql);
+		$filax=$this->fmt->query->obt_fila($rs);
+		return $filax[$prefijo.$fila];
+	} //Fion nombre usuario
+
+  function cambiar_tumb($ruta){
+    $arrayName = array(".jpg",".png");
+    $arrayVar = array("-tumb.jpg","-tumb.png");
+    $ruta = str_replace($arrayName, $arrayVar, $ruta);
+    return $ruta;
+  }
 	function get_modulo_id (){
 
 		if (isset($_GET['mod_id'])){

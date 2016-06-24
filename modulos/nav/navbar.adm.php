@@ -73,7 +73,7 @@
 
             <li class="dropdown" id="Perfil">
               <a href="#" class="dropdown-toggle btn-navbar btn-user" data-toggle="dropdown" data-hover="dropdown" data-delay="10" data-close-others="false">
-                  <i class="icn-user-a"></i>
+                  <i class="icn-user"></i>
                   <i class="icn-chevron-donw btn-donw"></i>
                 </a>
                 <ul class="dropdown-menu menu-user">
@@ -138,6 +138,7 @@
   $(document).ready(function()
   {
       $(".btn-menu-ajax").click(function () {
+        $(".cont_1").addClass("oncontentpage");
         var id = this.id;
         var id_mod = $( this ).attr("id_mod");
 

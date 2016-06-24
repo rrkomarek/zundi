@@ -13,8 +13,8 @@ class USUARIOS{
 	}
 
 	function busqueda(){
-		$botones = $this->fmt->class_pagina->crear_btn("roles.adm.php","btn btn-link","icn-list","Roles");  // link, tarea, clase, icono, nombre
-		$botones .= $this->fmt->class_pagina->crear_btn("grupo-roles.adm.php","btn btn-link","icn-credential","Grupo Roles");
+		$botones = $this->fmt->class_pagina->crear_btn("roles.adm.php?id_mod=$this->id_mod","btn btn-link"," icn-credential","Roles");  // link, tarea, clase, icono, nombre
+		$botones .= $this->fmt->class_pagina->crear_btn("grupo-usuarios.adm.php","btn btn-link","icn-list","Grupos de Usuarios");
     $botones .= $this->fmt->class_pagina->crear_btn("usuarios.adm.php?tarea=form_nuevo&id_mod=$this->id_mod","btn btn-primary","icn-plus","Nuevo Usuario");
     $this->fmt->class_pagina->crear_head( $this->id_mod, $botones); // id modulo, botones
 
@@ -183,7 +183,7 @@ class USUARIOS{
     header("location: usuarios.adm.php?id_mod=".$this->id_mod);
   }
 
-	
+
 
 	function eliminar(){
 
