@@ -55,7 +55,7 @@ class FORM{
     <?php
   }
   function file_form_nuevo($nom,$ruta,$id_form,$class,$class_div,$id_div,$directorio_p){
-
+  	//echo $ruta;
     ?>
     <div class="form-group <?php echo $class_div; ?>" id="<?php echo $id_div; ?>" >
       <label>Seleccionar ruta url para subir : </label>

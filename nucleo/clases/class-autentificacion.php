@@ -99,9 +99,9 @@ class AUTENTIFICACION{
   }
   function dominio_cat($dominio){
 	  //echo $dominio;
-	  $rd = explode("//", $dominio);
-	  $rx = str_replace("/","", $rd['1']);
-	  $consulta="SELECT cat_id FROM categoria WHERE cat_dominio='$rx'";
+	  //$rd = explode("//", $dominio);
+	  //$rx = str_replace("/","", $rd['1']);
+	  $consulta="SELECT cat_id FROM categoria WHERE cat_dominio='$dominio'";
 	  $rs = $this->fmt->query->consulta($consulta);
 	  $num =$this->fmt->query->num_registros($rs);
 	  $fila = $this->fmt->query->obt_fila($rs);

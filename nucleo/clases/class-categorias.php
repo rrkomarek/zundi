@@ -414,5 +414,12 @@ class CATEGORIA{
     return $aux;
   }
 
+  function traer_dominio_cat_ruta($dato){
+    $consulta = "SELECT cat_dominio FROM categoria WHERE cat_ruta_sitio='".$dato."' and cat_tipo='2'";
+    $rs = $this->fmt->query->consulta($consulta);
+    $fila=$this->fmt->query->obt_fila($rs);
+    return $fila["cat_dominio"];
+  }
+
 }
 ?>

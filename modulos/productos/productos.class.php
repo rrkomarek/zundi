@@ -38,7 +38,7 @@ class PRODUCTOS{
               list($fila_id,$fila_nombre,$fila_imagen,$fila_activar)=$this->fmt->query->obt_fila($rs);
             ?>
             <tr>
-              <td class="" style="width:20%" ><img class="img-responsive" src="<?php echo _RUTA_WEB.$fila_imagen; ?>" alt="" /></td>
+              <td class="" style="width:20%" ><img class="img-responsive" src="<?php echo _RUTA_HOST.$fila_imagen; ?>" alt="" /></td>
               <td class=""><?php echo $fila_nombre; ?></td>
               <td class="">
 								<?php
@@ -137,7 +137,7 @@ class PRODUCTOS{
 				<div class="panel panel-default" >
 					<div class="panel-body">
 				<?php
-				$this->fmt->form->file_form_nuevo('Cargar Archivo (max 8MB)','sitios','form_nuevo','form-file','','box-file-form','productos');
+				$this->fmt->form->file_form_nuevo('Cargar Archivo (max 8MB)','','form_nuevo','form-file','','box-file-form','productos');
 				?>
 					</div>
 				</div>

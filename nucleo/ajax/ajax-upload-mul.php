@@ -2,7 +2,7 @@
   require_once("../clases/class-constructor.php");
   $fmt = new CONSTRUCTOR();
 
-  $output_dir = _RUTA_HOST.$_POST["inputRutaArchivos"];
+  $output_dir = _RUTA_SERVER.$_POST["inputRutaArchivos"];
   if(isset($_FILES["inputArchivos"])){
 
     $error = $_FILES["inputArchivos"]["error"];
@@ -10,6 +10,7 @@
 
       $file = $_FILES["inputArchivos"];
       $nombre = strtolower ( $file["name"]);
+      $nombre_url= $fmt->get->convertir_url_amigable($nombre);
       $var = array ('.jpg','.gif','.png','.mp3','.mp4','quicktime');
       $inputNombre = str_replace($var,'',$fmt->get->convertir_url_amigable($nombre));
       $tipo = $file["type"];
@@ -32,35 +33,47 @@
       }else if($width < 60 || $height < 60){
         echo "Error la anchura y la altura mínima permitida es 60px";
       }else{
-        move_uploaded_file($_FILES["inputArchivos"]["tmp_name"],$output_dir."/".$nombre);
-        $src = $_POST["inputRutaArchivos"]."/".$nombre;
-        $nombre_t=$fmt->archivos->convertir_nombre_thumb($nombre);
-        $fmt->archivos->crear_thumb(_RUTA_HOST.$src,_RUTA_HOST.$_POST["inputRutaArchivos"].'/'.$nombre_t,$thumb_s[0],$thumb_s[1],1);
+        move_uploaded_file($_FILES["inputArchivos"]["tmp_name"],$output_dir."/".$nombre_url);
+        $src = $_POST["inputRutaArchivos"]."/".$nombre_url;
+        $nombre_t=$fmt->archivos->convertir_nombre_thumb($nombre_url);
+        $fmt->archivos->crear_thumb(_RUTA_SERVER.$src,_RUTA_SERVER.$_POST["inputRutaArchivos"].'/'.$nombre_t,$thumb_s[0],$thumb_s[1],1);
         //$src, $dst, $width, $height, $crop=0
+        echo $inputUrl= $_POST["inputRutaArchivos"]."/".$nombre_url;
+        $ruta_v = explode ("/",$inputUrl);
+        $inputDominio = _RUTA_WEB;
 
+        if ( $ruta_v[1]=="sitios"){
+          $c = strlen ($ruta_v[0] );
+          $inputUrl = substr($inputUrl, $c +1 );
+          $inputDominio = $fmt->categoria->traer_dominio_cat_ruta($ruta_v[1]."/".$ruta_v[0]);
+        }
 
         if (!isset($_POST["inputId"])){
-          echo "<img width='100%' src='"._RUTA_WEB.$src."'></br></br>";
+          echo "<img width='100%' src='"._RUTA_WEB_temp.$src."'></br></br>";
           $fmt->form->input_form('<span class="obligatorio">*</span> Nombre archivo:','inputNombre','',$inputNombre,'','','En minúsculas');
-          $fmt->form->input_form('Url archivo:','inputUrl','',$_POST["inputRutaArchivos"]."/".$nombre,'');
+          $fmt->form->input_form('Url archivo:','inputUrl','',$inputUrl,'');
           $fmt->form->input_form('Tipo archivo:','inputTipo','',$inputTipo,'');
           $fmt->form->input_form('Leyenda:','inputLeyenda','','','','',''); //$label,$id,$placeholder,$valor,$class,$class_div,$mensaje
           $fmt->form->input_form('Texto Alternativo:','inputTextoalternativo','','','','','');
           $fmt->form->textarea_form('Descripción:','inputDescripcion','','','','3',''); //$label,$id,$placeholder,$valor,$class,$class_div,$rows,$mensaje
           $fmt->form->input_form('Dimensión:','inputDimension','',$dimension,'','','');
           $fmt->form->input_form('Tamaño:','inputTamano','',$inputSize,'','','');
+          $fmt->form->input_form('Dominio:','inputDominio','',$inputDominio,'','','');
+          
         } else {
-          $url =$_POST["inputRutaArchivos"]."/".$nombre;
+	        
+          $url =$inputUrl;
           $rt .= "editar";
-          $rt .= ':'.$url;
-          $rt .= ':inputNombre,'.$inputNombre;
-          $rt .= ':inputUrl,'.$url;
-          $rt .= ':inputTipo,'.$inputTipo;
-          $rt .= ':inputLeyenda,';
-          $rt .= ':inputTextoalternativo,';
-          $rt .= ':inputDescripcion,';
-          $rt .= ':inputDimension,'.$dimension;
-          $rt .= ':inputTamano,'.$inputSize;
+          $rt .= ','.$url;
+          $rt .= ',inputNombre^'.$inputNombre;
+          $rt .= ',inputUrl^'.$url;
+          $rt .= ',inputTipo^'.$inputTipo;
+          $rt .= ',inputLeyenda^';
+          $rt .= ',inputTextoalternativo^';
+          $rt .= ',inputDescripcion^';
+          $rt .= ',inputDimension^'.$dimension;
+          $rt .= ',inputTamano^'.$inputSize;
+          $rt .= ',inputDominio^'.$inputDominio;
           echo $rt;
         }
 

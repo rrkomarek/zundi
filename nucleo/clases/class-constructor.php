@@ -33,6 +33,7 @@ class CONSTRUCTOR{
     /* VARIABLES DEL SITIO */
     define('_RUTA_HOST',str_replace("/nucleo/clases","",str_replace("\\", "/", dirname(__FILE__)))."/");
 
+
     define('_RUTA_WEB_temp',"http://".str_replace("\\", "/", $_SERVER['SERVER_NAME'])."/");
 
 
@@ -61,6 +62,7 @@ class CONSTRUCTOR{
     //echo "ruta-web:"._RUTA_WEB."</br>";
     // echo "version:"._VZ."</br>";
     // echo "ruta-default:"._RUTA_DEFAULT."</br>";
+    //echo "ruta-server:"._RUTA_SERVER."</br>";
 
     require_once(_RUTA_HOST."nucleo/clases/class-sesion.php");
     require_once(_RUTA_HOST."nucleo/clases/class-mysql.php");

@@ -14,6 +14,9 @@ class ARCHIVOS{
 
   function select_archivos($sitio,$directorio_p){
     //echo _RUTA_HOST.$sitio."</br>";
+    //echo $directorio_p;
+    echo $sitio;
+    //echo _RUTA_SERVER;
     //$this->listar_directorios_ruta($sitio,"1");
 
     ?>
@@ -26,7 +29,7 @@ class ARCHIVOS{
   }
 
   function listar_directorios_ruta($ruta,$nivel,$directorio_p){
-    $rutax = _RUTA_HOST.$ruta;
+    $rutax = _RUTA_SERVER.$ruta;
     $directorio = opendir($rutax);
     for ($i=0;$i<$nivel;$i++){
       $aux .= "-";
@@ -52,10 +55,20 @@ class ARCHIVOS{
   function option_directorio_hijo($ruta,$directorio){
     $rx = explode ("/",$ruta);
     $con = count($rx);
+    $ar = str_split($ruta);
+    if ($ar[0]=="/"){ $ruta = substr($ruta, 1); }
+    $ruta_v = explode ("/",$ruta);
+    if ($ruta_v[0]==_RUTA_DEFAULT){
+      $c = strlen ($ruta_v[0] );
+      $ruta_valor = substr($ruta, $c +1 );
+    } else {
+      $ruta_valor = $ruta;
+    }
+
     for ($i=0; $i < $con ; $i++) {
 
       if( $rx[$i] == $directorio ){
-        echo "<option value='".$ruta."'>";
+        echo "<option value='".$ruta_valor."'>";
         echo $ruta;
         echo "</option>";
       }
