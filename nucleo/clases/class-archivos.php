@@ -188,4 +188,16 @@ class ARCHIVOS{
     return $trozos[0];
   }
 
+  function existe_archivo($ruta_archivo){
+    if (file_exists($ruta_archivo)) { return true;}  else { return false; }
+  }
+
+  function permitir_escritura($ruta_archivo){
+    chmod($ruta_archivo, 0754) or die(print_r(error_get_last(),true));
+  }
+
+  function quitar_escritura($ruta_archivo){
+    chmod($ruta_archivo, 0644) or die(print_r(error_get_last(),true));
+  }
+
 }
