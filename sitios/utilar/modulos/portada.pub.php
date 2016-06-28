@@ -42,7 +42,7 @@ if($num>0){
         <?php echo $fila_descripcion; ?>
       </div>
       <div class="shadow-item"></div>
-      <div class="imagen" style="background-image:url('<?php echo $fila_url; ?>')" ></div>
+      <div class="imagen" style="background-image:url('<?php echo _RUTA_WEB.$fila_url; ?>')" ></div>
     </div>
     <?php
       }

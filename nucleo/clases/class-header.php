@@ -109,6 +109,7 @@ class HEADER{
     $aux .= '       <link rel="stylesheet" href="'._RUTA_WEB.'css/color.adm.css" rel="stylesheet" type="text/css">'."\n";
     $aux .= '       <link rel="stylesheet" href="'._RUTA_WEB.'css/icon-font.css" rel="stylesheet" type="text/css">'."\n";
     $aux .= '       <link rel="stylesheet" href="'._RUTA_WEB.'css/lato-font.css" rel="stylesheet" type="text/css">'."\n";
+    $aux .= '       <link rel="stylesheet" href="'._RUTA_WEB.'css/sf-ui-font.css" rel="stylesheet" type="text/css">'."\n";
     $aux .= '       <link rel="stylesheet" href="'._RUTA_WEB.'css/estilos.adm.css" rel="stylesheet" type="text/css">'."\n";
     $aux .= '       <link rel="stylesheet" href="'._RUTA_WEB.'css/theme.adm.css" rel="stylesheet" type="text/css">'."\n";
 

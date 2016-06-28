@@ -4,7 +4,7 @@ require_once(_RUTA_HOST."nucleo/clases/class-constructor.php");
 $fmt = new CONSTRUCTOR;
 ?>
 <!-- inicio css y script -->
-<script type='text/javascript' src='sitios/landicorp/js/scripts.js'></script>
+<script type='text/javascript' src='<? echo _RUTA_WEB; ?>sitios/landicorp/js/scripts.js'></script>
 <!-- pre-loader-->
 <div class='pre-load-web'>
   <div class='box-siteloader'>

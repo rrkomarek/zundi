@@ -22,6 +22,7 @@
       $width = $dimensiones[0];
       $height = $dimensiones[1];
       $dimension = $width." x ".$height;
+        $thumb_s= explode("x",$_POST["inputThumb"]);
       if ($tipo != 'image/jpg' && $tipo != 'image/jpeg' && $tipo != 'image/png' && $tipo != 'image/gif' && $tipo != 'audio/mp3' && $tipo != 'video/mp4' && $tipo != 'audio/quicktime'){
         echo "Error, el archivo no es valido (jpg,jpeg,png,gif)";
       }else if ($size > 1024*1024*8){
@@ -34,7 +35,7 @@
         move_uploaded_file($_FILES["inputArchivos"]["tmp_name"],$output_dir."/".$nombre);
         $src = $_POST["inputRutaArchivos"]."/".$nombre;
         $nombre_t=$fmt->archivos->convertir_nombre_thumb($nombre);
-        $fmt->archivos->crear_thumb(_RUTA_HOST.$src,_RUTA_HOST.$_POST["inputRutaArchivos"].'/'.$nombre_t,'100','100',1);
+        $fmt->archivos->crear_thumb(_RUTA_HOST.$src,_RUTA_HOST.$_POST["inputRutaArchivos"].'/'.$nombre_t,$thumb_s[0],$thumb_s[1],1);
         //$src, $dst, $width, $height, $crop=0
 
 

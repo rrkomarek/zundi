@@ -32,7 +32,9 @@ class CONSTRUCTOR{
 
     /* VARIABLES DEL SITIO */
     define('_RUTA_HOST',str_replace("/nucleo/clases","",str_replace("\\", "/", dirname(__FILE__)))."/");
-    define('_RUTA_WEB',"http://".str_replace("\\", "/", $_SERVER['SERVER_NAME'])."".str_replace(str_replace("\\", "/", $_SERVER['DOCUMENT_ROOT']), "", _RUTA_HOST));
+
+    define('_RUTA_WEB_temp',"http://".str_replace("\\", "/", $_SERVER['SERVER_NAME'])."/");
+
 
     if(isset($_GET["mod_id"])){
       if (!is_numeric($_GET["mod_id"])){
@@ -55,8 +57,8 @@ class CONSTRUCTOR{
     // echo "us:"._USUARIO."</br>";
     // echo "pw:"._PASSWORD."</br>";
     // echo "bd:"._BASE_DE_DATOS."</br>";
-    // echo "ruta-host:"._RUTA_HOST."</br>";
-    // echo "ruta-web:"._RUTA_WEB."</br>";
+    //echo "ruta-host:"._RUTA_HOST."</br>";
+    //echo "ruta-web:"._RUTA_WEB."</br>";
     // echo "version:"._VZ."</br>";
     // echo "ruta-default:"._RUTA_DEFAULT."</br>";
 

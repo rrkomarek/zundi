@@ -42,7 +42,7 @@ class PRODUCTOS{
               <td class=""><?php echo $fila_nombre; ?></td>
               <td class="">
 								<?php
-									$this->traer_rel_cat_nombres($fila_id); //$fila_id,$from,$prefijo_cat,$prefijo_rel
+									//$this->traer_rel_cat_nombres($fila_id); //$fila_id,$from,$prefijo_cat,$prefijo_rel
 								?>
 							</td>
               <td class="estado">

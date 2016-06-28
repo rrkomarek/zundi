@@ -28,6 +28,15 @@ class FORM{
     <?php
   }
 
+	function sizes_thumb(){
+		?>
+		<select id="inputThumb" name="inputThumb" class="form-control">
+			<option value="100x100">100 x 100 px (miniatura)</option>
+			<option value="300x325">300 x 325 px (productos)</option>
+			<option value="400x300">400 x 300 px (slides)</option>
+		</select>
+		<?php
+	}
   function file_form_seleccion($nom,$ruta,$id_form,$class,$class_div,$id_div,$directorio_p){
 		if ($id_form == 'form_nuevo'){ $texto="para subir"; }else{ $texto="para reemplazar"; }
     ?>
@@ -35,10 +44,7 @@ class FORM{
       <label>Seleccionar ruta url <? echo $texto; ?> : </label>
       <?php $this->fmt->archivos->select_archivos($ruta,$directorio_p); ?>
 			<br/><label>Seleccionar tamaño thumb (ancho x alto):</label>
-			<select id="inputThumb" name="inputThumb" class="form-control">
-				<option value="100x100">100 x 100 px (miniatura)</option>
-				<option value="300x325">300 x 325 px (productos)</option>
-			</select>
+			<?php $this->sizes_thumb(); ?>
 
       <br/>
 			<label><? echo $nom; ?> :</label>
@@ -55,10 +61,7 @@ class FORM{
       <label>Seleccionar ruta url para subir : </label>
       <?php $this->fmt->archivos->select_archivos($ruta,$directorio_p); ?>
 			<br/><label>Seleccionar tamaño thumb (ancho x alto):</label>
-			<select id="inputThumb" name="inputThumb" class="form-control">
-				<option value="100x100">100 x 100 px (miniatura)</option>
-				<option value="300x325">300 x 325 px (productos)</option>
-			</select>
+			<?php $this->sizes_thumb(); ?>
       <br/>
 			<label><? echo $nom; ?> :</label>
       <input type="file" ruta="<?php echo _RUTA_WEB; ?>" class="form-control <?php echo $class; ?>" id="inputArchivos" name="inputArchivos"  />
@@ -102,16 +105,19 @@ class FORM{
       <label>Seleccionar ruta url para subir : </label>
       <?php $this->fmt->archivos->select_archivos($ruta,$directorio_p); ?>
 			<br/><label>Seleccionar tamaño thumb (ancho x alto):</label>
-			<select id="inputThumb" name="inputThumb" class="form-control">
-				<option value="100x100">100 x 100 px (miniatura)</option>
-				<option value="300x325">300 x 325 px (productos)</option>
-			</select>
+			<?php $this->sizes_thumb(); ?>
       <br/>
 			<label><? echo $nom; ?> :</label>
       <input type="file" ruta="<?php echo _RUTA_WEB; ?>" class="form-control <?php echo $class; ?>" id="inputArchivos" name="inputArchivos"  />
 			<div id='prog'></div>
       <div id="respuesta"></div>
     </div>
+		</script>
+			$(function(){
+				$(".<?php echo $class; ?>").on("change", function(){
+				});
+			});
+		</script>
     <?php
   }
 

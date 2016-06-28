@@ -9,4 +9,7 @@
       define('_PASSWORD','asdf123A');
       define('_BASE_DE_DATOS','landicorp');
     }
+    $sub_dominio ="zundi/";
+    define("_RUTA_WEB",_RUTA_WEB_temp.$sub_dominio);
+    //echo _RUTA_WEB;
 ?>
