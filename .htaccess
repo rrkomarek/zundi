@@ -6,4 +6,4 @@ RewriteCond %{SCRIPT_FILENAME} !-d
 RewriteCond %{SCRIPT_FILENAME} !-f
 #
 Rewriterule ^dashboard$  nucleo/dashboard.php
-Rewriterule ^zundi$  index.php?cat=&pla=
+Rewriterule ^zundi$  index.php?cat=&pla
