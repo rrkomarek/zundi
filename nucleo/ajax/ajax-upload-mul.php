@@ -38,7 +38,7 @@
         $nombre_t=$fmt->archivos->convertir_nombre_thumb($nombre_url);
         $fmt->archivos->crear_thumb(_RUTA_SERVER.$src,_RUTA_SERVER.$_POST["inputRutaArchivos"].'/'.$nombre_t,$thumb_s[0],$thumb_s[1],1);
         //$src, $dst, $width, $height, $crop=0
-        echo $inputUrl= $_POST["inputRutaArchivos"]."/".$nombre_url;
+        $inputUrl= $_POST["inputRutaArchivos"]."/".$nombre_url;
         $ruta_v = explode ("/",$inputUrl);
         $inputDominio = _RUTA_WEB;
 
@@ -49,7 +49,7 @@
         }
 
         if (!isset($_POST["inputId"])){
-          echo "<img width='100%' src='"._RUTA_WEB_temp.$src."'></br></br>";
+          echo "<img width='100%' src='".$inputDominio.$inputUrl."'></br></br>";
           $fmt->form->input_form('<span class="obligatorio">*</span> Nombre archivo:','inputNombre','',$inputNombre,'','','En minúsculas');
           $fmt->form->input_form('Url archivo:','inputUrl','',$inputUrl,'');
           $fmt->form->input_form('Tipo archivo:','inputTipo','',$inputTipo,'');
@@ -58,10 +58,11 @@
           $fmt->form->textarea_form('Descripción:','inputDescripcion','','','','3',''); //$label,$id,$placeholder,$valor,$class,$class_div,$rows,$mensaje
           $fmt->form->input_form('Dimensión:','inputDimension','',$dimension,'','','');
           $fmt->form->input_form('Tamaño:','inputTamano','',$inputSize,'','','');
-          $fmt->form->input_form('Dominio:','inputDominio','',$inputDominio,'','','');
-          
+          $fmt->form->input_form('Dominio:','','',$inputDominio,'','','');
+          $fmt->form->input_hidden_form('inputDominio',$fmt->categoria->traer_id_cat_dominio($inputDominio));
+
         } else {
-	        
+
           $url =$inputUrl;
           $rt .= "editar";
           $rt .= ','.$url;

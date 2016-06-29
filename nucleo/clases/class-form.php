@@ -102,7 +102,7 @@ class FORM{
   function file_form_editar($nom,$ruta,$id_form,$class,$class_div,$id_div,$directorio_p){
     ?>
     <div class="form-group <?php echo $class_div; ?>" id="<?php echo $id_div; ?>" >
-      <label>Seleccionar ruta url para subir : </label>
+      <label>Seleccionar ruta url para reemplazar archivo : </label>
       <?php $this->fmt->archivos->select_archivos($ruta,$directorio_p); ?>
 			<br/><label>Seleccionar tamaño thumb (ancho x alto):</label>
 			<?php $this->sizes_thumb(); ?>
@@ -112,11 +112,59 @@ class FORM{
 			<div id='prog'></div>
       <div id="respuesta"></div>
     </div>
-		</script>
+		<script>
 			$(function(){
 				$(".<?php echo $class; ?>").on("change", function(){
+					var formData = new FormData($("#<?php echo $id_form; ?>")[0]);
+	        var ruta = "<?php echo _RUTA_WEB; ?>nucleo/ajax/ajax-upload.php";
+					$("#respuesta").toggleClass('respuesta-form');
+					$("#url-imagen").html('');
+					$.ajax({
+	            url: ruta,
+	            type: "POST",
+	            data: formData,
+	            contentType: false,
+	            processData: false,
+							xhr: function() {
+				        var xhr = $.ajaxSettings.xhr();
+				        xhr.upload.onprogress = function(e) {
+									var dat = Math.floor(e.loaded / e.total *100);
+				          //console.log(Math.floor(e.loaded / e.total *100) + '%');
+									$("#prog").html('<div class="progress"><div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" aria-valuenow="'+ dat +'" aria-valuemin="0" aria-valuemax="100" style="width: '+ dat +'%;">'+ dat +'%</div></div>');
+				        };
+				        return xhr;
+					    },
+	            success: function(datos){
+								//$("#respuesta").html(datos);
+								var myarr = datos.split(",");
+								var num = myarr.length;
+								if (myarr[0]=="editar"){
+									//alert(num);
+									var i;
+									//var datosx='';
+									var url = myarr[1];
+									for (i = 2; i < num; i++) {
+										var datx = myarr[i].split('^');
+										var dx = datx[1];
+										//datosx += datx[0]+'-'+datx[1]+"<br/>";
+										$("#"+datx[0]).val(datx[1]); //cambia los valores por los nuevos
+									}
+								}
+							  var datosx='<img src="'+ dx + url +'" class="img-responsive">';
+								$("#respuesta").html(datosx);
+								/*	for (i = 2; i < num; i++) {
+										var dat = myarr[i].split('^');
+										var dx = dat[1];
+										//datosx += dat[0]+'-'+dat[1]+"<br/>";
+										$("#"+dat[0]).val(dat[1]); //cambia los valores por los nuevos
+									}
+									var datosx='<img src="'+ dx + url +'" class="img-responsive">';*/
+
+
+							}
+						});
 				});
-			});
+      });
 		</script>
     <?php
   }

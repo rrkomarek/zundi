@@ -30,19 +30,21 @@ class PRODUCTOS{
         </thead>
         <tbody>
           <?php
-            $sql="select mod_prod_id, mod_prod_nombre, mod_prod_imagen, mod_prod_activar from mod_productos	ORDER BY mod_prod_id desc";
+            $sql="select mod_prod_id, mod_prod_nombre, mod_prod_imagen,  mod_prod_id_dominio, mod_prod_activar from mod_productos	ORDER BY mod_prod_id desc";
             $rs =$this->fmt->query->consulta($sql);
             $num=$this->fmt->query->num_registros($rs);
             if($num>0){
             for($i=0;$i<$num;$i++){
-              list($fila_id,$fila_nombre,$fila_imagen,$fila_activar)=$this->fmt->query->obt_fila($rs);
+              list($fila_id,$fila_nombre,$fila_imagen,$fila_dominio,$fila_activar)=$this->fmt->query->obt_fila($rs);
+							if (empty($fila_dominio)){ $aux=_RUTA_WEB_temp; } else { $aux = $this->fmt->categoria->traer_dominio_cat_id($fila_dominio); }
+							$img=$this->fmt->archivos->convertir_url_thumb( $fila_imagen );
             ?>
             <tr>
-              <td class="" style="width:20%" ><img class="img-responsive" src="<?php echo _RUTA_HOST.$fila_imagen; ?>" alt="" /></td>
+              <td class="" style="width:20%" ><?php //echo $aux.$img; ?><img class="img-responsive" width="60px" src="<?php echo $aux.$img; ?>" alt="" /></td>
               <td class=""><?php echo $fila_nombre; ?></td>
               <td class="">
 								<?php
-									//$this->traer_rel_cat_nombres($fila_id); //$fila_id,$from,$prefijo_cat,$prefijo_rel
+									$this->traer_rel_cat_nombres($fila_id); //$fila_id,$from,$prefijo_cat,$prefijo_rel
 								?>
 							</td>
               <td class="estado">
@@ -88,20 +90,23 @@ class PRODUCTOS{
 		$fila=$this->fmt->query->obt_fila($rs);
 		$this->fmt->form->head_editar('Producto','productos',$this->id_mod,'','form_editar');
 		$this->fmt->form->input_form("<span class='obligatorio'>*</span> Nombre archivo:","inputNombre","",$fila['mod_prod_nombre'],"input-lg","","");
+		$this->fmt->form->input_hidden_form("inputId",$id);
 		$this->fmt->form->input_form("Tags:","inputTags","",$fila['mod_prod_tags'],"","","");
 		?>
 		<div class="form-group">
 			<label>Imagen (560x400px):</label>
 			<div class="panel panel-default" >
 				<div class="panel-body">
-		<?php
-		$this->fmt->form->file_form_editar('Cargar Archivo (max 8MB)','sitios','form_editar','form-file','','box-file-form','productos');
-		?>
-					<div class="url-imagen"><img src="<?php echo _RUTA_WEB.$fila['mod_prod_imagen']; ?>" class="img-responsive"></div>
+					<?php
+					$this->fmt->form->file_form_editar('Cargar Archivo (max 8MB)','','form_editar','form-file','','box-file-form','productos');
+					?>
+					<div class="url-imagen" id="url-imagen"><img src="<?php echo $this->fmt->categoria->traer_dominio_cat_id($fila['mod_prod_id_dominio']).$fila['mod_prod_imagen']; ?>" class="img-responsive"></div>
 				</div>
 			</div>
 		</div>
 		<?php
+		$this->fmt->form->input_form('Url archivo:','inputUrl','',$fila['mod_prod_imagen'],'');
+		$this->fmt->form->input_form('Dominio:','inputDominio','',$this->fmt->categoria->traer_dominio_cat_id($fila['mod_prod_id_dominio']),'');
 		$this->fmt->form->input_form("Codigo:","inputCodigo","",$fila['mod_prod_codigo'],"","","");
 		$this->fmt->form->input_form("Modelo:","inputModelo","",$fila['mod_prod_modelo'],"","","");
 		$this->fmt->form->textarea_form("Resumen:","inputResumen","",$fila['mod_prod_resumen'],"","","5",""); //$label,$id,$placeholder,$valor,$class,$class_div,$rows,$mensaje
@@ -125,11 +130,15 @@ class PRODUCTOS{
 			<form class="form form-modulo" action="productos.adm.php?tarea=ingresar&id_mod=<? echo $this->id_mod; ?>"  method="POST" id="form_nuevo">
 				<div class="form-group" id="mensaje-form"></div> <!--Mensaje form -->
 				<div class="form-group">
-					<label>Nombre Producto</label>
+					<label>Nombre Producto:</label>
 					<input class="form-control input-lg"  id="inputNombre" name="inputNombre" placeholder=" " type="text" autofocus />
 				</div>
 				<div class="form-group">
-					<label>Tags</label>
+					<label>Nombre amigable:</label>
+					<input class="form-control"  id="inputNombreAmigable" name="inputNombreAmigable" placeholder=" " type="text" autofocus />
+				</div>
+				<div class="form-group">
+					<label>Tags:</label>
 					<input class="form-control" id="inputTags" name="inputTags" placeholder="" />
 				</div>
 				<div class="form-group">
@@ -204,7 +213,7 @@ class PRODUCTOS{
 		if ($_POST["btn-accion"]=="guardar"){
 			$activar=0;
 		}
-		$ingresar ="mod_prod_nombre, mod_prod_tags, mod_prod_codigo, mod_prod_modelo,mod_prod_resumen, mod_prod_detalles, mod_prod_especificaciones, mod_prod_disponibilidad, mod_prod_imagen,mod_prod_precio, mod_prod_id_doc, mod_prod_id_mul, mod_prod_activar";
+		$ingresar ="mod_prod_nombre, mod_prod_tags, mod_prod_codigo, mod_prod_modelo,mod_prod_resumen, mod_prod_detalles, mod_prod_especificaciones, mod_prod_disponibilidad, mod_prod_imagen,mod_prod_precio, mod_prod_id_doc, mod_prod_id_mul, mod_prod_id_dominio, mod_prod_activar";
 		$valores  ="'".$_POST['inputNombre']."','".
 									 $_POST['inputTags']."','".
 									 $_POST['inputCodigo']."','".
@@ -217,9 +226,10 @@ class PRODUCTOS{
 									 $_POST['inputPrecio']."','".
 									 $_POST['inputDoc']."','".
 									 $_POST['inputMul']."','".
+									 $_POST['inputDominio']."','".
 									 $activar."'";
 
-		$sql="insert into mod_productos (".$ingresar.") values (".$valores.")";
+		echo $sql="insert into mod_productos (".$ingresar.") values (".$valores.")";
 		$this->fmt->query->consulta($sql);
 
 		$sql="select max(mod_prod_id) as id from mod_productos";
@@ -232,6 +242,32 @@ class PRODUCTOS{
 		$this->fmt->query->consulta($sql1);
 
 		header("location: productos.adm.php?id_mod=".$this->id_mod);
+	}
+
+	function modificar(){
+		if ($_POST["btn-accion"]=="eliminar"){}
+		if ($_POST["btn-accion"]=="actualizar"){
+
+			$sql="UPDATE mod_productos SET
+						mod_prod_nombre='".$_POST['inputNombre']."',
+						mod_prod_tags ='".$_POST['inputTags']."',
+						mod_prod_codigo='".$_POST['inputCodigo']."',
+						mod_prod_modelo='".$_POST['inputModelo']."',
+						mod_prod_resumen='".$_POST['inputResumen']."',
+						mod_prod_detalles='".$_POST['inputDetalles']."',
+						mod_prod_especificaciones='".$_POST['inputEspecificaciones']."',
+						mod_prod_disponibilidad='".$_POST['inputDisponibilidad']."',
+						mod_prod_imagen='".$_POST['inputUrl']."',
+						mod_prod_precio='".$_POST['inputPrecio']."',
+						mod_prod_id_dominio='".$this->fmt->categoria->traer_id_cat_dominio($_POST['inputDominio'])."',
+						mod_prod_id_doc='".$_POST['inputDoc']."',
+						mod_prod_id_mul='".$_POST['inputMul']."',
+						mod_prod_activar='".$_POST['inputActivar']."'
+						WHERE mod_prod_id='".$_POST['inputId']."'";
+
+			$this->fmt->query->consulta($sql);
+		}
+			header("location: productos.adm.php?id_mod=".$this->id_mod);
 	}
 
 	function eliminar(){

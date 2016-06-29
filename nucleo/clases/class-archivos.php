@@ -68,7 +68,7 @@ class ARCHIVOS{
     for ($i=0; $i < $con ; $i++) {
 
       if( $rx[$i] == $directorio ){
-        echo "<option value='".$ruta_valor."'>";
+        echo "<option value='".$ruta."'>";
         echo $ruta;
         echo "</option>";
       }

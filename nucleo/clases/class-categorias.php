@@ -421,5 +421,18 @@ class CATEGORIA{
     return $fila["cat_dominio"];
   }
 
+    function traer_dominio_cat_id($dato){
+    $consulta = "SELECT cat_dominio FROM categoria WHERE cat_id='".$dato."' and cat_tipo='2'";
+    $rs = $this->fmt->query->consulta($consulta);
+    $fila=$this->fmt->query->obt_fila($rs);
+    return $fila["cat_dominio"];
+  }
+
+  function traer_id_cat_dominio($dato){
+    $consulta = "SELECT cat_id FROM categoria WHERE cat_dominio='".$dato."' and cat_tipo='2'";
+    $rs = $this->fmt->query->consulta($consulta);
+    $fila=$this->fmt->query->obt_fila($rs);
+    return $fila["cat_id"];
+  }
 }
 ?>

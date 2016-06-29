@@ -423,8 +423,7 @@ class CATEGORIAS{
 		header("location: categorias.adm.php?id_mod=".$this->id_mod);
 	}
 
-	function update_htaccess(){
-			$nombre_archivo = $_SERVER["DOCUMENT_ROOT"]."/zundi/.htaccess";
+	function update_htaccess($nombre_archivo){
 			if($this->fmt->archivos->existe_archivo()){
 				$this->fmt->archivos->permitir_escritura($nombre_archivo); }
 		 	if($archivo = fopen($nombre_archivo, "w+") or die(print_r(error_get_last(),true)))

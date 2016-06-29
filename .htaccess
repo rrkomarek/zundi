@@ -1,4 +1,4 @@
-# htaccess 
+# htaccess
 # Fecha de modificacion:28 06 2016 22:06:54
 #
 RewriteEngine on
@@ -22,3 +22,6 @@ Rewriterule ^division-maquinaria$  index.php?cat=21&pla=1
 Rewriterule ^division-construccion$  index.php?cat=22&pla=1
 Rewriterule ^division-pecuaria$  index.php?cat=23&pla=1
 Rewriterule ^division-eco$  index.php?cat=24&pla=1
+
+
+Rewriterule ^division-agricola/cp=6$  index.php?cat=20&pla=1&c=6

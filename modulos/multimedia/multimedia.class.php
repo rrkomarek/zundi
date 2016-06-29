@@ -17,7 +17,7 @@ class MULTIMEDIA{
     $this->fmt->form->head_table();
     $this->fmt->form->thead_table('Previo:Archivo:Autor:Categoria:Fecha:Estado:Acciones');
     $this->fmt->form->tbody_table_open();
-		$consulta = "SELECT mul_id,mul_nombre,mul_url,mul_tipo_archivo,mul_dominio,mul_usuario,mul_fecha, mul_orden, mul_activar FROM multimedia ORDER BY mul_id desc";
+		$consulta = "SELECT mul_id,mul_nombre,mul_url,mul_tipo_archivo,mul_id_dominio,mul_usuario,mul_fecha, mul_orden, mul_activar FROM multimedia ORDER BY mul_id desc";
 		$rs =$this->fmt->query->consulta($consulta);
 		$num=$this->fmt->query->num_registros($rs);
 		if($num>0){
@@ -27,7 +27,7 @@ class MULTIMEDIA{
 		      echo '<td class="">';
 					//echo $fila_url;
 					//echo $fila_dominio;
-					if (empty($fila_dominio)){ $aux=_RUTA_WEB_temp; } else { $aux = $fila_dominio; }
+					if (empty($fila_dominio)){ $aux=_RUTA_WEB_temp; } else { $aux = $this->fmt->categoria->traer_dominio_cat_id($fila_dominio); }
 					$img=$this->fmt->archivos->convertir_url_thumb( $fila_url );
 		      echo '<img src="'.$aux.$img.'" width="60px">';
 		      echo '</td>';
@@ -57,7 +57,18 @@ class MULTIMEDIA{
 
   function form_nuevo(){
     $this->fmt->form->head_nuevo('Archivo','multimedia',$this->id_mod,'','form_nuevo'); //$nom,$archivo,$id_mod,$botones,$id_form
+		?>
+		<div class="form-group">
+			<label>Archivo Multimedia:</label>
+			<div class="panel panel-default" >
+				<div class="panel-body">
+		<?php
     $this->fmt->form->file_form_seleccion('Cargar Archivo (max 8MB)','','form_nuevo','form-file','','box-file-form','multimedia');  //$nom,$ruta,$id_form,$class,$class_div,$id_div
+		?>
+				</div>
+			</div>
+		</div>
+		<?
     $this->fmt->form->categoria_form('Categoria','inputCat',"0","","",""); //$label,$id,$cat_raiz,$cat_valor,$class,$class_div
 		$fecha=$this->fmt->class_modulo->fecha_hoy('America/La_Paz');
 		$this->fmt->form->input_form_sololectura('Fecha:','inputFecha','',$fecha,'','','');//$label,$id,$placeholder,$valor,$class,$class_div,$mensaje
@@ -109,7 +120,18 @@ class MULTIMEDIA{
 
 		$this->fmt->form->head_editar('Archivo','multimedia',$this->id_mod,'','form_editar');
 		$this->fmt->form->input_hidden_form("inputId",$id);
+		?>
+		<div class="form-group">
+			<label>Archivo Multimedia:</label>
+			<div class="panel panel-default" >
+				<div class="panel-body">
+		<?php
 		$this->fmt->form->file_form_seleccion('Cargar Archivo (max 8MB)','','form_editar','form-file','','box-file-form','multimedia');
+		?>
+				</div>
+			</div>
+		</div>
+		<?php
 		$cats_id = $this->fmt->categoria->traer_rel_cat_id($id,'multimedia_rel','mul_rel_cat_id','mul_rel_mul_id');
 		$this->fmt->form->input_form("<span class='obligatorio'>*</span> Nombre archivo:","inputNombre","",$fila['mul_nombre'],"","","En minúsculas");
 		$this->fmt->form->input_form('Url archivo:','inputUrl','',$fila['mul_url'],'');
@@ -119,7 +141,7 @@ class MULTIMEDIA{
 		$this->fmt->form->textarea_form('Descripción:','inputDescripcion','',$fila['mul_descripcion'],'','3',''); //$label,$id,$placeholder,$valor,$class,$class_div,$rows,$mensaje
 		$this->fmt->form->input_form('Dimensión:','inputDimension','',$fila['mul_dimension'],'','','');
 		$this->fmt->form->input_form('Tamaño:','inputTamano','',$fila['mul_tamano'],'','','');
-		$this->fmt->form->input_form('Dominio:','inputDominio','',$fila['mul_dominio'],'','','');
+		$this->fmt->form->input_form('Dominio:','inputDominio','',$this->fmt->categoria->traer_dominio_cat_id($fila['mul_id_dominio']),'','','');
 		$this->fmt->form->categoria_form('Categoria','inputCat',"0",$cats_id,"","");
 		//$label,$id,$cat_raiz,$cat_valor,$class,$class_div
 		$fecha=$this->fmt->class_modulo->fecha_hoy('America/La_Paz');
@@ -136,7 +158,7 @@ class MULTIMEDIA{
 		?>
 		<script>
       $(function(){
-				$("#respuesta").html('<?php echo '<img src="'.$fila['mul_dominio'].$fila['mul_url'].'" class="img-responsive" />';?>');
+				$("#respuesta").html('<?php echo '<img src="'.$this->fmt->categoria->traer_dominio_cat_id($fila['mul_id_dominio']).$fila['mul_url'].'" class="img-responsive" />';?>');
         $(".form-file").on("change", function(){
         var formData = new FormData($("#form_editar")[0]);
         var ruta = "<?php echo _RUTA_WEB; ?>nucleo/ajax/ajax-upload-mul.php";
@@ -165,10 +187,10 @@ class MULTIMEDIA{
 								var i;
 								var url = myarr[1];
 								for (i = 2; i < num; i++) {
-									var dat = myarr[i].split('^');
-									var dx = dat[1];
+									var datx = myarr[i].split('^');
+									var dx = datx[1];
 									//datosx += dat[0]+'-'+dat[1]+"<br/>";
-									$("#"+dat[0]).val(dat[1]); //cambia los valores por los nuevos
+									$("#"+datx[0]).val(datx[1]); //cambia los valores por los nuevos
 								}
 								var datosx='<img src="'+ dx + url +'" class="img-responsive">';
 
@@ -192,7 +214,7 @@ class MULTIMEDIA{
 		if ($_POST["btn-accion"]=="guardar"){
 			$activar=0;
 		}
-		$ingresar ="mul_nombre,mul_url,mul_tipo_archivo,mul_leyenda,mul_texto_alternativo,mul_descripcion,mul_dimension,mul_tamano,mul_dominio,mul_fecha,mul_usuario,mul_orden,mul_activar";
+		$ingresar ="mul_nombre,mul_url,mul_tipo_archivo,mul_leyenda,mul_texto_alternativo,mul_descripcion,mul_dimension,mul_tamano,mul_id_dominio,mul_fecha,mul_usuario,mul_orden,mul_activar";
 		$valores  ="'".$_POST['inputNombre']."','".
 									 $_POST['inputUrl']."','".
 									 $_POST['inputTipo']."','".
@@ -248,7 +270,7 @@ class MULTIMEDIA{
 						mul_descripcion='".$_POST['inputDescripcion']."',
 						mul_dimension='".$_POST['inputDimension']."',
 						mul_tamano='".$_POST['inputTamano']."',
-						mul_dominio='".$_POST['inputDominio']."',
+						mul_id_dominio='".$this->fmt->categoria->traer_id_cat_dominio($_POST['inputDominio'])."',
 						mul_fecha='".$_POST['inputFecha']."',
 						mul_usuario='".$_POST['inputUsuario']."',
 						mul_orden='".$_POST['inputOrden']."',
