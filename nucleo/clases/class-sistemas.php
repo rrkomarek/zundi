@@ -73,7 +73,7 @@ class CLASSSISTEMAS{
   }
 
   function update_htaccess(){
-      $nombre_archivo = _RUTA_SERVER.".htaccess";
+      $nombre_archivo = _RUTA_HT.".htaccess";
       $datos = $this->get_data($nombre_archivo);
       //if($this->fmt->archivos->existe_archivo($nombre_archivo)){
       //  $this->fmt->archivos->permitir_escritura($nombre_archivo); }
@@ -86,6 +86,7 @@ class CLASSSISTEMAS{
             fwrite($archivo, "RewriteEngine on".PHP_EOL);
             fwrite($archivo, "RewriteCond %{SCRIPT_FILENAME} !-d".PHP_EOL);
             fwrite($archivo, "RewriteCond %{SCRIPT_FILENAME} !-f".PHP_EOL);
+            //fwrite($archivo, "RewriteRule ^raiz$ http://landicorp.com.bo/ [R=301,L]".PHP_EOL);
             fwrite($archivo, "#".PHP_EOL);
             fwrite($archivo, "Rewriterule ^dashboard$  nucleo/dashboard.php".PHP_EOL);
             fwrite($archivo, "Rewriterule ^".$datos[1]."$  index.php?cat=".$datos[0]."&pla=".$datos[2].PHP_EOL);

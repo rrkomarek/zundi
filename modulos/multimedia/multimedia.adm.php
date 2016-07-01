@@ -21,5 +21,7 @@ switch( $tarea ){
   case 'eliminar': $form->eliminar();break;
   default: $form->busqueda();break;
 }
+$fmt->form->ventana_lista_directorio();
+
 echo $fmt->footer->footer_modulo();
 ?>
