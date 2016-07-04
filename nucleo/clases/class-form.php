@@ -338,37 +338,16 @@ class FORM{
     <?php
   }
 
-/* @rrkomarek
-	function listar_directorios($ruta){
-   if (is_dir($ruta)) {
-      if ($dh = opendir($ruta)) {
-				echo "<ul class='list-group'>";
-         while (($file = readdir($dh)) !== false) {
-						if (is_dir($ruta . $file) && $file!="." && $file!=".."){
-							echo "<li class='list-group-item'> ".
-							"<a class='close icn-chevron-right' role='button' data-toggle='collapse' href='#item_$file' aria-expanded='false' aria-controls='item_$file'>
-							</a><div style='cursor:pointer;' ". 'onclick="seleccionar_dir(\''.$ruta.$file.'/\',\''.$file.'\',\'/zundi/\');">'."
-							$file</div>";
-               	$this->listar_sub_directorios($ruta . $file . "/",$file);
-							 echo "</li>";
-            }
-         }
-      	closedir($dh);
-				echo "</ul>";
-			}
-   }
- }*/
- function listar_directorios($ruta,$file,$arreglo){
+ function listar_directorios($ruta,$file){
 	 if (is_dir($ruta)) {
 		 if ($dh = opendir($ruta)) {
 			 echo "<ul class='list-group'>";
 				while (($file = readdir($dh)) !== false) {
 					 if (is_dir($ruta . $file) && $file!="." && $file!=".."){
 						 echo "<li class='list-group-item'style='cursor:pointer;' ".
-						 'onclick="seleccionar_dir(\''.$ruta.$file.'/\',\''.$file.'\',\'/zundi/\');">'.
+						 'onclick="crear_space(\''.$ruta.$file.'/\',\''.$file.'\',\'/zundi/\');">'.
 						 "$file <i class='icn-chevron-right' style='float:right;'></i></li>";
-							 //$this->listar_sub_directorios($ruta . $file . "/",$file);
-							//echo "</li>";
+							echo "</li>";
 					 }
 				}
 			 closedir($dh);
@@ -376,58 +355,61 @@ class FORM{
 		 }
 		}
 	}
-	function listar_sub_directorios($ruta,$parent){
+	function listar_sub_directorios($ruta,$parent,$item){
     if (is_dir($ruta)) {
        if ($dh = opendir($ruta)) {
-				echo "<div class='collapse' id='item_$parent'>";
  				echo "<ul class='list-group'>";
           while (($file = readdir($dh)) !== false) {
  						if (is_dir($ruta . $file) && $file!="." && $file!=".."){
-                //solo si el archivo es un directorio, distinto que "." y ".."
                 echo "<li class='list-group-item'>
-								<div style='cursor:pointer;' ". 'onclick="seleccionar_dir(\'0\',\''.$ruta.$file.'/\',\''.$file.'\',\'/zundi/\');">'."
-								$file <i class='icn-folder-up'></i></div></li>";
-                //$this->listar_sub_directorios($ruta . $file . "/",$file);
+								<div style='cursor:pointer;' ". 'onclick="crear_space(\''.$ruta.$file.'/\',\''.$file.'\',\'/zundi/\');">'."
+								$file <i class='icn-chevron-right' style='float:right;'></i></div></li>";
+
              }
           }
        	closedir($dh);
+				$this->listar_archivos($ruta . $file . "/",$file);
  				echo "</ul></div>";
  			}
     }
 
 	}
+	function poner_ruta($ruta,$file)
+	{
+		$arr = explode('/',$ruta);
+		$num = count($arr);
+		$clave = array_search('sitios', $arr);  // $clave = 1;
+
+		?>
+
+			<ol class="breadcrumb" style="margin-bottom: 5px;">
+				<li><a href="#" title="atras" onclick="go_back();" class="icn-chevron-left"></a></li>
+				<?php
+				for ($i=$clave+1; $i < $num ; $i++) {
+					if ($arr[$i]==$file){ ?>
+							<li class="active"><?=$arr[$i];?></li>
+						<?php } else {?>
+							<li><a href="#" title="<?=$arr[$i];?>" onclick="go_to();"><?=$arr[$i];?></a></li>
+				<?php }
+				} ?>
+			</ol>
+
+		<?php
+	}
 
 	function listar_archivos($ruta,$file){
 		if (is_dir($ruta)) {
        if ($dh = opendir($ruta)) {
-				 echo '<div class="row"><h4 class="col-md-4">Carpeta: <small>'.$file.'</small></h4>';
-				 echo '<div col-md-8> <i class="icn-plus" >nueva</i> </div> ';
-				 echo '</div>';
-				 echo "<div class='row' style='height:300px; overflow: scroll;'><ul class='list-group'>";
           while (($file = readdir($dh)) !== false) {
  						if($file!="." && $file!=".." && filetype($ruta . $file)!="dir"){
-						/*	echo "<div class='col-xs-4 col-sm-2 col-md-1 col-lg-1 well-sm'>";
-			 				echo "<div class='btn btn-default img-thumbnail' title='$file' id='btn_$file'>";
-             	echo "<div class='text-center'>$file</div>";//. filetype($ruta . $file)
-							echo "</div></div>";*/
 							echo "<li class='list-group-item' title='$file'>$file</li>";
-
  						}
           }
        	closedir($dh);
-				echo "</div></ul>";
  			}
     }
 	}
-/*
-<div class="btn btn-default img-thumbnail" title="Libros" onclick="go_to('libros/');">
-                      <img width="100%" height="auto" src="img/png128/squares36.png">
-                        <div class="text-center">Libros</div>
 
-                    </div>
-*/
-
-	// end revisar
 	function ventana_lista_directorio(){
 		?>
 			<div class="modal fade " id="modal_directorio" tabindex="-1" role="dialog" aria-labelledby="modal_directorio" aria-hidden="true">
@@ -439,14 +421,22 @@ class FORM{
 			      </div>
 			      <div class="modal-body">
 							<div class="container-fluid" id="contenedor_de_carpetas">
-								<div class="col-md-3 ">
-										<div>Ruta: <small> sitios/</small></div>
+								<div class="col-md-3 container-fluid" style="width:200px; max-width=200px; height:300px; max-height:350px;">
+										<h5> Directorio <small>sitios</small></h5>
 										<div style="height:300px; overflow: scroll;" id="folder_01">
 													<?php $this->listar_directorios(_RUTA_SERVER."sitios/" ); ?>
 										</div>
 								</div>
-								<div class="col-md-9" id="contenido_carpeta" >
-									hola
+								<div class="col-md-9 container-fluid" style="height:300px; max-height:300px; overflow: scroll;" >
+									<div id="ruta_carpeta">
+										<a href="#" title="atras" class="icn-chevron-left"></a>
+										Ruta: <ol class="breadcrumb" style="margin-bottom: 5px;">
+										  <li><a href="#" title="atras" onclick="go_back();" class="icn-chevron-left"></a></li>
+										  <li class="active"></li>
+										</ol>
+									</div>
+									<div id="contenido_carpeta">
+									</div>
 								</div>
 							</div>
 			      </div>
@@ -460,40 +450,31 @@ class FORM{
 			<script type="text/javascript">
 					$('#modal_directorio').modal('show');
 
-					function seleccionar_dir(item,ruta,file,raiz){
-						//crear lugar
-						div_id = 'raiz_'+item;
-						if ( document.getElementById(div_id)) {
-							alert('Ya existe');
-						}	else 	{
-
-							var nodoPadre = document.getElementById('contenido_carpeta');
-							var nodoHijo = document.createElement("div");
-							nodoHijo.setAttribute("id", div_id);
-							nodoHijo.setAttribute("class","col-md-3");
-							nodoPadre.appendChild(nodoHijo);
-
-								var data = {"ruta":ruta, "file":file};
+					function crear_space(ruta,file,raiz){
+						var data = {"ruta":ruta, "file":file, "item":"1"};
 								jQuery.ajax({
-									url: ruta+'nucleo/ajax/ajax-contenido-carpeta.php',
+									url: raiz+'nucleo/ajax/ajax-contenido-carpeta.php',
 									method: "post",
 									data: data,
 									success: function(data){
-										jQuery(file).html(data);
+										jQuery('#contenido_carpeta').html(data);
 									},
 									error: function(){
 										alert('error al cargar contenido de la carpeta.');
 									}
 								});
-
-
-
-						}
-					}
-
-
-					function cargar_datos(raiz,ruta){
-
+						var data1 = {"ruta":ruta, "file":file, "item":"2" };
+								jQuery.ajax({
+									url: raiz+'nucleo/ajax/ajax-contenido-carpeta.php',
+									method: "post",
+									data: data1,
+									success: function(data){
+										jQuery('#ruta_carpeta').html(data);
+									},
+									error: function(){
+										alert('error al cargar contenido del breadcrumb.');
+									}
+								});
 					}
 
 
